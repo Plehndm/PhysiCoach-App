@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "646632930899",
+    "project_id": "physi-coach-drwjme",
+    "storage_bucket": "physi-coach-drwjme.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646632930899:android:1ac1023e0533e74eadd0a6",
+        "android_client_info": {
+          "package_name": "com.mycompany.physicoach"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646632930899-39j4vefr9jp1ccshvsspnn7h60tko59f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.physicoach",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "646632930899-oet8s96edq64q9qh6c6te475ltf1v2ka.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiiVkdYkOK9bGhWBNkBvlStEs3Q_3X7k8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646632930899-oet8s96edq64q9qh6c6te475ltf1v2ka.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "646632930899-eg080uke3f8gk1iifpa5akh64siq5ia1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.physicoach"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

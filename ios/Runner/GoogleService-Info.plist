@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>646632930899-eg080uke3f8gk1iifpa5akh64siq5ia1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.646632930899-eg080uke3f8gk1iifpa5akh64siq5ia1</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>646632930899-39j4vefr9jp1ccshvsspnn7h60tko59f.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB5vvhfc1U7KtxLobIBMMekqBWT8JGT08g</string>
+	<key>GCM_SENDER_ID</key>
+	<string>646632930899</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mycompany.physicoach</string>
+	<key>PROJECT_ID</key>
+	<string>physi-coach-drwjme</string>
+	<key>STORAGE_BUCKET</key>
+	<string>physi-coach-drwjme.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:646632930899:ios:2dc644ac7d0e5e7eadd0a6</string>
+</dict>
+</plist>

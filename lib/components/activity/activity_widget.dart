@@ -1,0 +1,138 @@
+import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import 'package:flutter/material.dart';
+import 'activity_model.dart';
+export 'activity_model.dart';
+
+class ActivityWidget extends StatefulWidget {
+  const ActivityWidget({
+    super.key,
+    required this.activitiesDoc,
+  });
+
+  final ActivitiesRecord? activitiesDoc;
+
+  @override
+  State<ActivityWidget> createState() => _ActivityWidgetState();
+}
+
+class _ActivityWidgetState extends State<ActivityWidget> {
+  late ActivityModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => ActivityModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _model.maybeDispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8.0),
+      child: Container(
+        height: 80.0,
+        constraints: const BoxConstraints(
+          maxHeight: 80.0,
+        ),
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+          boxShadow: const [
+            BoxShadow(
+              blurRadius: 4.0,
+              color: Color(0x33000000),
+              offset: Offset(
+                0.0,
+                2.0,
+              ),
+            )
+          ],
+          borderRadius: BorderRadius.circular(8.0),
+          border: Border.all(
+            color: FlutterFlowTheme.of(context).primaryText,
+            width: 1.0,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                valueOrDefault<String>(
+                  (int seconds) {
+                    return "${(seconds / 60).toString().padLeft(2, "0")}:${(seconds % 60).toString().padRight(2, "0")}";
+                  }(valueOrDefault<int>(
+                    widget.activitiesDoc?.seconds,
+                    60,
+                  )),
+                  '01:00',
+                ),
+                style: FlutterFlowTheme.of(context).headlineSmall.override(
+                      fontFamily: 'Inter',
+                      letterSpacing: 0.0,
+                    ),
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        valueOrDefault<String>(
+                          widget.activitiesDoc?.title,
+                          'title',
+                        ),
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ),
+                    Flexible(
+                      child: Text(
+                        valueOrDefault<String>(
+                          widget.activitiesDoc?.description,
+                          'description',
+                        ).maybeHandleOverflow(
+                          maxChars: 10,
+                          replacement: '…',
+                        ),
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.normal,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
