@@ -74,28 +74,64 @@ class _ActivityWidgetState extends State<ActivityWidget> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(
-                valueOrDefault<String>(
-                  (int seconds) {
-                    return "${(seconds / 60).toString().padLeft(2, "0")}:${(seconds % 60).toString().padRight(2, "0")}";
-                  }(valueOrDefault<int>(
-                    widget.activitiesDoc?.seconds,
-                    60,
-                  )),
-                  '01:00',
-                ),
-                style: FlutterFlowTheme.of(context).headlineSmall.override(
-                      fontFamily: 'Inter',
-                      letterSpacing: 0.0,
-                    ),
-              ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                child: Text(
+                  valueOrDefault<String>(
+                    (int seconds) {
+                      return "${(seconds / 60).toString().padLeft(2, "0")}:${(seconds % 60).toString().padRight(2, "0")}";
+                    }(valueOrDefault<int>(
+                      widget.activitiesDoc?.seconds,
+                      60,
+                    )),
+                    '01:00',
+                  ),
+                  style: FlutterFlowTheme.of(context).headlineSmall.override(
+                        fontFamily: 'Inter',
+                        letterSpacing: 0.0,
+                      ),
+                ),
+              ),
+              SizedBox(
+                height: 80.0,
+                child: Stack(
                   children: [
-                    Flexible(
+                    Align(
+                      alignment: const AlignmentDirectional(1.0, -1.0),
+                      child: Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(40.0, 0.0, 0.0, 0.0),
+                        child: Theme(
+                          data: ThemeData(
+                            checkboxTheme: const CheckboxThemeData(
+                              visualDensity: VisualDensity.compact,
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              shape: CircleBorder(),
+                            ),
+                            unselectedWidgetColor:
+                                FlutterFlowTheme.of(context).alternate,
+                          ),
+                          child: Checkbox(
+                            value: _model.completedValue ??=
+                                widget.activitiesDoc!.completed,
+                            onChanged: (newValue) async {
+                              safeSetState(
+                                  () => _model.completedValue = newValue!);
+                            },
+                            side: BorderSide(
+                              width: 2,
+                              color: FlutterFlowTheme.of(context).alternate,
+                            ),
+                            activeColor: FlutterFlowTheme.of(context).primary,
+                            checkColor: FlutterFlowTheme.of(context).info,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
                       child: Text(
                         valueOrDefault<String>(
                           widget.activitiesDoc?.title,
@@ -109,7 +145,9 @@ class _ActivityWidgetState extends State<ActivityWidget> {
                             ),
                       ),
                     ),
-                    Flexible(
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                       child: Text(
                         valueOrDefault<String>(
                           widget.activitiesDoc?.description,

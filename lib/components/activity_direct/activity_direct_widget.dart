@@ -216,11 +216,7 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
                     } else {
                       return;
                     }
-
-                    Navigator.pop(context);
                   }
-
-                  Navigator.pop(context);
                 }
 
                 Navigator.pop(context);

@@ -51,6 +51,11 @@ class ActivitiesRecord extends FirestoreRecord {
   int get id => _id ?? 0;
   bool hasId() => _id != null;
 
+  // "completed" field.
+  bool? _completed;
+  bool get completed => _completed ?? false;
+  bool hasCompleted() => _completed != null;
+
   void _initializeFields() {
     _type = snapshotData['type'] is ActivityTypes
         ? snapshotData['type']
@@ -61,6 +66,7 @@ class ActivitiesRecord extends FirestoreRecord {
     _date = snapshotData['date'] as DateTime?;
     _seconds = castToType<int>(snapshotData['seconds']);
     _id = castToType<int>(snapshotData['id']);
+    _completed = snapshotData['completed'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -105,6 +111,7 @@ Map<String, dynamic> createActivitiesRecordData({
   DateTime? date,
   int? seconds,
   int? id,
+  bool? completed,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -115,6 +122,7 @@ Map<String, dynamic> createActivitiesRecordData({
       'date': date,
       'seconds': seconds,
       'id': id,
+      'completed': completed,
     }.withoutNulls,
   );
 
@@ -132,12 +140,21 @@ class ActivitiesRecordDocumentEquality implements Equality<ActivitiesRecord> {
         e1?.user == e2?.user &&
         e1?.date == e2?.date &&
         e1?.seconds == e2?.seconds &&
-        e1?.id == e2?.id;
+        e1?.id == e2?.id &&
+        e1?.completed == e2?.completed;
   }
 
   @override
-  int hash(ActivitiesRecord? e) => const ListEquality().hash(
-      [e?.type, e?.title, e?.description, e?.user, e?.date, e?.seconds, e?.id]);
+  int hash(ActivitiesRecord? e) => const ListEquality().hash([
+        e?.type,
+        e?.title,
+        e?.description,
+        e?.user,
+        e?.date,
+        e?.seconds,
+        e?.id,
+        e?.completed
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is ActivitiesRecord;

@@ -201,6 +201,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'planner',
+          path: '/planner',
+          builder: (context, params) => const PlannerWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

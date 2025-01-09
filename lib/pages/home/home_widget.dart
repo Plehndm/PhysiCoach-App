@@ -49,7 +49,7 @@ class _HomeWidgetState extends State<HomeWidget> {
         key: scaffoldKey,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            print('FloatingActionButton pressed ...');
+            print('addActivityFAB pressed ...');
           },
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           elevation: 0.0,

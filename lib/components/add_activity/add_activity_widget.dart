@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
+import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -71,267 +72,310 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Align(
-              alignment: const AlignmentDirectional(1.0, -1.0),
-              child: FlutterFlowIconButton(
-                borderRadius: 20.0,
-                buttonSize: 50.0,
-                icon: Icon(
-                  Icons.close,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  size: 30.0,
+        padding: const EdgeInsets.all(18.0),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Align(
+                alignment: const AlignmentDirectional(1.0, -1.0),
+                child: FlutterFlowIconButton(
+                  borderRadius: 20.0,
+                  buttonSize: 50.0,
+                  icon: Icon(
+                    Icons.close,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    size: 30.0,
+                  ),
+                  onPressed: () async {
+                    Navigator.pop(context);
+                  },
                 ),
-                onPressed: () async {
-                  Navigator.pop(context);
-                },
               ),
-            ),
-            Text(
-              'Add Activity',
-              style: FlutterFlowTheme.of(context).headlineLarge.override(
-                    fontFamily: 'Inter',
-                    letterSpacing: 0.0,
-                  ),
-            ),
-            FlutterFlowDropDown<ActivityTypes>(
-              controller: _model.typeValueController ??=
-                  FormFieldController<ActivityTypes>(
-                _model.typeValue ??= ActivityTypes.Triple_Jump,
-              ),
-              options: List<ActivityTypes>.from(ActivityTypes.values),
-              optionLabels: const ['Tripple Jump', 'Running', 'Long Jump'],
-              onChanged: (val) => safeSetState(() => _model.typeValue = val),
-              width: double.infinity,
-              height: 50.0,
-              textStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                    fontFamily: 'Inter',
-                    fontSize: 20.0,
-                    letterSpacing: 0.0,
-                  ),
-              hintText: 'Select Type...',
-              icon: Icon(
-                Icons.keyboard_arrow_down_rounded,
-                color: FlutterFlowTheme.of(context).secondaryText,
-                size: 24.0,
-              ),
-              fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-              elevation: 0.0,
-              borderColor: FlutterFlowTheme.of(context).primaryText,
-              borderWidth: 1.0,
-              borderRadius: 24.0,
-              margin: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
-              hidesUnderline: true,
-              isOverButton: false,
-              isSearchable: false,
-              isMultiSelect: false,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: TextFormField(
-                controller: _model.titleTextController,
-                focusNode: _model.titleFocusNode,
-                autofocus: false,
-                obscureText: false,
-                decoration: InputDecoration(
-                  isDense: true,
-                  labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                        fontFamily: 'Inter',
-                        fontSize: 18.0,
-                        letterSpacing: 0.0,
-                      ),
-                  hintText: 'Title...',
-                  hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                        fontFamily: 'Inter',
-                        fontSize: 20.0,
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.normal,
-                      ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(24.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: Color(0x00000000),
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(24.0),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: FlutterFlowTheme.of(context).error,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(24.0),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: FlutterFlowTheme.of(context).error,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(24.0),
-                  ),
-                  filled: true,
-                  fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  contentPadding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 22.0, 20.0, 22.0),
-                ),
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
+              Text(
+                'Add Activity',
+                style: FlutterFlowTheme.of(context).headlineLarge.override(
                       fontFamily: 'Inter',
-                      fontSize: 18.0,
                       letterSpacing: 0.0,
                     ),
-                cursorColor: FlutterFlowTheme.of(context).primaryText,
-                validator:
-                    _model.titleTextControllerValidator.asValidator(context),
               ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: TextFormField(
-                controller: _model.descriptionTextController,
-                focusNode: _model.descriptionFocusNode,
-                autofocus: false,
-                obscureText: false,
-                decoration: InputDecoration(
-                  isDense: true,
-                  labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                        fontFamily: 'Inter',
-                        fontSize: 18.0,
-                        letterSpacing: 0.0,
-                      ),
-                  hintText: 'Description...',
-                  hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                        fontFamily: 'Inter',
-                        fontSize: 20.0,
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.normal,
-                      ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(24.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: Color(0x00000000),
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(24.0),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: FlutterFlowTheme.of(context).error,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(24.0),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: FlutterFlowTheme.of(context).error,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(24.0),
-                  ),
-                  filled: true,
-                  fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  contentPadding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 22.0, 20.0, 22.0),
+              FlutterFlowDropDown<ActivityTypes>(
+                controller: _model.typeValueController ??=
+                    FormFieldController<ActivityTypes>(
+                  _model.typeValue ??= ActivityTypes.Triple_Jump,
                 ),
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Inter',
-                      fontSize: 18.0,
-                      letterSpacing: 0.0,
-                    ),
-                maxLines: null,
-                minLines: 3,
-                cursorColor: FlutterFlowTheme.of(context).primaryText,
-                validator: _model.descriptionTextControllerValidator
-                    .asValidator(context),
-              ),
-            ),
-            FFButtonWidget(
-              onPressed: () async {
-                await ActivitiesRecord.collection
-                    .doc()
-                    .set(createActivitiesRecordData(
-                      type: _model.typeValue,
-                      title: _model.titleTextController.text,
-                      description: _model.descriptionTextController.text,
-                      user: currentUserReference,
-                      date: getCurrentTimestamp,
-                      id: FFAppState().activityId,
-                    ));
-                if (_model.typeValue == ActivityTypes.Running) {
-                  await RunningDataRecord.collection
-                      .doc()
-                      .set(createRunningDataRecordData(
-                        id: FFAppState().activityId,
-                      ));
-                } else {
-                  if (_model.typeValue == ActivityTypes.Triple_Jump) {
-                    await TrippleJumpDataRecord.collection
-                        .doc()
-                        .set(createTrippleJumpDataRecordData(
-                          id: FFAppState().activityId,
-                        ));
-                  } else {
-                    if (_model.typeValue == ActivityTypes.Long_Jump) {
-                      await LongJumpDataRecord.collection
-                          .doc()
-                          .set(createLongJumpDataRecordData(
-                            id: FFAppState().activityId,
-                          ));
-                    }
-                  }
-                }
-
-                await AccelerometerDataRecord.collection
-                    .doc()
-                    .set(createAccelerometerDataRecordData(
-                      id: FFAppState().activityId,
-                    ));
-                FFAppState().activityId = FFAppState().activityId + 1;
-                safeSetState(() {});
-                Navigator.pop(context);
-              },
-              text: 'Add Activity',
-              icon: const Icon(
-                Icons.add,
-                size: 30.0,
-              ),
-              options: FFButtonOptions(
+                options: List<ActivityTypes>.from(ActivityTypes.values),
+                optionLabels: const ['Tripple Jump', 'Running', 'Long Jump'],
+                onChanged: (val) => safeSetState(() => _model.typeValue = val),
                 width: double.infinity,
-                height: 70.0,
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                color: FlutterFlowTheme.of(context).primary,
-                textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                height: 50.0,
+                textStyle: FlutterFlowTheme.of(context).labelMedium.override(
                       fontFamily: 'Inter',
-                      color: FlutterFlowTheme.of(context).primaryText,
                       fontSize: 20.0,
                       letterSpacing: 0.0,
-                      fontWeight: FontWeight.w500,
                     ),
-                elevation: 0.0,
-                borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  width: 1.0,
+                hintText: 'Select Type...',
+                icon: Icon(
+                  Icons.keyboard_arrow_down_rounded,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  size: 24.0,
                 ),
-                borderRadius: BorderRadius.circular(24.0),
+                fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                elevation: 0.0,
+                borderColor: FlutterFlowTheme.of(context).primaryText,
+                borderWidth: 1.0,
+                borderRadius: 24.0,
+                margin: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                hidesUnderline: true,
+                isOverButton: false,
+                isSearchable: false,
+                isMultiSelect: false,
               ),
-            ),
-          ].divide(const SizedBox(height: 24.0)),
+              SizedBox(
+                width: double.infinity,
+                child: TextFormField(
+                  controller: _model.titleTextController,
+                  focusNode: _model.titleFocusNode,
+                  autofocus: false,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    isDense: true,
+                    labelStyle:
+                        FlutterFlowTheme.of(context).labelMedium.override(
+                              fontFamily: 'Inter',
+                              fontSize: 18.0,
+                              letterSpacing: 0.0,
+                            ),
+                    hintText: 'Title...',
+                    hintStyle:
+                        FlutterFlowTheme.of(context).labelMedium.override(
+                              fontFamily: 'Inter',
+                              fontSize: 20.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.normal,
+                            ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(24.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color(0x00000000),
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(24.0),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).error,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(24.0),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).error,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(24.0),
+                    ),
+                    filled: true,
+                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    contentPadding:
+                        const EdgeInsetsDirectional.fromSTEB(20.0, 22.0, 20.0, 22.0),
+                  ),
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Inter',
+                        fontSize: 18.0,
+                        letterSpacing: 0.0,
+                      ),
+                  cursorColor: FlutterFlowTheme.of(context).primaryText,
+                  validator:
+                      _model.titleTextControllerValidator.asValidator(context),
+                ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: TextFormField(
+                  controller: _model.descriptionTextController,
+                  focusNode: _model.descriptionFocusNode,
+                  autofocus: false,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    isDense: true,
+                    labelStyle:
+                        FlutterFlowTheme.of(context).labelMedium.override(
+                              fontFamily: 'Inter',
+                              fontSize: 18.0,
+                              letterSpacing: 0.0,
+                            ),
+                    hintText: 'Description...',
+                    hintStyle:
+                        FlutterFlowTheme.of(context).labelMedium.override(
+                              fontFamily: 'Inter',
+                              fontSize: 20.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.normal,
+                            ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(24.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color(0x00000000),
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(24.0),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).error,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(24.0),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).error,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(24.0),
+                    ),
+                    filled: true,
+                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    contentPadding:
+                        const EdgeInsetsDirectional.fromSTEB(20.0, 22.0, 20.0, 22.0),
+                  ),
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Inter',
+                        fontSize: 18.0,
+                        letterSpacing: 0.0,
+                      ),
+                  maxLines: null,
+                  minLines: 3,
+                  cursorColor: FlutterFlowTheme.of(context).primaryText,
+                  validator: _model.descriptionTextControllerValidator
+                      .asValidator(context),
+                ),
+              ),
+              FlutterFlowCalendar(
+                color: FlutterFlowTheme.of(context).primary,
+                iconColor: FlutterFlowTheme.of(context).secondaryText,
+                weekFormat: false,
+                weekStartsMonday: false,
+                initialDate: getCurrentTimestamp,
+                rowHeight: 48.0,
+                onChange: (DateTimeRange? newSelectedDate) {
+                  safeSetState(() => _model.dateSelectedDay = newSelectedDate);
+                },
+                titleStyle: FlutterFlowTheme.of(context).titleLarge.override(
+                      fontFamily: 'Inter',
+                      letterSpacing: 0.0,
+                    ),
+                dayOfWeekStyle: FlutterFlowTheme.of(context).bodyLarge.override(
+                      fontFamily: 'Inter',
+                      letterSpacing: 0.0,
+                    ),
+                dateStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Inter',
+                      letterSpacing: 0.0,
+                    ),
+                selectedDateStyle:
+                    FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Inter',
+                          letterSpacing: 0.0,
+                        ),
+                inactiveDateStyle:
+                    FlutterFlowTheme.of(context).labelMedium.override(
+                          fontFamily: 'Inter',
+                          letterSpacing: 0.0,
+                        ),
+              ),
+              FFButtonWidget(
+                onPressed: () async {
+                  await ActivitiesRecord.collection
+                      .doc()
+                      .set(createActivitiesRecordData(
+                        type: _model.typeValue,
+                        title: _model.titleTextController.text,
+                        description: _model.descriptionTextController.text,
+                        user: currentUserReference,
+                        date: _model.dateSelectedDay?.start,
+                        id: FFAppState().activityId,
+                      ));
+                  if (_model.typeValue == ActivityTypes.Running) {
+                    await RunningDataRecord.collection
+                        .doc()
+                        .set(createRunningDataRecordData(
+                          id: FFAppState().activityId,
+                          user: currentUserReference,
+                        ));
+                  } else {
+                    if (_model.typeValue == ActivityTypes.Triple_Jump) {
+                      await TrippleJumpDataRecord.collection
+                          .doc()
+                          .set(createTrippleJumpDataRecordData(
+                            id: FFAppState().activityId,
+                            user: currentUserReference,
+                          ));
+                    } else {
+                      if (_model.typeValue == ActivityTypes.Long_Jump) {
+                        await LongJumpDataRecord.collection
+                            .doc()
+                            .set(createLongJumpDataRecordData(
+                              id: FFAppState().activityId,
+                              user: currentUserReference,
+                            ));
+                      }
+                    }
+                  }
+
+                  await AccelerometerDataRecord.collection
+                      .doc()
+                      .set(createAccelerometerDataRecordData(
+                        id: FFAppState().activityId,
+                      ));
+                  FFAppState().activityId = FFAppState().activityId + 1;
+                  safeSetState(() {});
+                  Navigator.pop(context);
+                },
+                text: 'Add Activity',
+                icon: const Icon(
+                  Icons.add,
+                  size: 30.0,
+                ),
+                options: FFButtonOptions(
+                  width: double.infinity,
+                  height: 70.0,
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  iconPadding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  color: FlutterFlowTheme.of(context).primary,
+                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                        fontFamily: 'Inter',
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        fontSize: 20.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.w500,
+                      ),
+                  elevation: 0.0,
+                  borderSide: BorderSide(
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    width: 1.0,
+                  ),
+                  borderRadius: BorderRadius.circular(24.0),
+                ),
+              ),
+            ].divide(const SizedBox(height: 24.0)),
+          ),
         ),
       ),
     );

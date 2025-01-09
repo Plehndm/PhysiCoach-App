@@ -1,4 +1,5 @@
 import '/backend/schema/enums/enums.dart';
+import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'add_activity_widget.dart' show AddActivityWidget;
@@ -18,9 +19,16 @@ class AddActivityModel extends FlutterFlowModel<AddActivityWidget> {
   FocusNode? descriptionFocusNode;
   TextEditingController? descriptionTextController;
   String? Function(BuildContext, String?)? descriptionTextControllerValidator;
+  // State field(s) for Date widget.
+  DateTimeRange? dateSelectedDay;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    dateSelectedDay = DateTimeRange(
+      start: DateTime.now().startOfDay,
+      end: DateTime.now().endOfDay,
+    );
+  }
 
   @override
   void dispose() {

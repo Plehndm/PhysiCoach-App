@@ -3,6 +3,8 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart'
+    as smooth_page_indicator;
 import 'package:flutter/material.dart';
 import 'triple_jump_analysis_model.dart';
 export 'triple_jump_analysis_model.dart';
@@ -115,7 +117,7 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                       size: 30.0,
                     ),
                     onPressed: () async {
-                      context.pop();
+                      context.safePop();
                     },
                   ),
                   title: Text(
@@ -150,164 +152,514 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Container(
-                          width: 350.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(24.0),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Advanced Running Metrics',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                  ),
-                                  FlutterFlowIconButton(
-                                    borderRadius: 8.0,
-                                    buttonSize: 40.0,
-                                    icon: Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      size: 24.0,
-                                    ),
-                                    onPressed: () async {
-                                      context.pushNamed(
-                                        'advancedTripleJumpMetrics',
-                                        queryParameters: {
-                                          'trippleJumpDataDoc': serializeParam(
-                                            tripleJumpAnalysisTrippleJumpDataRecord,
-                                            ParamType.Document,
-                                          ),
-                                        }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          'trippleJumpDataDoc':
-                                              tripleJumpAnalysisTrippleJumpDataRecord,
-                                          kTransitionInfoKey: const TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.fade,
-                                            duration: Duration(milliseconds: 0),
-                                          ),
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 0.0, 0.0, 0.0),
-                                child: Column(
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 10.0, 0.0, 0.0),
+                          child: Container(
+                            width: 350.0,
+                            height: 310.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(24.0),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Row(
                                   mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Text(
-                                          'Asymmetry',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ],
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Advanced Triple Jump Metrics',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
                                     ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Text(
-                                          'Contact Time',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ],
+                                    FlutterFlowIconButton(
+                                      borderRadius: 8.0,
+                                      buttonSize: 40.0,
+                                      icon: Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        size: 24.0,
+                                      ),
+                                      onPressed: () async {
+                                        context.pushNamed(
+                                          'advancedTripleJumpMetrics',
+                                          queryParameters: {
+                                            'trippleJumpDataDoc':
+                                                serializeParam(
+                                              tripleJumpAnalysisTrippleJumpDataRecord,
+                                              ParamType.Document,
+                                            ),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            'trippleJumpDataDoc':
+                                                tripleJumpAnalysisTrippleJumpDataRecord,
+                                            kTransitionInfoKey: const TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.fade,
+                                              duration:
+                                                  Duration(milliseconds: 0),
+                                            ),
+                                          },
+                                        );
+                                      },
                                     ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Text(
-                                          'Flight Time',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Text(
-                                          'Regularity',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Text(
-                                          'Vertical',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Text(
-                                          'Stiffness',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                  ]
-                                      .divide(const SizedBox(height: 10.0))
-                                      .around(const SizedBox(height: 10.0)),
+                                  ],
                                 ),
-                              ),
-                            ],
+                                Align(
+                                  alignment: const AlignmentDirectional(1.0, 0.0),
+                                  child: Container(
+                                    width: 270.0,
+                                    decoration: const BoxDecoration(),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          'Improve',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                        Text(
+                                          'Good',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                        Text(
+                                          'Great',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 10.0, 10.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Asymmetry',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                          Text(
+                                            'Contact Time',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                          Text(
+                                            'Vertical Ratio',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                          Text(
+                                            'Stride Length',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                        ].divide(const SizedBox(height: 50.0)),
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            width: 220.0,
+                                            height: 0.01,
+                                            child: SizedBox(
+                                              width: 200.0,
+                                              height: 1.0,
+                                              child: Stack(
+                                                children: [
+                                                  PageView(
+                                                    physics:
+                                                        const NeverScrollableScrollPhysics(),
+                                                    controller: _model
+                                                            .pageViewController1 ??=
+                                                        PageController(
+                                                            initialPage: 0),
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    children: [
+                                                      Container(),
+                                                      Container(),
+                                                      Container(),
+                                                    ],
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        const AlignmentDirectional(
+                                                            0.0, 0.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  16.0),
+                                                      child: smooth_page_indicator
+                                                          .SmoothPageIndicator(
+                                                        controller: _model
+                                                                .pageViewController1 ??=
+                                                            PageController(
+                                                                initialPage: 0),
+                                                        count: 3,
+                                                        axisDirection:
+                                                            Axis.horizontal,
+                                                        onDotClicked:
+                                                            (i) async {
+                                                          await _model
+                                                              .pageViewController1!
+                                                              .animateToPage(
+                                                            i,
+                                                            duration: const Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                            curve: Curves.ease,
+                                                          );
+                                                          safeSetState(() {});
+                                                        },
+                                                        effect:
+                                                            smooth_page_indicator
+                                                                .SlideEffect(
+                                                          spacing: 8.0,
+                                                          radius: 8.0,
+                                                          dotWidth: 70.0,
+                                                          dotHeight: 8.0,
+                                                          dotColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .accent1,
+                                                          activeDotColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primary,
+                                                          paintStyle:
+                                                              PaintingStyle
+                                                                  .fill,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 220.0,
+                                            height: 0.01,
+                                            decoration: const BoxDecoration(),
+                                            child: SizedBox(
+                                              width: 200.0,
+                                              height: 1.0,
+                                              child: Stack(
+                                                children: [
+                                                  PageView(
+                                                    physics:
+                                                        const NeverScrollableScrollPhysics(),
+                                                    controller: _model
+                                                            .pageViewController2 ??=
+                                                        PageController(
+                                                            initialPage: 0),
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    children: [
+                                                      Container(),
+                                                      Container(),
+                                                      Container(),
+                                                    ],
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        const AlignmentDirectional(
+                                                            0.0, 0.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  16.0),
+                                                      child: smooth_page_indicator
+                                                          .SmoothPageIndicator(
+                                                        controller: _model
+                                                                .pageViewController2 ??=
+                                                            PageController(
+                                                                initialPage: 0),
+                                                        count: 3,
+                                                        axisDirection:
+                                                            Axis.horizontal,
+                                                        onDotClicked:
+                                                            (i) async {
+                                                          await _model
+                                                              .pageViewController2!
+                                                              .animateToPage(
+                                                            i,
+                                                            duration: const Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                            curve: Curves.ease,
+                                                          );
+                                                          safeSetState(() {});
+                                                        },
+                                                        effect:
+                                                            smooth_page_indicator
+                                                                .SlideEffect(
+                                                          spacing: 8.0,
+                                                          radius: 8.0,
+                                                          dotWidth: 70.0,
+                                                          dotHeight: 8.0,
+                                                          dotColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .accent1,
+                                                          activeDotColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primary,
+                                                          paintStyle:
+                                                              PaintingStyle
+                                                                  .fill,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 220.0,
+                                            height: 0.01,
+                                            decoration: const BoxDecoration(),
+                                            child: SizedBox(
+                                              width: 200.0,
+                                              height: 1.0,
+                                              child: Stack(
+                                                children: [
+                                                  PageView(
+                                                    physics:
+                                                        const NeverScrollableScrollPhysics(),
+                                                    controller: _model
+                                                            .pageViewController3 ??=
+                                                        PageController(
+                                                            initialPage: 0),
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    children: [
+                                                      Container(),
+                                                      Container(),
+                                                      Container(),
+                                                    ],
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        const AlignmentDirectional(
+                                                            0.0, 0.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  16.0),
+                                                      child: smooth_page_indicator
+                                                          .SmoothPageIndicator(
+                                                        controller: _model
+                                                                .pageViewController3 ??=
+                                                            PageController(
+                                                                initialPage: 0),
+                                                        count: 3,
+                                                        axisDirection:
+                                                            Axis.horizontal,
+                                                        onDotClicked:
+                                                            (i) async {
+                                                          await _model
+                                                              .pageViewController3!
+                                                              .animateToPage(
+                                                            i,
+                                                            duration: const Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                            curve: Curves.ease,
+                                                          );
+                                                          safeSetState(() {});
+                                                        },
+                                                        effect:
+                                                            smooth_page_indicator
+                                                                .SlideEffect(
+                                                          spacing: 8.0,
+                                                          radius: 8.0,
+                                                          dotWidth: 70.0,
+                                                          dotHeight: 8.0,
+                                                          dotColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .accent1,
+                                                          activeDotColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primary,
+                                                          paintStyle:
+                                                              PaintingStyle
+                                                                  .fill,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 220.0,
+                                            height: 0.01,
+                                            decoration: const BoxDecoration(),
+                                            child: SizedBox(
+                                              width: 200.0,
+                                              height: 1.0,
+                                              child: Stack(
+                                                children: [
+                                                  PageView(
+                                                    physics:
+                                                        const NeverScrollableScrollPhysics(),
+                                                    controller: _model
+                                                            .pageViewController4 ??=
+                                                        PageController(
+                                                            initialPage: 0),
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    children: [
+                                                      Container(),
+                                                      Container(),
+                                                      Container(),
+                                                    ],
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        const AlignmentDirectional(
+                                                            0.0, 0.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  16.0),
+                                                      child: smooth_page_indicator
+                                                          .SmoothPageIndicator(
+                                                        controller: _model
+                                                                .pageViewController4 ??=
+                                                            PageController(
+                                                                initialPage: 0),
+                                                        count: 3,
+                                                        axisDirection:
+                                                            Axis.horizontal,
+                                                        onDotClicked:
+                                                            (i) async {
+                                                          await _model
+                                                              .pageViewController4!
+                                                              .animateToPage(
+                                                            i,
+                                                            duration: const Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                            curve: Curves.ease,
+                                                          );
+                                                          safeSetState(() {});
+                                                        },
+                                                        effect:
+                                                            smooth_page_indicator
+                                                                .SlideEffect(
+                                                          spacing: 8.0,
+                                                          radius: 8.0,
+                                                          dotWidth: 70.0,
+                                                          dotHeight: 8.0,
+                                                          dotColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .accent1,
+                                                          activeDotColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primary,
+                                                          paintStyle:
+                                                              PaintingStyle
+                                                                  .fill,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ].divide(const SizedBox(height: 69.0)),
+                                      ),
+                                    ].divide(const SizedBox(width: 10.0)),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
