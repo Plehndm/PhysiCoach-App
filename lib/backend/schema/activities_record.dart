@@ -36,11 +36,6 @@ class ActivitiesRecord extends FirestoreRecord {
   DocumentReference? get user => _user;
   bool hasUser() => _user != null;
 
-  // "date" field.
-  DateTime? _date;
-  DateTime? get date => _date;
-  bool hasDate() => _date != null;
-
   // "seconds" field.
   int? _seconds;
   int get seconds => _seconds ?? 0;
@@ -56,6 +51,11 @@ class ActivitiesRecord extends FirestoreRecord {
   bool get completed => _completed ?? false;
   bool hasCompleted() => _completed != null;
 
+  // "date" field.
+  DateStruct? _date;
+  DateStruct get date => _date ?? DateStruct();
+  bool hasDate() => _date != null;
+
   void _initializeFields() {
     _type = snapshotData['type'] is ActivityTypes
         ? snapshotData['type']
@@ -63,10 +63,12 @@ class ActivitiesRecord extends FirestoreRecord {
     _title = snapshotData['title'] as String?;
     _description = snapshotData['description'] as String?;
     _user = snapshotData['user'] as DocumentReference?;
-    _date = snapshotData['date'] as DateTime?;
     _seconds = castToType<int>(snapshotData['seconds']);
     _id = castToType<int>(snapshotData['id']);
     _completed = snapshotData['completed'] as bool?;
+    _date = snapshotData['date'] is DateStruct
+        ? snapshotData['date']
+        : DateStruct.maybeFromMap(snapshotData['date']);
   }
 
   static CollectionReference get collection =>
@@ -108,10 +110,10 @@ Map<String, dynamic> createActivitiesRecordData({
   String? title,
   String? description,
   DocumentReference? user,
-  DateTime? date,
   int? seconds,
   int? id,
   bool? completed,
+  DateStruct? date,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -119,12 +121,15 @@ Map<String, dynamic> createActivitiesRecordData({
       'title': title,
       'description': description,
       'user': user,
-      'date': date,
       'seconds': seconds,
       'id': id,
       'completed': completed,
+      'date': DateStruct().toMap(),
     }.withoutNulls,
   );
+
+  // Handle nested data for "date" field.
+  addDateStructData(firestoreData, date, 'date');
 
   return firestoreData;
 }
@@ -138,10 +143,10 @@ class ActivitiesRecordDocumentEquality implements Equality<ActivitiesRecord> {
         e1?.title == e2?.title &&
         e1?.description == e2?.description &&
         e1?.user == e2?.user &&
-        e1?.date == e2?.date &&
         e1?.seconds == e2?.seconds &&
         e1?.id == e2?.id &&
-        e1?.completed == e2?.completed;
+        e1?.completed == e2?.completed &&
+        e1?.date == e2?.date;
   }
 
   @override
@@ -150,10 +155,10 @@ class ActivitiesRecordDocumentEquality implements Equality<ActivitiesRecord> {
         e?.title,
         e?.description,
         e?.user,
-        e?.date,
         e?.seconds,
         e?.id,
-        e?.completed
+        e?.completed,
+        e?.date
       ]);
 
   @override

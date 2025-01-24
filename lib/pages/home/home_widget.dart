@@ -4,6 +4,8 @@ import '/backend/schema/enums/enums.dart';
 import '/components/activity/activity_widget.dart';
 import '/components/activity_direct/activity_direct_widget.dart';
 import '/components/add_activity/add_activity_widget.dart';
+import '/flutter_flow/flutter_flow_button_tabbar.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -18,7 +20,7 @@ class HomeWidget extends StatefulWidget {
   State<HomeWidget> createState() => _HomeWidgetState();
 }
 
-class _HomeWidgetState extends State<HomeWidget> {
+class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
   late HomeModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -28,6 +30,11 @@ class _HomeWidgetState extends State<HomeWidget> {
     super.initState();
     _model = createModel(context, () => HomeModel());
 
+    _model.tabBarController = TabController(
+      vsync: this,
+      length: 2,
+      initialIndex: 0,
+    )..addListener(() => safeSetState(() {}));
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -96,10 +103,68 @@ class _HomeWidgetState extends State<HomeWidget> {
             ),
           ),
         ),
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Home',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Inter',
+                  color: Colors.white,
+                  fontSize: 22.0,
+                  letterSpacing: 0.0,
+                ),
+          ),
+          actions: [
+            Stack(
+              children: [
+                if (Theme.of(context).brightness == Brightness.light)
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                    child: FlutterFlowIconButton(
+                      borderRadius: 8.0,
+                      buttonSize: 50.0,
+                      fillColor: FlutterFlowTheme.of(context).primary,
+                      icon: Icon(
+                        Icons.light_mode,
+                        color: FlutterFlowTheme.of(context).info,
+                        size: 40.0,
+                      ),
+                      onPressed: () async {
+                        setDarkModeSetting(context, ThemeMode.dark);
+                      },
+                    ),
+                  ),
+                if (Theme.of(context).brightness == Brightness.dark)
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                    child: FlutterFlowIconButton(
+                      borderRadius: 8.0,
+                      buttonSize: 50.0,
+                      fillColor: FlutterFlowTheme.of(context).primary,
+                      icon: Icon(
+                        Icons.dark_mode_sharp,
+                        color: FlutterFlowTheme.of(context).info,
+                        size: 40.0,
+                      ),
+                      onPressed: () async {
+                        setDarkModeSetting(context, ThemeMode.light);
+                      },
+                    ),
+                  ),
+              ],
+            ),
+          ],
+          centerTitle: false,
+          elevation: 2.0,
+        ),
         body: Stack(
           children: [
             Container(
               width: double.infinity,
+              height: double.infinity,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
@@ -115,7 +180,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                 padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                 child: SingleChildScrollView(
                   child: Column(
-                    mainAxisSize: MainAxisSize.max,
+                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -127,667 +192,1254 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 ),
                       ),
                       SizedBox(
-                        height: 125.0,
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: double.infinity,
-                              height: 100.0,
-                              decoration: const BoxDecoration(),
-                              child: Text(
-                                'Todays Activities',
-                                style: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 25.0, 0.0, 0.0),
-                              child: StreamBuilder<List<ActivitiesRecord>>(
-                                stream: queryActivitiesRecord(
-                                  queryBuilder: (activitiesRecord) =>
-                                      activitiesRecord
-                                          .where(
-                                            'user',
-                                            isEqualTo: currentUserReference,
-                                          )
-                                          .where(
-                                            'date',
-                                            isEqualTo: getCurrentTimestamp,
-                                          ),
-                                  limit: 20,
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  List<ActivitiesRecord>
-                                      listViewActivitiesRecordList =
-                                      snapshot.data!;
-
-                                  return ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount:
-                                        listViewActivitiesRecordList.length,
-                                    itemBuilder: (context, listViewIndex) {
-                                      final listViewActivitiesRecord =
-                                          listViewActivitiesRecordList[
-                                              listViewIndex];
-                                      return InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            context: context,
-                                            builder: (context) {
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  FocusScope.of(context)
-                                                      .unfocus();
-                                                  FocusManager
-                                                      .instance.primaryFocus
-                                                      ?.unfocus();
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child: ActivityDirectWidget(
-                                                    activityDoc:
-                                                        listViewActivitiesRecord,
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ).then(
-                                              (value) => safeSetState(() {}));
-                                        },
-                                        child: wrapWithModel(
-                                          model: _model.todaysActivityModels
-                                              .getModel(
-                                            listViewIndex.toString(),
-                                            listViewIndex,
-                                          ),
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: ActivityWidget(
-                                            key: Key(
-                                              'Keygjm_${listViewIndex.toString()}',
-                                            ),
-                                            activitiesDoc:
-                                                listViewActivitiesRecord,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 125.0,
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: double.infinity,
-                              height: 100.0,
-                              decoration: const BoxDecoration(),
-                              child: Text(
-                                'Most Recent Activities',
-                                style: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 25.0, 0.0, 0.0),
-                              child: StreamBuilder<List<ActivitiesRecord>>(
-                                stream: queryActivitiesRecord(
-                                  queryBuilder: (activitiesRecord) =>
-                                      activitiesRecord.where(
-                                    'user',
-                                    isEqualTo: currentUserReference,
-                                  ),
-                                  limit: 20,
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  List<ActivitiesRecord>
-                                      listViewActivitiesRecordList =
-                                      snapshot.data!;
-
-                                  return ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount:
-                                        listViewActivitiesRecordList.length,
-                                    itemBuilder: (context, listViewIndex) {
-                                      final listViewActivitiesRecord =
-                                          listViewActivitiesRecordList[
-                                              listViewIndex];
-                                      return InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            context: context,
-                                            builder: (context) {
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  FocusScope.of(context)
-                                                      .unfocus();
-                                                  FocusManager
-                                                      .instance.primaryFocus
-                                                      ?.unfocus();
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child: ActivityDirectWidget(
-                                                    activityDoc:
-                                                        listViewActivitiesRecord,
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ).then(
-                                              (value) => safeSetState(() {}));
-                                        },
-                                        child: wrapWithModel(
-                                          model: _model.mostRecentActivityModels
-                                              .getModel(
-                                            listViewIndex.toString(),
-                                            listViewIndex,
-                                          ),
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: ActivityWidget(
-                                            key: Key(
-                                              'Keysrp_${listViewIndex.toString()}',
-                                            ),
-                                            activitiesDoc:
-                                                listViewActivitiesRecord,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 125.0,
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: double.infinity,
-                              height: 100.0,
-                              decoration: const BoxDecoration(),
-                              child: Text(
-                                'Triple Jump',
-                                style: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 25.0, 0.0, 0.0),
-                              child: StreamBuilder<List<ActivitiesRecord>>(
-                                stream: queryActivitiesRecord(
-                                  queryBuilder: (activitiesRecord) =>
-                                      activitiesRecord
-                                          .where(
-                                            'user',
-                                            isEqualTo: currentUserReference,
-                                          )
-                                          .where(
-                                            'type',
-                                            isEqualTo: ActivityTypes.Triple_Jump
-                                                .serialize(),
-                                          ),
-                                  limit: 20,
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  List<ActivitiesRecord>
-                                      listViewActivitiesRecordList =
-                                      snapshot.data!;
-
-                                  return ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount:
-                                        listViewActivitiesRecordList.length,
-                                    itemBuilder: (context, listViewIndex) {
-                                      final listViewActivitiesRecord =
-                                          listViewActivitiesRecordList[
-                                              listViewIndex];
-                                      return InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            context: context,
-                                            builder: (context) {
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  FocusScope.of(context)
-                                                      .unfocus();
-                                                  FocusManager
-                                                      .instance.primaryFocus
-                                                      ?.unfocus();
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child: ActivityDirectWidget(
-                                                    activityDoc:
-                                                        listViewActivitiesRecord,
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ).then(
-                                              (value) => safeSetState(() {}));
-                                        },
-                                        child: wrapWithModel(
-                                          model: _model.tripleJumpActivityModels
-                                              .getModel(
-                                            listViewIndex.toString(),
-                                            listViewIndex,
-                                          ),
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: ActivityWidget(
-                                            key: Key(
-                                              'Keykng_${listViewIndex.toString()}',
-                                            ),
-                                            activitiesDoc:
-                                                listViewActivitiesRecord,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 125.0,
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: double.infinity,
-                              height: 100.0,
-                              decoration: const BoxDecoration(),
-                              child: Text(
-                                'Running',
-                                style: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 25.0, 0.0, 0.0),
-                              child: StreamBuilder<List<ActivitiesRecord>>(
-                                stream: queryActivitiesRecord(
-                                  queryBuilder: (activitiesRecord) =>
-                                      activitiesRecord
-                                          .where(
-                                            'user',
-                                            isEqualTo: currentUserReference,
-                                          )
-                                          .where(
-                                            'type',
-                                            isEqualTo: ActivityTypes.Running
-                                                .serialize(),
-                                          ),
-                                  limit: 20,
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  List<ActivitiesRecord>
-                                      listViewActivitiesRecordList =
-                                      snapshot.data!;
-
-                                  return ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount:
-                                        listViewActivitiesRecordList.length,
-                                    itemBuilder: (context, listViewIndex) {
-                                      final listViewActivitiesRecord =
-                                          listViewActivitiesRecordList[
-                                              listViewIndex];
-                                      return InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            context: context,
-                                            builder: (context) {
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  FocusScope.of(context)
-                                                      .unfocus();
-                                                  FocusManager
-                                                      .instance.primaryFocus
-                                                      ?.unfocus();
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child: ActivityDirectWidget(
-                                                    activityDoc:
-                                                        listViewActivitiesRecord,
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ).then(
-                                              (value) => safeSetState(() {}));
-                                        },
-                                        child: wrapWithModel(
-                                          model: _model.runningActivityModels
-                                              .getModel(
-                                            listViewIndex.toString(),
-                                            listViewIndex,
-                                          ),
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: ActivityWidget(
-                                            key: Key(
-                                              'Key7db_${listViewIndex.toString()}',
-                                            ),
-                                            activitiesDoc:
-                                                listViewActivitiesRecord,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 125.0,
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: double.infinity,
-                              height: 100.0,
-                              decoration: const BoxDecoration(),
-                              child: Text(
-                                'Long Jump',
-                                style: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 25.0, 0.0, 0.0),
-                              child: StreamBuilder<List<ActivitiesRecord>>(
-                                stream: queryActivitiesRecord(
-                                  queryBuilder: (activitiesRecord) =>
-                                      activitiesRecord
-                                          .where(
-                                            'user',
-                                            isEqualTo: currentUserReference,
-                                          )
-                                          .where(
-                                            'type',
-                                            isEqualTo: ActivityTypes.Long_Jump
-                                                .serialize(),
-                                          ),
-                                  limit: 20,
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  List<ActivitiesRecord>
-                                      listViewActivitiesRecordList =
-                                      snapshot.data!;
-
-                                  return ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount:
-                                        listViewActivitiesRecordList.length,
-                                    itemBuilder: (context, listViewIndex) {
-                                      final listViewActivitiesRecord =
-                                          listViewActivitiesRecordList[
-                                              listViewIndex];
-                                      return InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            context: context,
-                                            builder: (context) {
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  FocusScope.of(context)
-                                                      .unfocus();
-                                                  FocusManager
-                                                      .instance.primaryFocus
-                                                      ?.unfocus();
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child: ActivityDirectWidget(
-                                                    activityDoc:
-                                                        listViewActivitiesRecord,
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ).then(
-                                              (value) => safeSetState(() {}));
-                                        },
-                                        child: wrapWithModel(
-                                          model: _model.longJumpActivityModels
-                                              .getModel(
-                                            listViewIndex.toString(),
-                                            listViewIndex,
-                                          ),
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: ActivityWidget(
-                                            key: Key(
-                                              'Keyqh5_${listViewIndex.toString()}',
-                                            ),
-                                            activitiesDoc:
-                                                listViewActivitiesRecord,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      FFButtonWidget(
-                        onPressed: () async {
-                          context.pushNamed(
-                            'account',
-                            extra: <String, dynamic>{
-                              kTransitionInfoKey: const TransitionInfo(
-                                hasTransition: true,
-                                transitionType: PageTransitionType.fade,
-                                duration: Duration(milliseconds: 0),
-                              ),
-                            },
-                          );
-                        },
-                        text: 'Account',
-                        options: FFButtonOptions(
-                          width: double.infinity,
-                          height: 40.0,
+                        height: 535.13,
+                        child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 0.0, 16.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          textStyle: FlutterFlowTheme.of(context)
-                              .titleSmall
-                              .override(
-                                fontFamily: 'Inter',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 20.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w500,
+                              0.0, 12.0, 0.0, 0.0),
+                          child: Column(
+                            children: [
+                              Align(
+                                alignment: const Alignment(0.0, 0),
+                                child: FlutterFlowButtonTabBar(
+                                  useToggleButtonStyle: true,
+                                  isScrollable: true,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                      ),
+                                  unselectedLabelStyle: const TextStyle(),
+                                  labelColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  unselectedLabelColor:
+                                      FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                  backgroundColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  unselectedBackgroundColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  borderColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  borderWidth: 2.0,
+                                  borderRadius: 12.0,
+                                  elevation: 0.0,
+                                  labelPadding: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 0.0),
+                                  tabs: const [
+                                    Tab(
+                                      text: 'Pending',
+                                    ),
+                                    Tab(
+                                      text: 'Completed',
+                                    ),
+                                  ],
+                                  controller: _model.tabBarController,
+                                  onTap: (i) async {
+                                    [() async {}, () async {}][i]();
+                                  },
+                                ),
                               ),
-                          elevation: 0.0,
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            width: 1.0,
+                              Expanded(
+                                child: TabBarView(
+                                  controller: _model.tabBarController,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 10.0, 0.0, 0.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          SizedBox(
+                                            height: 125.0,
+                                            child: Stack(
+                                              children: [
+                                                Container(
+                                                  width: double.infinity,
+                                                  height: 100.0,
+                                                  decoration: const BoxDecoration(),
+                                                  child: Text(
+                                                    'Triple Jump',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 25.0, 0.0, 0.0),
+                                                  child: StreamBuilder<
+                                                      List<ActivitiesRecord>>(
+                                                    stream:
+                                                        queryActivitiesRecord(
+                                                      queryBuilder:
+                                                          (activitiesRecord) =>
+                                                              activitiesRecord
+                                                                  .where(
+                                                                    'user',
+                                                                    isEqualTo:
+                                                                        currentUserReference,
+                                                                  )
+                                                                  .where(
+                                                                    'type',
+                                                                    isEqualTo: ActivityTypes
+                                                                            .Triple_Jump
+                                                                        .serialize(),
+                                                                  )
+                                                                  .where(
+                                                                    'completed',
+                                                                    isEqualTo:
+                                                                        false,
+                                                                  ),
+                                                      limit: 20,
+                                                    ),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      // Customize what your widget looks like when it's loading.
+                                                      if (!snapshot.hasData) {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            width: 50.0,
+                                                            height: 50.0,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              valueColor:
+                                                                  AlwaysStoppedAnimation<
+                                                                      Color>(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                      List<ActivitiesRecord>
+                                                          listViewActivitiesRecordList =
+                                                          snapshot.data!;
+
+                                                      return ListView.separated(
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        primary: false,
+                                                        shrinkWrap: true,
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                        itemCount:
+                                                            listViewActivitiesRecordList
+                                                                .length,
+                                                        separatorBuilder:
+                                                            (_, __) => const SizedBox(
+                                                                width: 10.0),
+                                                        itemBuilder: (context,
+                                                            listViewIndex) {
+                                                          final listViewActivitiesRecord =
+                                                              listViewActivitiesRecordList[
+                                                                  listViewIndex];
+                                                          return InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              await showModalBottomSheet(
+                                                                isScrollControlled:
+                                                                    true,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return GestureDetector(
+                                                                    onTap: () {
+                                                                      FocusScope.of(
+                                                                              context)
+                                                                          .unfocus();
+                                                                      FocusManager
+                                                                          .instance
+                                                                          .primaryFocus
+                                                                          ?.unfocus();
+                                                                    },
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: MediaQuery
+                                                                          .viewInsetsOf(
+                                                                              context),
+                                                                      child:
+                                                                          ActivityDirectWidget(
+                                                                        activityDoc:
+                                                                            listViewActivitiesRecord,
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ).then((value) =>
+                                                                  safeSetState(
+                                                                      () {}));
+                                                            },
+                                                            child:
+                                                                wrapWithModel(
+                                                              model: _model
+                                                                  .tripleJumpActivityPendingModels
+                                                                  .getModel(
+                                                                listViewIndex
+                                                                    .toString(),
+                                                                listViewIndex,
+                                                              ),
+                                                              updateCallback: () =>
+                                                                  safeSetState(
+                                                                      () {}),
+                                                              child:
+                                                                  ActivityWidget(
+                                                                key: Key(
+                                                                  'Keykng_${listViewIndex.toString()}',
+                                                                ),
+                                                                activitiesDoc:
+                                                                    listViewActivitiesRecord,
+                                                                checkAction:
+                                                                    () async {
+                                                                  await listViewActivitiesRecord
+                                                                      .reference
+                                                                      .update(
+                                                                          createActivitiesRecordData(
+                                                                    completed:
+                                                                        true,
+                                                                  ));
+                                                                },
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 125.0,
+                                            child: Stack(
+                                              children: [
+                                                Container(
+                                                  width: double.infinity,
+                                                  height: 100.0,
+                                                  decoration: const BoxDecoration(),
+                                                  child: Text(
+                                                    'Running',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 25.0, 0.0, 0.0),
+                                                  child: StreamBuilder<
+                                                      List<ActivitiesRecord>>(
+                                                    stream:
+                                                        queryActivitiesRecord(
+                                                      queryBuilder:
+                                                          (activitiesRecord) =>
+                                                              activitiesRecord
+                                                                  .where(
+                                                                    'user',
+                                                                    isEqualTo:
+                                                                        currentUserReference,
+                                                                  )
+                                                                  .where(
+                                                                    'type',
+                                                                    isEqualTo: ActivityTypes
+                                                                            .Running
+                                                                        .serialize(),
+                                                                  )
+                                                                  .where(
+                                                                    'completed',
+                                                                    isEqualTo:
+                                                                        false,
+                                                                  ),
+                                                      limit: 20,
+                                                    ),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      // Customize what your widget looks like when it's loading.
+                                                      if (!snapshot.hasData) {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            width: 50.0,
+                                                            height: 50.0,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              valueColor:
+                                                                  AlwaysStoppedAnimation<
+                                                                      Color>(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                      List<ActivitiesRecord>
+                                                          listViewActivitiesRecordList =
+                                                          snapshot.data!;
+
+                                                      return ListView.separated(
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        primary: false,
+                                                        shrinkWrap: true,
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                        itemCount:
+                                                            listViewActivitiesRecordList
+                                                                .length,
+                                                        separatorBuilder:
+                                                            (_, __) => const SizedBox(
+                                                                width: 10.0),
+                                                        itemBuilder: (context,
+                                                            listViewIndex) {
+                                                          final listViewActivitiesRecord =
+                                                              listViewActivitiesRecordList[
+                                                                  listViewIndex];
+                                                          return InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              await showModalBottomSheet(
+                                                                isScrollControlled:
+                                                                    true,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return GestureDetector(
+                                                                    onTap: () {
+                                                                      FocusScope.of(
+                                                                              context)
+                                                                          .unfocus();
+                                                                      FocusManager
+                                                                          .instance
+                                                                          .primaryFocus
+                                                                          ?.unfocus();
+                                                                    },
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: MediaQuery
+                                                                          .viewInsetsOf(
+                                                                              context),
+                                                                      child:
+                                                                          ActivityDirectWidget(
+                                                                        activityDoc:
+                                                                            listViewActivitiesRecord,
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ).then((value) =>
+                                                                  safeSetState(
+                                                                      () {}));
+                                                            },
+                                                            child:
+                                                                wrapWithModel(
+                                                              model: _model
+                                                                  .runningActivityPendingModels
+                                                                  .getModel(
+                                                                listViewIndex
+                                                                    .toString(),
+                                                                listViewIndex,
+                                                              ),
+                                                              updateCallback: () =>
+                                                                  safeSetState(
+                                                                      () {}),
+                                                              child:
+                                                                  ActivityWidget(
+                                                                key: Key(
+                                                                  'Key7db_${listViewIndex.toString()}',
+                                                                ),
+                                                                activitiesDoc:
+                                                                    listViewActivitiesRecord,
+                                                                checkAction:
+                                                                    () async {
+                                                                  await listViewActivitiesRecord
+                                                                      .reference
+                                                                      .update(
+                                                                          createActivitiesRecordData(
+                                                                    completed:
+                                                                        true,
+                                                                  ));
+                                                                },
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 125.0,
+                                            child: Stack(
+                                              children: [
+                                                Container(
+                                                  width: double.infinity,
+                                                  height: 100.0,
+                                                  decoration: const BoxDecoration(),
+                                                  child: Text(
+                                                    'Long Jump',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 25.0, 0.0, 0.0),
+                                                  child: StreamBuilder<
+                                                      List<ActivitiesRecord>>(
+                                                    stream:
+                                                        queryActivitiesRecord(
+                                                      queryBuilder:
+                                                          (activitiesRecord) =>
+                                                              activitiesRecord
+                                                                  .where(
+                                                                    'user',
+                                                                    isEqualTo:
+                                                                        currentUserReference,
+                                                                  )
+                                                                  .where(
+                                                                    'type',
+                                                                    isEqualTo: ActivityTypes
+                                                                            .Long_Jump
+                                                                        .serialize(),
+                                                                  )
+                                                                  .where(
+                                                                    'completed',
+                                                                    isEqualTo:
+                                                                        false,
+                                                                  ),
+                                                      limit: 20,
+                                                    ),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      // Customize what your widget looks like when it's loading.
+                                                      if (!snapshot.hasData) {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            width: 50.0,
+                                                            height: 50.0,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              valueColor:
+                                                                  AlwaysStoppedAnimation<
+                                                                      Color>(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                      List<ActivitiesRecord>
+                                                          listViewActivitiesRecordList =
+                                                          snapshot.data!;
+
+                                                      return ListView.separated(
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        primary: false,
+                                                        shrinkWrap: true,
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                        itemCount:
+                                                            listViewActivitiesRecordList
+                                                                .length,
+                                                        separatorBuilder:
+                                                            (_, __) => const SizedBox(
+                                                                width: 10.0),
+                                                        itemBuilder: (context,
+                                                            listViewIndex) {
+                                                          final listViewActivitiesRecord =
+                                                              listViewActivitiesRecordList[
+                                                                  listViewIndex];
+                                                          return InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              await showModalBottomSheet(
+                                                                isScrollControlled:
+                                                                    true,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return GestureDetector(
+                                                                    onTap: () {
+                                                                      FocusScope.of(
+                                                                              context)
+                                                                          .unfocus();
+                                                                      FocusManager
+                                                                          .instance
+                                                                          .primaryFocus
+                                                                          ?.unfocus();
+                                                                    },
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: MediaQuery
+                                                                          .viewInsetsOf(
+                                                                              context),
+                                                                      child:
+                                                                          ActivityDirectWidget(
+                                                                        activityDoc:
+                                                                            listViewActivitiesRecord,
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ).then((value) =>
+                                                                  safeSetState(
+                                                                      () {}));
+                                                            },
+                                                            child:
+                                                                wrapWithModel(
+                                                              model: _model
+                                                                  .longJumpActivityPendingModels
+                                                                  .getModel(
+                                                                listViewIndex
+                                                                    .toString(),
+                                                                listViewIndex,
+                                                              ),
+                                                              updateCallback: () =>
+                                                                  safeSetState(
+                                                                      () {}),
+                                                              child:
+                                                                  ActivityWidget(
+                                                                key: Key(
+                                                                  'Keyqh5_${listViewIndex.toString()}',
+                                                                ),
+                                                                activitiesDoc:
+                                                                    listViewActivitiesRecord,
+                                                                checkAction:
+                                                                    () async {
+                                                                  await listViewActivitiesRecord
+                                                                      .reference
+                                                                      .update(
+                                                                          createActivitiesRecordData(
+                                                                    completed:
+                                                                        true,
+                                                                  ));
+                                                                },
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ]
+                                            .divide(const SizedBox(height: 20.0))
+                                            .around(const SizedBox(height: 20.0)),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 10.0, 0.0, 0.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          SizedBox(
+                                            height: 125.0,
+                                            child: Stack(
+                                              children: [
+                                                Container(
+                                                  width: double.infinity,
+                                                  height: 100.0,
+                                                  decoration: const BoxDecoration(),
+                                                  child: Text(
+                                                    'Triple Jump',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 25.0, 0.0, 0.0),
+                                                  child: StreamBuilder<
+                                                      List<ActivitiesRecord>>(
+                                                    stream:
+                                                        queryActivitiesRecord(
+                                                      queryBuilder:
+                                                          (activitiesRecord) =>
+                                                              activitiesRecord
+                                                                  .where(
+                                                                    'user',
+                                                                    isEqualTo:
+                                                                        currentUserReference,
+                                                                  )
+                                                                  .where(
+                                                                    'type',
+                                                                    isEqualTo: ActivityTypes
+                                                                            .Triple_Jump
+                                                                        .serialize(),
+                                                                  )
+                                                                  .where(
+                                                                    'completed',
+                                                                    isEqualTo:
+                                                                        true,
+                                                                  ),
+                                                      limit: 20,
+                                                    ),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      // Customize what your widget looks like when it's loading.
+                                                      if (!snapshot.hasData) {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            width: 50.0,
+                                                            height: 50.0,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              valueColor:
+                                                                  AlwaysStoppedAnimation<
+                                                                      Color>(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                      List<ActivitiesRecord>
+                                                          listViewActivitiesRecordList =
+                                                          snapshot.data!;
+
+                                                      return ListView.separated(
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        primary: false,
+                                                        shrinkWrap: true,
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                        itemCount:
+                                                            listViewActivitiesRecordList
+                                                                .length,
+                                                        separatorBuilder:
+                                                            (_, __) => const SizedBox(
+                                                                width: 10.0),
+                                                        itemBuilder: (context,
+                                                            listViewIndex) {
+                                                          final listViewActivitiesRecord =
+                                                              listViewActivitiesRecordList[
+                                                                  listViewIndex];
+                                                          return InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              await showModalBottomSheet(
+                                                                isScrollControlled:
+                                                                    true,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return GestureDetector(
+                                                                    onTap: () {
+                                                                      FocusScope.of(
+                                                                              context)
+                                                                          .unfocus();
+                                                                      FocusManager
+                                                                          .instance
+                                                                          .primaryFocus
+                                                                          ?.unfocus();
+                                                                    },
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: MediaQuery
+                                                                          .viewInsetsOf(
+                                                                              context),
+                                                                      child:
+                                                                          ActivityDirectWidget(
+                                                                        activityDoc:
+                                                                            listViewActivitiesRecord,
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ).then((value) =>
+                                                                  safeSetState(
+                                                                      () {}));
+                                                            },
+                                                            child:
+                                                                wrapWithModel(
+                                                              model: _model
+                                                                  .tripleJumpActivityCompletedModels
+                                                                  .getModel(
+                                                                listViewIndex
+                                                                    .toString(),
+                                                                listViewIndex,
+                                                              ),
+                                                              updateCallback: () =>
+                                                                  safeSetState(
+                                                                      () {}),
+                                                              child:
+                                                                  ActivityWidget(
+                                                                key: Key(
+                                                                  'Keyef8_${listViewIndex.toString()}',
+                                                                ),
+                                                                activitiesDoc:
+                                                                    listViewActivitiesRecord,
+                                                                checkAction:
+                                                                    () async {
+                                                                  await listViewActivitiesRecord
+                                                                      .reference
+                                                                      .update(
+                                                                          createActivitiesRecordData(
+                                                                    completed:
+                                                                        false,
+                                                                  ));
+                                                                },
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 125.0,
+                                            child: Stack(
+                                              children: [
+                                                Container(
+                                                  width: double.infinity,
+                                                  height: 100.0,
+                                                  decoration: const BoxDecoration(),
+                                                  child: Text(
+                                                    'Running',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 25.0, 0.0, 0.0),
+                                                  child: StreamBuilder<
+                                                      List<ActivitiesRecord>>(
+                                                    stream:
+                                                        queryActivitiesRecord(
+                                                      queryBuilder:
+                                                          (activitiesRecord) =>
+                                                              activitiesRecord
+                                                                  .where(
+                                                                    'user',
+                                                                    isEqualTo:
+                                                                        currentUserReference,
+                                                                  )
+                                                                  .where(
+                                                                    'type',
+                                                                    isEqualTo: ActivityTypes
+                                                                            .Running
+                                                                        .serialize(),
+                                                                  )
+                                                                  .where(
+                                                                    'completed',
+                                                                    isEqualTo:
+                                                                        true,
+                                                                  ),
+                                                      limit: 20,
+                                                    ),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      // Customize what your widget looks like when it's loading.
+                                                      if (!snapshot.hasData) {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            width: 50.0,
+                                                            height: 50.0,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              valueColor:
+                                                                  AlwaysStoppedAnimation<
+                                                                      Color>(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                      List<ActivitiesRecord>
+                                                          listViewActivitiesRecordList =
+                                                          snapshot.data!;
+
+                                                      return ListView.separated(
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        primary: false,
+                                                        shrinkWrap: true,
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                        itemCount:
+                                                            listViewActivitiesRecordList
+                                                                .length,
+                                                        separatorBuilder:
+                                                            (_, __) => const SizedBox(
+                                                                width: 10.0),
+                                                        itemBuilder: (context,
+                                                            listViewIndex) {
+                                                          final listViewActivitiesRecord =
+                                                              listViewActivitiesRecordList[
+                                                                  listViewIndex];
+                                                          return InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              await showModalBottomSheet(
+                                                                isScrollControlled:
+                                                                    true,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return GestureDetector(
+                                                                    onTap: () {
+                                                                      FocusScope.of(
+                                                                              context)
+                                                                          .unfocus();
+                                                                      FocusManager
+                                                                          .instance
+                                                                          .primaryFocus
+                                                                          ?.unfocus();
+                                                                    },
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: MediaQuery
+                                                                          .viewInsetsOf(
+                                                                              context),
+                                                                      child:
+                                                                          ActivityDirectWidget(
+                                                                        activityDoc:
+                                                                            listViewActivitiesRecord,
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ).then((value) =>
+                                                                  safeSetState(
+                                                                      () {}));
+                                                            },
+                                                            child:
+                                                                wrapWithModel(
+                                                              model: _model
+                                                                  .runningActivityCompletedModels
+                                                                  .getModel(
+                                                                listViewIndex
+                                                                    .toString(),
+                                                                listViewIndex,
+                                                              ),
+                                                              updateCallback: () =>
+                                                                  safeSetState(
+                                                                      () {}),
+                                                              child:
+                                                                  ActivityWidget(
+                                                                key: Key(
+                                                                  'Key1kj_${listViewIndex.toString()}',
+                                                                ),
+                                                                activitiesDoc:
+                                                                    listViewActivitiesRecord,
+                                                                checkAction:
+                                                                    () async {
+                                                                  await listViewActivitiesRecord
+                                                                      .reference
+                                                                      .update(
+                                                                          createActivitiesRecordData(
+                                                                    completed:
+                                                                        false,
+                                                                  ));
+                                                                },
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 125.0,
+                                            child: Stack(
+                                              children: [
+                                                Container(
+                                                  width: double.infinity,
+                                                  height: 100.0,
+                                                  decoration: const BoxDecoration(),
+                                                  child: Text(
+                                                    'Long Jump',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 25.0, 0.0, 0.0),
+                                                  child: StreamBuilder<
+                                                      List<ActivitiesRecord>>(
+                                                    stream:
+                                                        queryActivitiesRecord(
+                                                      queryBuilder:
+                                                          (activitiesRecord) =>
+                                                              activitiesRecord
+                                                                  .where(
+                                                                    'user',
+                                                                    isEqualTo:
+                                                                        currentUserReference,
+                                                                  )
+                                                                  .where(
+                                                                    'type',
+                                                                    isEqualTo: ActivityTypes
+                                                                            .Long_Jump
+                                                                        .serialize(),
+                                                                  )
+                                                                  .where(
+                                                                    'completed',
+                                                                    isEqualTo:
+                                                                        true,
+                                                                  ),
+                                                      limit: 20,
+                                                    ),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      // Customize what your widget looks like when it's loading.
+                                                      if (!snapshot.hasData) {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            width: 50.0,
+                                                            height: 50.0,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              valueColor:
+                                                                  AlwaysStoppedAnimation<
+                                                                      Color>(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                      List<ActivitiesRecord>
+                                                          listViewActivitiesRecordList =
+                                                          snapshot.data!;
+
+                                                      return ListView.separated(
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        primary: false,
+                                                        shrinkWrap: true,
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                        itemCount:
+                                                            listViewActivitiesRecordList
+                                                                .length,
+                                                        separatorBuilder:
+                                                            (_, __) => const SizedBox(
+                                                                width: 10.0),
+                                                        itemBuilder: (context,
+                                                            listViewIndex) {
+                                                          final listViewActivitiesRecord =
+                                                              listViewActivitiesRecordList[
+                                                                  listViewIndex];
+                                                          return InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              await showModalBottomSheet(
+                                                                isScrollControlled:
+                                                                    true,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return GestureDetector(
+                                                                    onTap: () {
+                                                                      FocusScope.of(
+                                                                              context)
+                                                                          .unfocus();
+                                                                      FocusManager
+                                                                          .instance
+                                                                          .primaryFocus
+                                                                          ?.unfocus();
+                                                                    },
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: MediaQuery
+                                                                          .viewInsetsOf(
+                                                                              context),
+                                                                      child:
+                                                                          ActivityDirectWidget(
+                                                                        activityDoc:
+                                                                            listViewActivitiesRecord,
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ).then((value) =>
+                                                                  safeSetState(
+                                                                      () {}));
+                                                            },
+                                                            child:
+                                                                wrapWithModel(
+                                                              model: _model
+                                                                  .longJumpActivityCompletedModels
+                                                                  .getModel(
+                                                                listViewIndex
+                                                                    .toString(),
+                                                                listViewIndex,
+                                                              ),
+                                                              updateCallback: () =>
+                                                                  safeSetState(
+                                                                      () {}),
+                                                              child:
+                                                                  ActivityWidget(
+                                                                key: Key(
+                                                                  'Keyiqz_${listViewIndex.toString()}',
+                                                                ),
+                                                                activitiesDoc:
+                                                                    listViewActivitiesRecord,
+                                                                checkAction:
+                                                                    () async {
+                                                                  await listViewActivitiesRecord
+                                                                      .reference
+                                                                      .update(
+                                                                          createActivitiesRecordData(
+                                                                    completed:
+                                                                        false,
+                                                                  ));
+                                                                },
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ]
+                                            .divide(const SizedBox(height: 20.0))
+                                            .around(const SizedBox(height: 20.0)),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                          borderRadius: BorderRadius.circular(12.0),
                         ),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          FFButtonWidget(
+                            onPressed: () async {
+                              context.pushNamed(
+                                'account',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: const TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 0),
+                                  ),
+                                },
+                              );
+                            },
+                            text: 'Account',
+                            icon: const Icon(
+                              Icons.person_sharp,
+                              size: 24.0,
+                            ),
+                            options: FFButtonOptions(
+                              height: 40.0,
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 0.0),
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 20.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                              elevation: 0.0,
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                          ),
+                          FFButtonWidget(
+                            onPressed: () async {
+                              context.pushNamed(
+                                'planner',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: const TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 0),
+                                  ),
+                                },
+                              );
+                            },
+                            text: 'Planner',
+                            icon: const Icon(
+                              Icons.calendar_today,
+                              size: 24.0,
+                            ),
+                            options: FFButtonOptions(
+                              height: 40.0,
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 0.0),
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 20.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                              elevation: 0.0,
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                          ),
+                        ],
                       ),
                     ]
                         .divide(const SizedBox(height: 40.0))

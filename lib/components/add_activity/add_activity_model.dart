@@ -1,5 +1,5 @@
+import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
-import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'add_activity_widget.dart' show AddActivityWidget;
@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 class AddActivityModel extends FlutterFlowModel<AddActivityWidget> {
   ///  State fields for stateful widgets in this component.
 
+  final formKey = GlobalKey<FormState>();
   // State field(s) for Type widget.
   ActivityTypes? typeValue;
   FormFieldController<ActivityTypes>? typeValueController;
@@ -15,19 +16,25 @@ class AddActivityModel extends FlutterFlowModel<AddActivityWidget> {
   FocusNode? titleFocusNode;
   TextEditingController? titleTextController;
   String? Function(BuildContext, String?)? titleTextControllerValidator;
+  String? _titleTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Title is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for Description widget.
   FocusNode? descriptionFocusNode;
   TextEditingController? descriptionTextController;
   String? Function(BuildContext, String?)? descriptionTextControllerValidator;
-  // State field(s) for Date widget.
-  DateTimeRange? dateSelectedDay;
+  DateTime? datePicked;
+  // Stores action output result for [Backend Call - Create Document] action in AddActivity-Button widget.
+  ActivitiesRecord? activityDoc;
 
   @override
   void initState(BuildContext context) {
-    dateSelectedDay = DateTimeRange(
-      start: DateTime.now().startOfDay,
-      end: DateTime.now().endOfDay,
-    );
+    titleTextControllerValidator = _titleTextControllerValidator;
   }
 
   @override

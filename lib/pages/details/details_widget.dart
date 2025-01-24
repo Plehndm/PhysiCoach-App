@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'details_model.dart';
 export 'details_model.dart';
@@ -366,7 +367,8 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                           iconColor: FlutterFlowTheme.of(context).secondaryText,
                           weekFormat: false,
                           weekStartsMonday: false,
-                          initialDate: widget.activitiesDoc?.date,
+                          initialDate: functions
+                              .dateToDateTime(widget.activitiesDoc!.date),
                           rowHeight: 48.0,
                           onChange: (DateTimeRange? newSelectedDate) {
                             safeSetState(
@@ -408,7 +410,26 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                                 description:
                                     _model.descriptionTextController.text,
                                 user: currentUserReference,
-                                date: _model.dateSelectedDay?.start,
+                                date: updateDateStruct(
+                                  DateStruct(
+                                    day: valueOrDefault<int>(
+                                      functions.getDay(
+                                          _model.dateSelectedDay!.start),
+                                      1,
+                                    ),
+                                    month: valueOrDefault<int>(
+                                      functions.getMonth(
+                                          _model.dateSelectedDay!.start),
+                                      1,
+                                    ),
+                                    year: valueOrDefault<int>(
+                                      functions.getYear(
+                                          _model.dateSelectedDay!.start),
+                                      2000,
+                                    ),
+                                  ),
+                                  clearUnsetFields: false,
+                                ),
                               ));
                               _model.editingMode = !_model.editingMode;
                               safeSetState(() {});

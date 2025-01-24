@@ -9,9 +9,11 @@ class ActivityWidget extends StatefulWidget {
   const ActivityWidget({
     super.key,
     required this.activitiesDoc,
+    required this.checkAction,
   });
 
   final ActivitiesRecord? activitiesDoc;
+  final Future Function()? checkAction;
 
   @override
   State<ActivityWidget> createState() => _ActivityWidgetState();
@@ -97,10 +99,51 @@ class _ActivityWidgetState extends State<ActivityWidget> {
                 child: Stack(
                   children: [
                     Align(
+                      alignment: const AlignmentDirectional(-1.0, 0.0),
+                      child: Text(
+                        valueOrDefault<String>(
+                          widget.activitiesDoc?.title,
+                          'title',
+                        ).maybeHandleOverflow(
+                          maxChars: 10,
+                          replacement: '…',
+                        ),
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ),
+                    Align(
+                      alignment: const AlignmentDirectional(-1.0, 0.0),
+                      child: Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                        child: Text(
+                          valueOrDefault<String>(
+                            widget.activitiesDoc?.description,
+                            'description',
+                          ).maybeHandleOverflow(
+                            maxChars: 10,
+                            replacement: '…',
+                          ),
+                          textAlign: TextAlign.center,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                        ),
+                      ),
+                    ),
+                    Align(
                       alignment: const AlignmentDirectional(1.0, -1.0),
                       child: Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(40.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(50.0, 0.0, 0.0, 0.0),
                         child: Theme(
                           data: ThemeData(
                             checkboxTheme: const CheckboxThemeData(
@@ -118,6 +161,11 @@ class _ActivityWidgetState extends State<ActivityWidget> {
                             onChanged: (newValue) async {
                               safeSetState(
                                   () => _model.completedValue = newValue!);
+                              if (newValue!) {
+                                await widget.checkAction?.call();
+                              } else {
+                                await widget.checkAction?.call();
+                              }
                             },
                             side: BorderSide(
                               width: 2,
@@ -127,41 +175,6 @@ class _ActivityWidgetState extends State<ActivityWidget> {
                             checkColor: FlutterFlowTheme.of(context).info,
                           ),
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
-                      child: Text(
-                        valueOrDefault<String>(
-                          widget.activitiesDoc?.title,
-                          'title',
-                        ),
-                        textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
-                      child: Text(
-                        valueOrDefault<String>(
-                          widget.activitiesDoc?.description,
-                          'description',
-                        ).maybeHandleOverflow(
-                          maxChars: 10,
-                          replacement: '…',
-                        ),
-                        textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.normal,
-                            ),
                       ),
                     ),
                   ],

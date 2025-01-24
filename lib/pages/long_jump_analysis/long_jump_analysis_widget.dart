@@ -128,7 +128,48 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                           letterSpacing: 0.0,
                         ),
                   ),
-                  actions: const [],
+                  actions: [
+                    Stack(
+                      children: [
+                        if (Theme.of(context).brightness == Brightness.light)
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 10.0, 0.0),
+                            child: FlutterFlowIconButton(
+                              borderRadius: 8.0,
+                              buttonSize: 50.0,
+                              fillColor: FlutterFlowTheme.of(context).primary,
+                              icon: Icon(
+                                Icons.light_mode,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 40.0,
+                              ),
+                              onPressed: () async {
+                                setDarkModeSetting(context, ThemeMode.dark);
+                              },
+                            ),
+                          ),
+                        if (Theme.of(context).brightness == Brightness.dark)
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 10.0, 0.0),
+                            child: FlutterFlowIconButton(
+                              borderRadius: 8.0,
+                              buttonSize: 50.0,
+                              fillColor: FlutterFlowTheme.of(context).primary,
+                              icon: Icon(
+                                Icons.dark_mode_sharp,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 40.0,
+                              ),
+                              onPressed: () async {
+                                setDarkModeSetting(context, ThemeMode.light);
+                              },
+                            ),
+                          ),
+                      ],
+                    ),
+                  ],
                   centerTitle: false,
                   elevation: 2.0,
                 )

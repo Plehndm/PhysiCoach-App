@@ -130,6 +130,7 @@ class _ActivityListWidgetState extends State<ActivityListWidget> {
                             'Keyvuz_${listViewIndex.toString()}',
                           ),
                           activitiesDoc: listViewActivitiesRecord,
+                          checkAction: () async {},
                         ),
                       ),
                     );
