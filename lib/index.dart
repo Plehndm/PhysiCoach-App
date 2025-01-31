@@ -17,3 +17,7 @@ export '/pages/advanced_triple_jump_metrics/advanced_triple_jump_metrics_widget.
 export '/pages/advanced_long_jump_metrics/advanced_long_jump_metrics_widget.dart'
     show AdvancedLongJumpMetricsWidget;
 export '/pages/planner/planner_widget.dart' show PlannerWidget;
+export '/pages/profile_update/profile_update_widget.dart'
+    show ProfileUpdateWidget;
+export '/pages/perform_activity/perform_activity_widget.dart'
+    show PerformActivityWidget;

@@ -438,6 +438,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                         .doc()
                         .set(createAccelerometerDataRecordData(
                           id: FFAppState().activityId,
+                          user: currentUserReference,
                         ));
                     FFAppState().activityId = FFAppState().activityId + 1;
                     safeSetState(() {});

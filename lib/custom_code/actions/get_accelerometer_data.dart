@@ -26,8 +26,8 @@ Future<AccelerationDataStruct?> getAccelerometerData() async {
     accelerationData?.xAccel = event.x;
     accelerationData?.yAccel = event.y;
     accelerationData?.zAccel = event.z;
-    accelerationData?.duration = event.timeOccurred.millisecond;
-    accelerationData?.timeOccurred = event.timeOccurred.millisecond;
+    accelerationData?.duration = event.timestamp.millisecond.toDouble();
+    accelerationData?.timeOccurred = event.timestamp.second.toDouble();
 
     return accelerationData;
   } catch (error) {

@@ -93,6 +93,10 @@ class _AdvancedLongJumpMetricsWidgetState
               end: const AlignmentDirectional(0, 1.0),
             ),
           ),
+          child: const Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [],
+          ),
         ),
       ),
     );

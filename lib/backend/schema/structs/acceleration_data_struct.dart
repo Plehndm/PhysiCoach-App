@@ -11,7 +11,7 @@ class AccelerationDataStruct extends FFFirebaseStruct {
     double? xAccel,
     double? yAccel,
     double? zAccel,
-    int? duration,
+    double? duration,
     double? timeOccurred,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _xAccel = xAccel,
@@ -49,11 +49,11 @@ class AccelerationDataStruct extends FFFirebaseStruct {
   bool hasZAccel() => _zAccel != null;
 
   // "duration" field.
-  int? _duration;
-  int get duration => _duration ?? 0;
-  set duration(int? val) => _duration = val;
+  double? _duration;
+  double get duration => _duration ?? 1.0;
+  set duration(double? val) => _duration = val;
 
-  void incrementDuration(int amount) => duration = duration + amount;
+  void incrementDuration(double amount) => duration = duration + amount;
 
   bool hasDuration() => _duration != null;
 
@@ -72,7 +72,7 @@ class AccelerationDataStruct extends FFFirebaseStruct {
         xAccel: castToType<double>(data['x-accel']),
         yAccel: castToType<double>(data['y-accel']),
         zAccel: castToType<double>(data['z-accel']),
-        duration: castToType<int>(data['duration']),
+        duration: castToType<double>(data['duration']),
         timeOccurred: castToType<double>(data['timeOccurred']),
       );
 
@@ -104,7 +104,7 @@ class AccelerationDataStruct extends FFFirebaseStruct {
         ),
         'duration': serializeParam(
           _duration,
-          ParamType.int,
+          ParamType.double,
         ),
         'timeOccurred': serializeParam(
           _timeOccurred,
@@ -132,7 +132,7 @@ class AccelerationDataStruct extends FFFirebaseStruct {
         ),
         duration: deserializeParam(
           data['duration'],
-          ParamType.int,
+          ParamType.double,
           false,
         ),
         timeOccurred: deserializeParam(
@@ -164,7 +164,7 @@ AccelerationDataStruct createAccelerationDataStruct({
   double? xAccel,
   double? yAccel,
   double? zAccel,
-  int? duration,
+  double? duration,
   double? timeOccurred,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,

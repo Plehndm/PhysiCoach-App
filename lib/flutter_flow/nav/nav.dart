@@ -206,6 +206,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'planner',
           path: '/planner',
           builder: (context, params) => const PlannerWidget(),
+        ),
+        FFRoute(
+          name: 'profileUpdate',
+          path: '/profileUpdate',
+          builder: (context, params) => const ProfileUpdateWidget(),
+        ),
+        FFRoute(
+          name: 'performActivity',
+          path: '/performActivity',
+          asyncParams: {
+            'activityDoc':
+                getDoc(['activities'], ActivitiesRecord.fromSnapshot),
+            'accelDataDoc': getDoc(
+                ['accelerometerData'], AccelerometerDataRecord.fromSnapshot),
+          },
+          builder: (context, params) => PerformActivityWidget(
+            activityDoc: params.getParam(
+              'activityDoc',
+              ParamType.Document,
+            ),
+            accelDataDoc: params.getParam(
+              'accelDataDoc',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
