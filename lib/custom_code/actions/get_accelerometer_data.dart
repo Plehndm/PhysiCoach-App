@@ -12,11 +12,10 @@ import 'package:flutter/material.dart';
 
 import 'package:sensors_plus/sensors_plus.dart';
 
-Future<AccelerationDataStruct?> getAccelerometerData() async {
+Future<AccelerationDataStruct?> getAccelerometerData(
+    DateTime startTime, AccelerationDataStruct? accelerationData) async {
   // Subscribe to user accelerometer events with the desired sampling rate
   final userAccelerometerEvent = userAccelerometerEventStream();
-
-  AccelerationDataStruct? accelerationData;
 
   try {
     // Listen to the stream for magnetometer events
@@ -26,8 +25,9 @@ Future<AccelerationDataStruct?> getAccelerometerData() async {
     accelerationData?.xAccel = event.x;
     accelerationData?.yAccel = event.y;
     accelerationData?.zAccel = event.z;
-    accelerationData?.duration = event.timestamp.millisecond.toDouble();
-    accelerationData?.timeOccurred = event.timestamp.second.toDouble();
+    accelerationData?.durrationMilliSec =
+        DateTime.now().difference(startTime).inMilliseconds;
+    accelerationData?.timeOccurred = event.timestamp;
 
     return accelerationData;
   } catch (error) {

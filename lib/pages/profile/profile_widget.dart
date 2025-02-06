@@ -6,26 +6,26 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'account_model.dart';
-export 'account_model.dart';
+import 'profile_model.dart';
+export 'profile_model.dart';
 
-class AccountWidget extends StatefulWidget {
-  const AccountWidget({super.key});
+class ProfileWidget extends StatefulWidget {
+  const ProfileWidget({super.key});
 
   @override
-  State<AccountWidget> createState() => _AccountWidgetState();
+  State<ProfileWidget> createState() => _ProfileWidgetState();
 }
 
-class _AccountWidgetState extends State<AccountWidget>
+class _ProfileWidgetState extends State<ProfileWidget>
     with TickerProviderStateMixin {
-  late AccountModel _model;
+  late ProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AccountModel());
+    _model = createModel(context, () => ProfileModel());
 
     _model.tabBarController = TabController(
       vsync: this,
@@ -70,7 +70,7 @@ class _AccountWidgetState extends State<AccountWidget>
             },
           ),
           title: Text(
-            'Account',
+            'Profile',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Inter',
                   color: Colors.white,

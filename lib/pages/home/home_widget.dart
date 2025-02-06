@@ -1354,7 +1354,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                           FFButtonWidget(
                             onPressed: () async {
                               context.pushNamed(
-                                'account',
+                                'profile',
                                 extra: <String, dynamic>{
                                   kTransitionInfoKey: const TransitionInfo(
                                     hasTransition: true,
@@ -1364,7 +1364,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                 },
                               );
                             },
-                            text: 'Account',
+                            text: 'Profile',
                             icon: const Icon(
                               Icons.person_sharp,
                               size: 24.0,

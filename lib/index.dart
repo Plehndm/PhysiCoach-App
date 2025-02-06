@@ -5,7 +5,7 @@ export '/pages/onboarding/onboarding_widget.dart' show OnboardingWidget;
 export '/pages/details/details_widget.dart' show DetailsWidget;
 export '/pages/running_analysis/running_analysis_widget.dart'
     show RunningAnalysisWidget;
-export '/pages/account/account_widget.dart' show AccountWidget;
+export '/pages/profile/profile_widget.dart' show ProfileWidget;
 export '/pages/advanced_running_metrics/advanced_running_metrics_widget.dart'
     show AdvancedRunningMetricsWidget;
 export '/pages/triple_jump_analysis/triple_jump_analysis_widget.dart'

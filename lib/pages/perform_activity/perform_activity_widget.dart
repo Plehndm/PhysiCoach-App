@@ -4,9 +4,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/instant_timer.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'perform_activity_model.dart';
 export 'perform_activity_model.dart';
 
@@ -34,11 +37,46 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
     super.initState();
     _model = createModel(context, () => PerformActivityModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.accelDataRecording = InstantTimer.periodic(
+        duration: const Duration(milliseconds: 1000),
+        callback: (timer) async {
+          if (_model.isRecordingData == true) {
+            _model.accellData = await actions.getAccelerometerData(
+              getCurrentTimestamp,
+              AccelerationDataStruct(),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Data Point Taken!',
+                  style: TextStyle(
+                    color: FlutterFlowTheme.of(context).primaryText,
+                  ),
+                ),
+                duration: const Duration(milliseconds: 1000),
+                backgroundColor: FlutterFlowTheme.of(context).secondary,
+              ),
+            );
+            FFAppState().addToAccelerationAS(_model.accellData!);
+            safeSetState(() {});
+          }
+        },
+        startImmediately: true,
+      );
+    });
+
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
   void dispose() {
+    // On page dispose action.
+    () async {
+      _model.accelDataRecording?.cancel();
+    }();
+
     _model.dispose();
 
     super.dispose();
@@ -46,6 +84,8 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -143,6 +183,51 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
+                Text(
+                  'Exiting this page will stop data collection!',
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Inter',
+                        color: FlutterFlowTheme.of(context).error,
+                        fontSize: 16.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
+                      ),
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      valueOrDefault<String>(
+                        widget.activityDoc?.title,
+                        'title',
+                      ).maybeHandleOverflow(
+                        maxChars: 50,
+                        replacement: '…',
+                      ),
+                      textAlign: TextAlign.center,
+                      style:
+                          FlutterFlowTheme.of(context).headlineMedium.override(
+                                fontFamily: 'Inter',
+                                letterSpacing: 0.0,
+                              ),
+                    ),
+                    Text(
+                      valueOrDefault<String>(
+                        widget.activityDoc?.description,
+                        'description',
+                      ).maybeHandleOverflow(
+                        maxChars: 80,
+                        replacement: '…',
+                      ),
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.of(context).labelLarge.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
+                    ),
+                  ],
+                ),
                 Container(
                   width: 300.0,
                   height: 300.0,
@@ -158,9 +243,8 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                     alignment: const AlignmentDirectional(0.0, 0.0),
                     child: FlutterFlowTimer(
                       initialTime: _model.timerInitialTimeMs,
-                      getDisplayTime: (value) => StopWatchTimer.getDisplayTime(
-                          value,
-                          milliSecond: false),
+                      getDisplayTime: (value) =>
+                          StopWatchTimer.getDisplayTime(value),
                       controller: _model.timerController,
                       updateStateInterval: const Duration(milliseconds: 1000),
                       onChanged: (value, displayTime, shouldUpdate) {
@@ -169,12 +253,10 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                         if (shouldUpdate) safeSetState(() {});
                       },
                       textAlign: TextAlign.start,
-                      style:
-                          FlutterFlowTheme.of(context).headlineSmall.override(
-                                fontFamily: 'Inter',
-                                fontSize: 45.0,
-                                letterSpacing: 0.0,
-                              ),
+                      style: FlutterFlowTheme.of(context).displaySmall.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
                     ),
                   ),
                 ),
@@ -188,6 +270,17 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                             _model.timerController.onStopTimer();
                             _model.isRecordingData = false;
                             safeSetState(() {});
+
+                            await widget.accelDataDoc!.reference.update({
+                              ...mapToFirestore(
+                                {
+                                  'accelerations':
+                                      getAccelerationDataListFirestoreData(
+                                    FFAppState().accelerationAS,
+                                  ),
+                                },
+                              ),
+                            });
                           },
                           text: 'Stop',
                           options: FFButtonOptions(
@@ -262,10 +355,6 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                             _model.timerController.onStartTimer();
                             _model.isRecordingData = true;
                             safeSetState(() {});
-                            _model.accelerometerData =
-                                await actions.getAccelerometerData();
-
-                            safeSetState(() {});
                           },
                           text: 'Start',
                           options: FFButtonOptions(
@@ -297,6 +386,13 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                         ),
                       ),
                   ],
+                ),
+                Text(
+                  FFAppState().accelerationAS.length.toString(),
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Inter',
+                        letterSpacing: 0.0,
+                      ),
                 ),
               ].divide(const SizedBox(height: 15.0)),
             ),

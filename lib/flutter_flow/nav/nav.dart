@@ -128,9 +128,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'account',
-          path: '/account',
-          builder: (context, params) => const AccountWidget(),
+          name: 'profile',
+          path: '/profile',
+          builder: (context, params) => const ProfileWidget(),
         ),
         FFRoute(
           name: 'advancedRunningMetrics',

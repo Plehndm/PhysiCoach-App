@@ -583,7 +583,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                     ));
 
                     context.goNamed(
-                      'account',
+                      'profile',
                       extra: <String, dynamic>{
                         kTransitionInfoKey: const TransitionInfo(
                           hasTransition: true,

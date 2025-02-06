@@ -11,13 +11,13 @@ class AccelerationDataStruct extends FFFirebaseStruct {
     double? xAccel,
     double? yAccel,
     double? zAccel,
-    double? duration,
-    double? timeOccurred,
+    int? durrationMilliSec,
+    DateTime? timeOccurred,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _xAccel = xAccel,
         _yAccel = yAccel,
         _zAccel = zAccel,
-        _duration = duration,
+        _durrationMilliSec = durrationMilliSec,
         _timeOccurred = timeOccurred,
         super(firestoreUtilData);
 
@@ -48,22 +48,21 @@ class AccelerationDataStruct extends FFFirebaseStruct {
 
   bool hasZAccel() => _zAccel != null;
 
-  // "duration" field.
-  double? _duration;
-  double get duration => _duration ?? 1.0;
-  set duration(double? val) => _duration = val;
+  // "durrationMilliSec" field.
+  int? _durrationMilliSec;
+  int get durrationMilliSec => _durrationMilliSec ?? 0;
+  set durrationMilliSec(int? val) => _durrationMilliSec = val;
 
-  void incrementDuration(double amount) => duration = duration + amount;
+  void incrementDurrationMilliSec(int amount) =>
+      durrationMilliSec = durrationMilliSec + amount;
 
-  bool hasDuration() => _duration != null;
+  bool hasDurrationMilliSec() => _durrationMilliSec != null;
 
   // "timeOccurred" field.
-  double? _timeOccurred;
-  double get timeOccurred => _timeOccurred ?? 0.0;
-  set timeOccurred(double? val) => _timeOccurred = val;
-
-  void incrementTimeOccurred(double amount) =>
-      timeOccurred = timeOccurred + amount;
+  DateTime? _timeOccurred;
+  DateTime get timeOccurred =>
+      _timeOccurred ?? DateTime.fromMicrosecondsSinceEpoch(1738306800000000);
+  set timeOccurred(DateTime? val) => _timeOccurred = val;
 
   bool hasTimeOccurred() => _timeOccurred != null;
 
@@ -72,8 +71,8 @@ class AccelerationDataStruct extends FFFirebaseStruct {
         xAccel: castToType<double>(data['x-accel']),
         yAccel: castToType<double>(data['y-accel']),
         zAccel: castToType<double>(data['z-accel']),
-        duration: castToType<double>(data['duration']),
-        timeOccurred: castToType<double>(data['timeOccurred']),
+        durrationMilliSec: castToType<int>(data['durrationMilliSec']),
+        timeOccurred: data['timeOccurred'] as DateTime?,
       );
 
   static AccelerationDataStruct? maybeFromMap(dynamic data) => data is Map
@@ -84,7 +83,7 @@ class AccelerationDataStruct extends FFFirebaseStruct {
         'x-accel': _xAccel,
         'y-accel': _yAccel,
         'z-accel': _zAccel,
-        'duration': _duration,
+        'durrationMilliSec': _durrationMilliSec,
         'timeOccurred': _timeOccurred,
       }.withoutNulls;
 
@@ -102,13 +101,13 @@ class AccelerationDataStruct extends FFFirebaseStruct {
           _zAccel,
           ParamType.double,
         ),
-        'duration': serializeParam(
-          _duration,
-          ParamType.double,
+        'durrationMilliSec': serializeParam(
+          _durrationMilliSec,
+          ParamType.int,
         ),
         'timeOccurred': serializeParam(
           _timeOccurred,
-          ParamType.double,
+          ParamType.DateTime,
         ),
       }.withoutNulls;
 
@@ -130,14 +129,14 @@ class AccelerationDataStruct extends FFFirebaseStruct {
           ParamType.double,
           false,
         ),
-        duration: deserializeParam(
-          data['duration'],
-          ParamType.double,
+        durrationMilliSec: deserializeParam(
+          data['durrationMilliSec'],
+          ParamType.int,
           false,
         ),
         timeOccurred: deserializeParam(
           data['timeOccurred'],
-          ParamType.double,
+          ParamType.DateTime,
           false,
         ),
       );
@@ -151,21 +150,21 @@ class AccelerationDataStruct extends FFFirebaseStruct {
         xAccel == other.xAccel &&
         yAccel == other.yAccel &&
         zAccel == other.zAccel &&
-        duration == other.duration &&
+        durrationMilliSec == other.durrationMilliSec &&
         timeOccurred == other.timeOccurred;
   }
 
   @override
   int get hashCode => const ListEquality()
-      .hash([xAccel, yAccel, zAccel, duration, timeOccurred]);
+      .hash([xAccel, yAccel, zAccel, durrationMilliSec, timeOccurred]);
 }
 
 AccelerationDataStruct createAccelerationDataStruct({
   double? xAccel,
   double? yAccel,
   double? zAccel,
-  double? duration,
-  double? timeOccurred,
+  int? durrationMilliSec,
+  DateTime? timeOccurred,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -175,7 +174,7 @@ AccelerationDataStruct createAccelerationDataStruct({
       xAccel: xAccel,
       yAccel: yAccel,
       zAccel: zAccel,
-      duration: duration,
+      durrationMilliSec: durrationMilliSec,
       timeOccurred: timeOccurred,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
