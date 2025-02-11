@@ -218,16 +218,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           asyncParams: {
             'activityDoc':
                 getDoc(['activities'], ActivitiesRecord.fromSnapshot),
-            'accelDataDoc': getDoc(
-                ['accelerometerData'], AccelerometerDataRecord.fromSnapshot),
           },
           builder: (context, params) => PerformActivityWidget(
             activityDoc: params.getParam(
               'activityDoc',
-              ParamType.Document,
-            ),
-            accelDataDoc: params.getParam(
-              'accelDataDoc',
               ParamType.Document,
             ),
           ),

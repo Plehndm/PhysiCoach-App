@@ -29,18 +29,18 @@ service cloud.firestore {
       allow delete: if resource.data.user == /databases/$(database)/documents/users/$(request.auth.uid);
     }
 
-    match /accelerometerData/{document} {
+    match /longJumpData/{document} {
       allow create: if request.auth != null;
       allow read: if resource.data.user == /databases/$(database)/documents/users/$(request.auth.uid);
       allow write: if resource.data.user == /databases/$(database)/documents/users/$(request.auth.uid);
       allow delete: if resource.data.user == /databases/$(database)/documents/users/$(request.auth.uid);
     }
 
-    match /longJumpData/{document} {
+    match /activities/{parent}/accelerometerData/{document} {
       allow create: if request.auth != null;
-      allow read: if resource.data.user == /databases/$(database)/documents/users/$(request.auth.uid);
-      allow write: if resource.data.user == /databases/$(database)/documents/users/$(request.auth.uid);
-      allow delete: if resource.data.user == /databases/$(database)/documents/users/$(request.auth.uid);
+      allow read: if get(/databases/$(database)/documents/activities/$(parent)).data.user == /databases/$(database)/documents/users/$(request.auth.uid);
+      allow write: if get(/databases/$(database)/documents/activities/$(parent)).data.user == /databases/$(database)/documents/users/$(request.auth.uid);
+      allow delete: if get(/databases/$(database)/documents/activities/$(parent)).data.user == /databases/$(database)/documents/users/$(request.auth.uid);
     }
   }
 }

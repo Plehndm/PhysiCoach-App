@@ -9,8 +9,8 @@ import 'schema/users_record.dart';
 import 'schema/activities_record.dart';
 import 'schema/running_data_record.dart';
 import 'schema/tripple_jump_data_record.dart';
-import 'schema/accelerometer_data_record.dart';
 import 'schema/long_jump_data_record.dart';
+import 'schema/accelerometer_data_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -23,8 +23,8 @@ export 'schema/users_record.dart';
 export 'schema/activities_record.dart';
 export 'schema/running_data_record.dart';
 export 'schema/tripple_jump_data_record.dart';
-export 'schema/accelerometer_data_record.dart';
 export 'schema/long_jump_data_record.dart';
+export 'schema/accelerometer_data_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -174,43 +174,6 @@ Future<List<TrippleJumpDataRecord>> queryTrippleJumpDataRecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query AccelerometerDataRecords (as a Stream and as a Future).
-Future<int> queryAccelerometerDataRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      AccelerometerDataRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<AccelerometerDataRecord>> queryAccelerometerDataRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      AccelerometerDataRecord.collection,
-      AccelerometerDataRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<AccelerometerDataRecord>> queryAccelerometerDataRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      AccelerometerDataRecord.collection,
-      AccelerometerDataRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
 /// Functions to query LongJumpDataRecords (as a Stream and as a Future).
 Future<int> queryLongJumpDataRecordCount({
   Query Function(Query)? queryBuilder,
@@ -243,6 +206,46 @@ Future<List<LongJumpDataRecord>> queryLongJumpDataRecordOnce({
     queryCollectionOnce(
       LongJumpDataRecord.collection,
       LongJumpDataRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query AccelerometerDataRecords (as a Stream and as a Future).
+Future<int> queryAccelerometerDataRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      AccelerometerDataRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<AccelerometerDataRecord>> queryAccelerometerDataRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      AccelerometerDataRecord.collection(parent),
+      AccelerometerDataRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<AccelerometerDataRecord>> queryAccelerometerDataRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      AccelerometerDataRecord.collection(parent),
+      AccelerometerDataRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

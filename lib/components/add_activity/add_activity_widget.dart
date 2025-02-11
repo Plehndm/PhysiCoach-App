@@ -434,12 +434,12 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                       }
                     }
 
-                    await AccelerometerDataRecord.collection
-                        .doc()
+                    await AccelerometerDataRecord.createDoc(
+                            _model.activityDoc!.reference)
                         .set(createAccelerometerDataRecordData(
-                          id: FFAppState().activityId,
-                          user: currentUserReference,
-                        ));
+                      id: FFAppState().activityId,
+                      user: currentUserReference,
+                    ));
                     FFAppState().activityId = FFAppState().activityId + 1;
                     safeSetState(() {});
                     Navigator.pop(context);

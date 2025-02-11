@@ -5,6 +5,25 @@ admin.initializeApp();
 exports.onUserDeleted = functions.auth.user().onDelete(async (user) => {
   let firestore = admin.firestore();
   let userRef = firestore.doc("users/" + user.uid);
+  await firestore
+    .collection("activities")
+    .where("user", "==", userRef)
+    .get()
+    .then(async (querySnapshot) => {
+      for (var doc of querySnapshot.docs) {
+        await doc.ref
+          .collection("accelerometerData")
+          .get()
+          .then(async (q) => {
+            for (var d of q.docs) {
+              console.log(
+                `Deleting document ${d.id} from collection accelerometerData`,
+              );
+              await d.ref.delete();
+            }
+          });
+      }
+    });
   await firestore.collection("users").doc(user.uid).delete();
   await firestore
     .collection("activities")
@@ -34,18 +53,6 @@ exports.onUserDeleted = functions.auth.user().onDelete(async (user) => {
       for (var doc of querySnapshot.docs) {
         console.log(
           `Deleting document ${doc.id} from collection trippleJumpData`,
-        );
-        await doc.ref.delete();
-      }
-    });
-  await firestore
-    .collection("accelerometerData")
-    .where("user", "==", userRef)
-    .get()
-    .then(async (querySnapshot) => {
-      for (var doc of querySnapshot.docs) {
-        console.log(
-          `Deleting document ${doc.id} from collection accelerometerData`,
         );
         await doc.ref.delete();
       }

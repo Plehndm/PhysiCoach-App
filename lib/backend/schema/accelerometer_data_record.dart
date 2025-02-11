@@ -30,6 +30,8 @@ class AccelerometerDataRecord extends FirestoreRecord {
   DocumentReference? get user => _user;
   bool hasUser() => _user != null;
 
+  DocumentReference get parentReference => reference.parent.parent!;
+
   void _initializeFields() {
     _accelerations = getStructList(
       snapshotData['accelerations'],
@@ -39,8 +41,13 @@ class AccelerometerDataRecord extends FirestoreRecord {
     _user = snapshotData['user'] as DocumentReference?;
   }
 
-  static CollectionReference get collection =>
-      FirebaseFirestore.instance.collection('accelerometerData');
+  static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
+      parent != null
+          ? parent.collection('accelerometerData')
+          : FirebaseFirestore.instance.collectionGroup('accelerometerData');
+
+  static DocumentReference createDoc(DocumentReference parent, {String? id}) =>
+      parent.collection('accelerometerData').doc(id);
 
   static Stream<AccelerometerDataRecord> getDocument(DocumentReference ref) =>
       ref.snapshots().map((s) => AccelerometerDataRecord.fromSnapshot(s));
