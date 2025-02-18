@@ -8,7 +8,6 @@ export '../base_auth_user_provider.dart';
 class PhysiCoachFirebaseUser extends BaseAuthUser {
   PhysiCoachFirebaseUser(this.user);
   User? user;
-  @override
   bool get loggedIn => user != null;
 
   @override

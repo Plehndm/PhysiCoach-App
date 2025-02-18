@@ -39,42 +39,15 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 1000));
       _model.accelDataRecording = InstantTimer.periodic(
-        duration: const Duration(milliseconds: 1000),
+        duration: Duration(milliseconds: 1000),
         callback: (timer) async {
           if (_model.isRecordingData == true) {
             _model.accellData = await actions.getAccelerometerData(
               getCurrentTimestamp,
               AccelerationDataStruct(),
             );
-            ScaffoldMessenger.of(context).clearSnackBars();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  'Data Point Taken!',
-                  style: TextStyle(
-                    color: FlutterFlowTheme.of(context).primaryText,
-                  ),
-                ),
-                duration: const Duration(milliseconds: 2000),
-                backgroundColor: FlutterFlowTheme.of(context).secondary,
-              ),
-            );
             FFAppState().addToAccelerationAS(_model.accellData!);
             safeSetState(() {});
-          } else {
-            ScaffoldMessenger.of(context).clearSnackBars();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  'Test',
-                  style: TextStyle(
-                    color: FlutterFlowTheme.of(context).primaryText,
-                  ),
-                ),
-                duration: const Duration(milliseconds: 2000),
-                backgroundColor: FlutterFlowTheme.of(context).secondary,
-              ),
-            );
           }
         },
         startImmediately: true,
@@ -152,7 +125,7 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: const Icon(
+                icon: Icon(
                   Icons.arrow_back_rounded,
                   color: Colors.white,
                   size: 30.0,
@@ -176,7 +149,7 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                     if (Theme.of(context).brightness == Brightness.dark)
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                         child: FlutterFlowIconButton(
                           borderRadius: 8.0,
                           buttonSize: 50.0,
@@ -194,7 +167,7 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                     if (Theme.of(context).brightness == Brightness.light)
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                         child: FlutterFlowIconButton(
                           borderRadius: 8.0,
                           buttonSize: 50.0,
@@ -223,13 +196,13 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                     FlutterFlowTheme.of(context).primaryBackground,
                     FlutterFlowTheme.of(context).secondary
                   ],
-                  stops: const [0.0, 1.0],
-                  begin: const AlignmentDirectional(0.0, -1.0),
-                  end: const AlignmentDirectional(0, 1.0),
+                  stops: [0.0, 1.0],
+                  begin: AlignmentDirectional(0.0, -1.0),
+                  end: AlignmentDirectional(0, 1.0),
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: EdgeInsets.all(24.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -292,13 +265,13 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                         ),
                       ),
                       child: Align(
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: FlutterFlowTimer(
                           initialTime: _model.timerInitialTimeMs,
                           getDisplayTime: (value) =>
                               StopWatchTimer.getDisplayTime(value),
                           controller: _model.timerController,
-                          updateStateInterval: const Duration(milliseconds: 1000),
+                          updateStateInterval: Duration(milliseconds: 1000),
                           onChanged: (value, displayTime, shouldUpdate) {
                             _model.timerMilliseconds = value;
                             _model.timerValue = displayTime;
@@ -318,7 +291,7 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                       children: [
                         if (_model.isRecordingData)
                           Align(
-                            alignment: const AlignmentDirectional(1.0, 0.0),
+                            alignment: AlignmentDirectional(1.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
                                 _model.timerController.onStopTimer();
@@ -329,9 +302,9 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                               options: FFButtonOptions(
                                 width: 100.0,
                                 height: 100.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -357,7 +330,7 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                           ),
                         if (!_model.isRecordingData)
                           Align(
-                            alignment: const AlignmentDirectional(-1.0, 0.0),
+                            alignment: AlignmentDirectional(-1.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
                                 _model.timerController.onResetTimer();
@@ -366,9 +339,9 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                               options: FFButtonOptions(
                                 width: 100.0,
                                 height: 100.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -394,7 +367,7 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                           ),
                         if (!_model.isRecordingData)
                           Align(
-                            alignment: const AlignmentDirectional(1.0, 0.0),
+                            alignment: AlignmentDirectional(1.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
                                 _model.timerController.onStartTimer();
@@ -405,9 +378,9 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                               options: FFButtonOptions(
                                 width: 100.0,
                                 height: 100.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -474,7 +447,7 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                         context.goNamed(
                           'home',
                           extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
+                            kTransitionInfoKey: TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.fade,
                               duration: Duration(milliseconds: 0),
@@ -483,16 +456,16 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                         );
                       },
                       text: 'Complete Activity',
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.check_outlined,
                         size: 24.0,
                       ),
                       options: FFButtonOptions(
                         height: 40.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 0.0),
                         iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                         textStyle: FlutterFlowTheme.of(context)
                             .titleSmall
@@ -511,7 +484,7 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                     ),
-                  ].divide(const SizedBox(height: 15.0)),
+                  ].divide(SizedBox(height: 15.0)),
                 ),
               ),
             ),

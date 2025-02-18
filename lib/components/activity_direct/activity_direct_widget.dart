@@ -49,12 +49,12 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
     return Container(
       width: double.infinity,
       height: 600.0,
-      constraints: const BoxConstraints(
+      constraints: BoxConstraints(
         maxWidth: 500.0,
       ),
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(24.0),
@@ -65,13 +65,13 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: EdgeInsets.all(24.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Align(
-              alignment: const AlignmentDirectional(1.0, -1.0),
+              alignment: AlignmentDirectional(1.0, -1.0),
               child: FlutterFlowIconButton(
                 borderColor: Colors.transparent,
                 borderRadius: 20.0,
@@ -112,7 +112,7 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
                   }.withoutNulls,
                   extra: <String, dynamic>{
                     'activitiesDoc': widget.activityDoc,
-                    kTransitionInfoKey: const TransitionInfo(
+                    kTransitionInfoKey: TransitionInfo(
                       hasTransition: true,
                       transitionType: PageTransitionType.fade,
                       duration: Duration(milliseconds: 0),
@@ -123,15 +123,15 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
                 Navigator.pop(context);
               },
               text: 'Details',
-              icon: const Icon(
+              icon: Icon(
                 Icons.list_alt_outlined,
                 size: 30.0,
               ),
               options: FFButtonOptions(
                 width: double.infinity,
                 height: 70.0,
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 color: FlutterFlowTheme.of(context).primary,
                 textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                       fontFamily: 'Inter',
@@ -167,7 +167,7 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
                   }.withoutNulls,
                   extra: <String, dynamic>{
                     'activityDoc': widget.activityDoc,
-                    kTransitionInfoKey: const TransitionInfo(
+                    kTransitionInfoKey: TransitionInfo(
                       hasTransition: true,
                       transitionType: PageTransitionType.fade,
                       duration: Duration(milliseconds: 0),
@@ -178,15 +178,15 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
                 Navigator.pop(context);
               },
               text: 'Perform',
-              icon: const Icon(
+              icon: Icon(
                 Icons.check_circle_outline_sharp,
                 size: 30.0,
               ),
               options: FFButtonOptions(
                 width: double.infinity,
                 height: 70.0,
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 color: FlutterFlowTheme.of(context).primary,
                 textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                       fontFamily: 'Inter',
@@ -225,7 +225,7 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
                       }.withoutNulls,
                       extra: <String, dynamic>{
                         'activityDoc': widget.activityDoc,
-                        kTransitionInfoKey: const TransitionInfo(
+                        kTransitionInfoKey: TransitionInfo(
                           hasTransition: true,
                           transitionType: PageTransitionType.fade,
                           duration: Duration(milliseconds: 0),
@@ -245,7 +245,7 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
                         }.withoutNulls,
                         extra: <String, dynamic>{
                           'activityDoc': widget.activityDoc,
-                          kTransitionInfoKey: const TransitionInfo(
+                          kTransitionInfoKey: TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.fade,
                             duration: Duration(milliseconds: 0),
@@ -265,7 +265,7 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
                           }.withoutNulls,
                           extra: <String, dynamic>{
                             'activityDoc': widget.activityDoc,
-                            kTransitionInfoKey: const TransitionInfo(
+                            kTransitionInfoKey: TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.fade,
                               duration: Duration(milliseconds: 0),
@@ -281,16 +281,16 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
                   Navigator.pop(context);
                 },
                 text: 'Analysis',
-                icon: const Icon(
+                icon: Icon(
                   Icons.insert_chart_outlined_outlined,
                   size: 30.0,
                 ),
                 options: FFButtonOptions(
                   width: double.infinity,
                   height: 70.0,
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   iconPadding:
-                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
                   textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                         fontFamily: 'Inter',
@@ -307,7 +307,7 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
                   borderRadius: BorderRadius.circular(24.0),
                 ),
               ),
-          ].divide(const SizedBox(height: 24.0)),
+          ].divide(SizedBox(height: 24.0)),
         ),
       ),
     );

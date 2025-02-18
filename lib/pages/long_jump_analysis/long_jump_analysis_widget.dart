@@ -110,7 +110,7 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                     borderRadius: 30.0,
                     borderWidth: 1.0,
                     buttonSize: 60.0,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.arrow_back_rounded,
                       color: Colors.white,
                       size: 30.0,
@@ -133,7 +133,7 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                       children: [
                         if (Theme.of(context).brightness == Brightness.light)
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: FlutterFlowIconButton(
                               borderRadius: 8.0,
@@ -151,7 +151,7 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                           ),
                         if (Theme.of(context).brightness == Brightness.dark)
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: FlutterFlowIconButton(
                               borderRadius: 8.0,
@@ -184,16 +184,16 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                           FlutterFlowTheme.of(context).primaryBackground,
                           FlutterFlowTheme.of(context).secondary
                         ],
-                        stops: const [0.0, 1.0],
-                        begin: const AlignmentDirectional(0.0, -1.0),
-                        end: const AlignmentDirectional(0, 1.0),
+                        stops: [0.0, 1.0],
+                        begin: AlignmentDirectional(0.0, -1.0),
+                        end: AlignmentDirectional(0, 1.0),
                       ),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 10.0, 0.0, 0.0),
                           child: Container(
                             width: 350.0,
@@ -212,7 +212,7 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           10.0, 0.0, 0.0, 0.0),
                                       child: Text(
                                         'Advanced Long Jump Metrics',
@@ -245,7 +245,7 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                           extra: <String, dynamic>{
                                             'longJumpDataDoc':
                                                 longJumpAnalysisLongJumpDataRecord,
-                                            kTransitionInfoKey: const TransitionInfo(
+                                            kTransitionInfoKey: TransitionInfo(
                                               hasTransition: true,
                                               transitionType:
                                                   PageTransitionType.fade,
@@ -259,10 +259,10 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                   ],
                                 ),
                                 Align(
-                                  alignment: const AlignmentDirectional(1.0, 0.0),
+                                  alignment: AlignmentDirectional(1.0, 0.0),
                                   child: Container(
                                     width: 270.0,
-                                    decoration: const BoxDecoration(),
+                                    decoration: BoxDecoration(),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       mainAxisAlignment:
@@ -300,7 +300,7 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 10.0, 10.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -348,7 +348,7 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
-                                        ].divide(const SizedBox(height: 50.0)),
+                                        ].divide(SizedBox(height: 50.0)),
                                       ),
                                       Column(
                                         mainAxisSize: MainAxisSize.min,
@@ -357,10 +357,10 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          SizedBox(
+                                          Container(
                                             width: 220.0,
                                             height: 0.01,
-                                            child: SizedBox(
+                                            child: Container(
                                               width: 200.0,
                                               height: 1.0,
                                               child: Stack(
@@ -382,11 +382,11 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             0.0, 0.0),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -407,7 +407,7 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                                               .pageViewController1!
                                                               .animateToPage(
                                                             i,
-                                                            duration: const Duration(
+                                                            duration: Duration(
                                                                 milliseconds:
                                                                     500),
                                                             curve: Curves.ease,
@@ -443,8 +443,8 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                           Container(
                                             width: 220.0,
                                             height: 0.01,
-                                            decoration: const BoxDecoration(),
-                                            child: SizedBox(
+                                            decoration: BoxDecoration(),
+                                            child: Container(
                                               width: 200.0,
                                               height: 1.0,
                                               child: Stack(
@@ -466,11 +466,11 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             0.0, 0.0),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -491,7 +491,7 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                                               .pageViewController2!
                                                               .animateToPage(
                                                             i,
-                                                            duration: const Duration(
+                                                            duration: Duration(
                                                                 milliseconds:
                                                                     500),
                                                             curve: Curves.ease,
@@ -527,8 +527,8 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                           Container(
                                             width: 220.0,
                                             height: 0.01,
-                                            decoration: const BoxDecoration(),
-                                            child: SizedBox(
+                                            decoration: BoxDecoration(),
+                                            child: Container(
                                               width: 200.0,
                                               height: 1.0,
                                               child: Stack(
@@ -550,11 +550,11 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             0.0, 0.0),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -575,7 +575,7 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                                               .pageViewController3!
                                                               .animateToPage(
                                                             i,
-                                                            duration: const Duration(
+                                                            duration: Duration(
                                                                 milliseconds:
                                                                     500),
                                                             curve: Curves.ease,
@@ -611,8 +611,8 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                           Container(
                                             width: 220.0,
                                             height: 0.01,
-                                            decoration: const BoxDecoration(),
-                                            child: SizedBox(
+                                            decoration: BoxDecoration(),
+                                            child: Container(
                                               width: 200.0,
                                               height: 1.0,
                                               child: Stack(
@@ -634,11 +634,11 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             0.0, 0.0),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -659,7 +659,7 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                                               .pageViewController4!
                                                               .animateToPage(
                                                             i,
-                                                            duration: const Duration(
+                                                            duration: Duration(
                                                                 milliseconds:
                                                                     500),
                                                             curve: Curves.ease,
@@ -692,9 +692,9 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                               ),
                                             ),
                                           ),
-                                        ].divide(const SizedBox(height: 69.0)),
+                                        ].divide(SizedBox(height: 69.0)),
                                       ),
-                                    ].divide(const SizedBox(width: 10.0)),
+                                    ].divide(SizedBox(width: 10.0)),
                                   ),
                                 ),
                               ],

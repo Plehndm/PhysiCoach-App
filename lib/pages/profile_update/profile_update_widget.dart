@@ -68,13 +68,13 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                 FlutterFlowTheme.of(context).primaryBackground,
                 FlutterFlowTheme.of(context).secondary
               ],
-              stops: const [0.0, 1.0],
-              begin: const AlignmentDirectional(0.0, -1.0),
-              end: const AlignmentDirectional(0, 1.0),
+              stops: [0.0, 1.0],
+              begin: AlignmentDirectional(0.0, -1.0),
+              end: AlignmentDirectional(0, 1.0),
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: EdgeInsets.all(24.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -86,7 +86,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Align(
-                        alignment: const AlignmentDirectional(-1.0, 0.0),
+                        alignment: AlignmentDirectional(-1.0, 0.0),
                         child: Text(
                           'Update Profile',
                           style: FlutterFlowTheme.of(context)
@@ -160,10 +160,10 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                           ));
                         },
                         child: Stack(
-                          alignment: const AlignmentDirectional(-1.0, 1.0),
+                          alignment: AlignmentDirectional(-1.0, 1.0),
                           children: [
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   8.0, 0.0, 0.0, 8.0),
                               child: AuthUserStreamWidget(
                                 builder: (context) => Container(
@@ -208,14 +208,14 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                         ),
                       ),
                       AuthUserStreamWidget(
-                        builder: (context) => SizedBox(
+                        builder: (context) => Container(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.nameTextController,
                             focusNode: _model.nameFocusNode,
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.nameTextController',
-                              const Duration(milliseconds: 2000),
+                              Duration(milliseconds: 2000),
                               () => safeSetState(() {}),
                             ),
                             autofocus: false,
@@ -248,7 +248,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                                 borderRadius: BorderRadius.circular(24.0),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
+                                borderSide: BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
@@ -271,7 +271,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                               filled: true,
                               fillColor: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
-                              contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 22.0, 20.0, 22.0),
                               suffixIcon:
                                   _model.nameTextController!.text.isNotEmpty
@@ -280,7 +280,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                                             _model.nameTextController?.clear();
                                             safeSetState(() {});
                                           },
-                                          child: const Icon(
+                                          child: Icon(
                                             Icons.clear,
                                             size: 24.0,
                                           ),
@@ -301,14 +301,14 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      Container(
                         width: double.infinity,
                         child: TextFormField(
                           controller: _model.emailTextController,
                           focusNode: _model.emailFocusNode,
                           onChanged: (_) => EasyDebounce.debounce(
                             '_model.emailTextController',
-                            const Duration(milliseconds: 2000),
+                            Duration(milliseconds: 2000),
                             () => safeSetState(() {}),
                           ),
                           autofocus: false,
@@ -340,7 +340,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                               borderRadius: BorderRadius.circular(24.0),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
+                              borderSide: BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
@@ -363,7 +363,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                             filled: true,
                             fillColor: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                            contentPadding: EdgeInsetsDirectional.fromSTEB(
                                 20.0, 22.0, 20.0, 22.0),
                             suffixIcon:
                                 _model.emailTextController!.text.isNotEmpty
@@ -372,7 +372,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                                           _model.emailTextController?.clear();
                                           safeSetState(() {});
                                         },
-                                        child: const Icon(
+                                        child: Icon(
                                           Icons.clear,
                                           size: 24.0,
                                         ),
@@ -392,14 +392,14 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                         ),
                       ),
                       AuthUserStreamWidget(
-                        builder: (context) => SizedBox(
+                        builder: (context) => Container(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.phoneNumberTextController,
                             focusNode: _model.phoneNumberFocusNode,
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.phoneNumberTextController',
-                              const Duration(milliseconds: 2000),
+                              Duration(milliseconds: 2000),
                               () => safeSetState(() {}),
                             ),
                             autofocus: false,
@@ -432,7 +432,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                                 borderRadius: BorderRadius.circular(24.0),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
+                                borderSide: BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
@@ -455,7 +455,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                               filled: true,
                               fillColor: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
-                              contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 22.0, 20.0, 22.0),
                               suffixIcon: _model.phoneNumberTextController!.text
                                       .isNotEmpty
@@ -465,7 +465,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                                             ?.clear();
                                         safeSetState(() {});
                                       },
-                                      child: const Icon(
+                                      child: Icon(
                                         Icons.clear,
                                         size: 24.0,
                                       ),
@@ -490,7 +490,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                       ),
                       FFButtonWidget(
                         onPressed: () async {
-                          final datePickedDate = await showDatePicker(
+                          final _datePickedDate = await showDatePicker(
                             context: context,
                             initialDate: (currentUserDocument?.birthday ??
                                 DateTime.now()),
@@ -529,27 +529,31 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                             },
                           );
 
-                          if (datePickedDate != null) {
+                          if (_datePickedDate != null) {
                             safeSetState(() {
                               _model.datePicked = DateTime(
-                                datePickedDate.year,
-                                datePickedDate.month,
-                                datePickedDate.day,
+                                _datePickedDate.year,
+                                _datePickedDate.month,
+                                _datePickedDate.day,
                               );
+                            });
+                          } else if (_model.datePicked != null) {
+                            safeSetState(() {
+                              _model.datePicked = currentUserDocument?.birthday;
                             });
                           }
                         },
                         text: 'Update Birthday',
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.calendar_today,
                           size: 15.0,
                         ),
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 70.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
@@ -570,7 +574,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                           borderRadius: BorderRadius.circular(24.0),
                         ),
                       ),
-                    ].divide(const SizedBox(height: 24.0)),
+                    ].divide(SizedBox(height: 24.0)),
                   ),
                 ),
                 FFButtonWidget(
@@ -585,7 +589,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                     context.goNamed(
                       'profile',
                       extra: <String, dynamic>{
-                        kTransitionInfoKey: const TransitionInfo(
+                        kTransitionInfoKey: TransitionInfo(
                           hasTransition: true,
                           transitionType: PageTransitionType.fade,
                           duration: Duration(milliseconds: 0),
@@ -598,9 +602,9 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                     width: double.infinity,
                     height: 70.0,
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Inter',

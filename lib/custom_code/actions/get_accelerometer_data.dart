@@ -15,24 +15,29 @@ import 'package:sensors_plus/sensors_plus.dart';
 Future<AccelerationDataStruct?> getAccelerometerData(
     DateTime startTime, AccelerationDataStruct? accelerationData) async {
   // Subscribe to user accelerometer events with the desired sampling rate
-  final userAccelerometerEvent = userAccelerometerEventStream();
+  final _streamSubscriptions = <StreamSubscription<dynamic>>[];
+  Duration sensorInterval = SensorInterval.normalInterval;
 
-  try {
-    // Listen to the stream for magnetometer events
-    final UserAccelerometerEvent event = await userAccelerometerEvent.first;
+  // Listen to the stream for UserAccelerometer events
+  _streamSubscriptions
+      .add(userAccelerometerEventStream(samplingPeriod: sensorInterval).listen(
+    (UserAccelerometerEvent event) {
+      // Store data from userAccelerometer stream
+      accelerationData?.xAccel = event.x;
+      accelerationData?.yAccel = event.y;
+      accelerationData?.zAccel = event.z;
+      accelerationData?.durrationMilliSec =
+          DateTime.now().difference(startTime).inMilliseconds;
+      accelerationData?.timeOccurred = event.timestamp;
+    },
+    onError: (error) {
+      // Logic to handle error
+      // Needed for Android in case sensor is not available
 
-    // Store data from userAccelerometer stream
-    accelerationData?.xAccel = event.x;
-    accelerationData?.yAccel = event.y;
-    accelerationData?.zAccel = event.z;
-    accelerationData?.durrationMilliSec =
-        DateTime.now().difference(startTime).inMilliseconds;
-    accelerationData?.timeOccurred = event.timestamp;
+      return null;
+    },
+    cancelOnError: true,
+  ));
 
-    return accelerationData;
-  } catch (error) {
-    // Handle error gracefully
-    print('Error fetching UserAccelerometer data: $error');
-    return null;
-  }
+  return accelerationData;
 }

@@ -85,7 +85,7 @@ class _PlannerWidgetState extends State<PlannerWidget> {
                       },
                       child: Padding(
                         padding: MediaQuery.viewInsetsOf(context),
-                        child: const AddActivityWidget(),
+                        child: AddActivityWidget(),
                       ),
                     );
                   },
@@ -107,7 +107,7 @@ class _PlannerWidgetState extends State<PlannerWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -131,7 +131,7 @@ class _PlannerWidgetState extends State<PlannerWidget> {
                 if (Theme.of(context).brightness == Brightness.dark)
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                     child: FlutterFlowIconButton(
                       borderRadius: 8.0,
                       buttonSize: 50.0,
@@ -149,7 +149,7 @@ class _PlannerWidgetState extends State<PlannerWidget> {
                 if (Theme.of(context).brightness == Brightness.light)
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                     child: FlutterFlowIconButton(
                       borderRadius: 8.0,
                       buttonSize: 50.0,
@@ -180,19 +180,19 @@ class _PlannerWidgetState extends State<PlannerWidget> {
                     FlutterFlowTheme.of(context).primaryBackground,
                     FlutterFlowTheme.of(context).secondary
                   ],
-                  stops: const [0.0, 1.0],
-                  begin: const AlignmentDirectional(0.0, -1.0),
-                  end: const AlignmentDirectional(0, 1.0),
+                  stops: [0.0, 1.0],
+                  begin: AlignmentDirectional(0.0, -1.0),
+                  end: AlignmentDirectional(0, 1.0),
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: EdgeInsets.all(12.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                       child: Container(
                         decoration: BoxDecoration(
                           color:
@@ -204,7 +204,7 @@ class _PlannerWidgetState extends State<PlannerWidget> {
                           ),
                         ),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 1.0),
                           child: FlutterFlowCalendar(
                             color: FlutterFlowTheme.of(context).primary,
@@ -252,7 +252,7 @@ class _PlannerWidgetState extends State<PlannerWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -273,9 +273,9 @@ class _PlannerWidgetState extends State<PlannerWidget> {
                             text: 'Button',
                             options: FFButtonOptions(
                               height: 40.0,
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   16.0, 0.0, 16.0, 0.0),
-                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context).primary,
                               textStyle: FlutterFlowTheme.of(context)
@@ -348,7 +348,7 @@ class _PlannerWidgetState extends State<PlannerWidget> {
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           itemCount: listViewActivitiesRecordList.length,
-                          separatorBuilder: (_, __) => const SizedBox(height: 10.0),
+                          separatorBuilder: (_, __) => SizedBox(height: 10.0),
                           itemBuilder: (context, listViewIndex) {
                             final listViewActivitiesRecord =
                                 listViewActivitiesRecordList[listViewIndex];

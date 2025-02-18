@@ -89,7 +89,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                       },
                       child: Padding(
                         padding: MediaQuery.viewInsetsOf(context),
-                        child: const AddActivityWidget(),
+                        child: AddActivityWidget(),
                       ),
                     );
                   },
@@ -121,7 +121,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                 if (Theme.of(context).brightness == Brightness.light)
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                     child: FlutterFlowIconButton(
                       borderRadius: 8.0,
                       buttonSize: 50.0,
@@ -139,7 +139,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                 if (Theme.of(context).brightness == Brightness.dark)
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                     child: FlutterFlowIconButton(
                       borderRadius: 8.0,
                       buttonSize: 50.0,
@@ -171,13 +171,13 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                     FlutterFlowTheme.of(context).primaryBackground,
                     FlutterFlowTheme.of(context).secondary
                   ],
-                  stops: const [0.0, 1.0],
-                  begin: const AlignmentDirectional(0.0, -1.0),
-                  end: const AlignmentDirectional(0, 1.0),
+                  stops: [0.0, 1.0],
+                  begin: AlignmentDirectional(0.0, -1.0),
+                  end: AlignmentDirectional(0, 1.0),
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -191,15 +191,15 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   letterSpacing: 0.0,
                                 ),
                       ),
-                      SizedBox(
+                      Container(
                         height: 535.13,
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 12.0, 0.0, 0.0),
                           child: Column(
                             children: [
                               Align(
-                                alignment: const Alignment(0.0, 0),
+                                alignment: Alignment(0.0, 0),
                                 child: FlutterFlowButtonTabBar(
                                   useToggleButtonStyle: true,
                                   isScrollable: true,
@@ -209,7 +209,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                         fontFamily: 'Inter',
                                         letterSpacing: 0.0,
                                       ),
-                                  unselectedLabelStyle: const TextStyle(),
+                                  unselectedLabelStyle: TextStyle(),
                                   labelColor:
                                       FlutterFlowTheme.of(context).primary,
                                   unselectedLabelColor:
@@ -224,9 +224,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   borderWidth: 2.0,
                                   borderRadius: 12.0,
                                   elevation: 0.0,
-                                  labelPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  labelPadding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 0.0, 16.0, 0.0),
-                                  tabs: const [
+                                  tabs: [
                                     Tab(
                                       text: 'Pending',
                                     ),
@@ -245,19 +245,19 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                   controller: _model.tabBarController,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 10.0, 0.0, 0.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          SizedBox(
+                                          Container(
                                             height: 125.0,
                                             child: Stack(
                                               children: [
                                                 Container(
                                                   width: double.infinity,
                                                   height: 100.0,
-                                                  decoration: const BoxDecoration(),
+                                                  decoration: BoxDecoration(),
                                                   child: Text(
                                                     'Triple Jump',
                                                     style: FlutterFlowTheme.of(
@@ -270,7 +270,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 25.0, 0.0, 0.0),
                                                   child: StreamBuilder<
@@ -334,7 +334,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                             listViewActivitiesRecordList
                                                                 .length,
                                                         separatorBuilder:
-                                                            (_, __) => const SizedBox(
+                                                            (_, __) => SizedBox(
                                                                 width: 10.0),
                                                         itemBuilder: (context,
                                                             listViewIndex) {
@@ -429,14 +429,14 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                               ],
                                             ),
                                           ),
-                                          SizedBox(
+                                          Container(
                                             height: 125.0,
                                             child: Stack(
                                               children: [
                                                 Container(
                                                   width: double.infinity,
                                                   height: 100.0,
-                                                  decoration: const BoxDecoration(),
+                                                  decoration: BoxDecoration(),
                                                   child: Text(
                                                     'Running',
                                                     style: FlutterFlowTheme.of(
@@ -449,7 +449,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 25.0, 0.0, 0.0),
                                                   child: StreamBuilder<
@@ -513,7 +513,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                             listViewActivitiesRecordList
                                                                 .length,
                                                         separatorBuilder:
-                                                            (_, __) => const SizedBox(
+                                                            (_, __) => SizedBox(
                                                                 width: 10.0),
                                                         itemBuilder: (context,
                                                             listViewIndex) {
@@ -608,14 +608,14 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                               ],
                                             ),
                                           ),
-                                          SizedBox(
+                                          Container(
                                             height: 125.0,
                                             child: Stack(
                                               children: [
                                                 Container(
                                                   width: double.infinity,
                                                   height: 100.0,
-                                                  decoration: const BoxDecoration(),
+                                                  decoration: BoxDecoration(),
                                                   child: Text(
                                                     'Long Jump',
                                                     style: FlutterFlowTheme.of(
@@ -628,7 +628,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 25.0, 0.0, 0.0),
                                                   child: StreamBuilder<
@@ -692,7 +692,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                             listViewActivitiesRecordList
                                                                 .length,
                                                         separatorBuilder:
-                                                            (_, __) => const SizedBox(
+                                                            (_, __) => SizedBox(
                                                                 width: 10.0),
                                                         itemBuilder: (context,
                                                             listViewIndex) {
@@ -788,24 +788,24 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                             ),
                                           ),
                                         ]
-                                            .divide(const SizedBox(height: 20.0))
-                                            .around(const SizedBox(height: 20.0)),
+                                            .divide(SizedBox(height: 20.0))
+                                            .around(SizedBox(height: 20.0)),
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 10.0, 0.0, 0.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          SizedBox(
+                                          Container(
                                             height: 125.0,
                                             child: Stack(
                                               children: [
                                                 Container(
                                                   width: double.infinity,
                                                   height: 100.0,
-                                                  decoration: const BoxDecoration(),
+                                                  decoration: BoxDecoration(),
                                                   child: Text(
                                                     'Triple Jump',
                                                     style: FlutterFlowTheme.of(
@@ -818,7 +818,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 25.0, 0.0, 0.0),
                                                   child: StreamBuilder<
@@ -882,7 +882,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                             listViewActivitiesRecordList
                                                                 .length,
                                                         separatorBuilder:
-                                                            (_, __) => const SizedBox(
+                                                            (_, __) => SizedBox(
                                                                 width: 10.0),
                                                         itemBuilder: (context,
                                                             listViewIndex) {
@@ -977,14 +977,14 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                               ],
                                             ),
                                           ),
-                                          SizedBox(
+                                          Container(
                                             height: 125.0,
                                             child: Stack(
                                               children: [
                                                 Container(
                                                   width: double.infinity,
                                                   height: 100.0,
-                                                  decoration: const BoxDecoration(),
+                                                  decoration: BoxDecoration(),
                                                   child: Text(
                                                     'Running',
                                                     style: FlutterFlowTheme.of(
@@ -997,7 +997,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 25.0, 0.0, 0.0),
                                                   child: StreamBuilder<
@@ -1061,7 +1061,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                             listViewActivitiesRecordList
                                                                 .length,
                                                         separatorBuilder:
-                                                            (_, __) => const SizedBox(
+                                                            (_, __) => SizedBox(
                                                                 width: 10.0),
                                                         itemBuilder: (context,
                                                             listViewIndex) {
@@ -1156,14 +1156,14 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                               ],
                                             ),
                                           ),
-                                          SizedBox(
+                                          Container(
                                             height: 125.0,
                                             child: Stack(
                                               children: [
                                                 Container(
                                                   width: double.infinity,
                                                   height: 100.0,
-                                                  decoration: const BoxDecoration(),
+                                                  decoration: BoxDecoration(),
                                                   child: Text(
                                                     'Long Jump',
                                                     style: FlutterFlowTheme.of(
@@ -1176,7 +1176,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 25.0, 0.0, 0.0),
                                                   child: StreamBuilder<
@@ -1240,7 +1240,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                             listViewActivitiesRecordList
                                                                 .length,
                                                         separatorBuilder:
-                                                            (_, __) => const SizedBox(
+                                                            (_, __) => SizedBox(
                                                                 width: 10.0),
                                                         itemBuilder: (context,
                                                             listViewIndex) {
@@ -1336,8 +1336,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                             ),
                                           ),
                                         ]
-                                            .divide(const SizedBox(height: 20.0))
-                                            .around(const SizedBox(height: 20.0)),
+                                            .divide(SizedBox(height: 20.0))
+                                            .around(SizedBox(height: 20.0)),
                                       ),
                                     ),
                                   ],
@@ -1356,7 +1356,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               context.pushNamed(
                                 'profile',
                                 extra: <String, dynamic>{
-                                  kTransitionInfoKey: const TransitionInfo(
+                                  kTransitionInfoKey: TransitionInfo(
                                     hasTransition: true,
                                     transitionType: PageTransitionType.fade,
                                     duration: Duration(milliseconds: 0),
@@ -1365,15 +1365,15 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               );
                             },
                             text: 'Profile',
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.person_sharp,
                               size: 24.0,
                             ),
                             options: FFButtonOptions(
                               height: 40.0,
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   16.0, 0.0, 16.0, 0.0),
-                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
@@ -1400,7 +1400,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               context.pushNamed(
                                 'planner',
                                 extra: <String, dynamic>{
-                                  kTransitionInfoKey: const TransitionInfo(
+                                  kTransitionInfoKey: TransitionInfo(
                                     hasTransition: true,
                                     transitionType: PageTransitionType.fade,
                                     duration: Duration(milliseconds: 0),
@@ -1409,15 +1409,15 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               );
                             },
                             text: 'Planner',
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.calendar_today,
                               size: 24.0,
                             ),
                             options: FFButtonOptions(
                               height: 40.0,
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   16.0, 0.0, 16.0, 0.0),
-                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
@@ -1442,8 +1442,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                         ],
                       ),
                     ]
-                        .divide(const SizedBox(height: 40.0))
-                        .around(const SizedBox(height: 40.0)),
+                        .divide(SizedBox(height: 40.0))
+                        .around(SizedBox(height: 40.0)),
                   ),
                 ),
               ),

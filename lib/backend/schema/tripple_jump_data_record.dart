@@ -9,9 +9,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class TrippleJumpDataRecord extends FirestoreRecord {
   TrippleJumpDataRecord._(
-    super.reference,
-    super.data,
-  ) {
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
     _initializeFields();
   }
 

@@ -48,14 +48,14 @@ class _ActivityListWidgetState extends State<ActivityListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 125.0,
       child: Stack(
         children: [
           Container(
             width: double.infinity,
             height: 100.0,
-            decoration: const BoxDecoration(),
+            decoration: BoxDecoration(),
             child: Text(
               valueOrDefault<String>(
                 (String activityType) {
@@ -70,7 +70,7 @@ class _ActivityListWidgetState extends State<ActivityListWidget> {
             ),
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
             child: StreamBuilder<List<ActivitiesRecord>>(
               stream: queryActivitiesRecord(
                 queryBuilder: (activitiesRecord) => activitiesRecord

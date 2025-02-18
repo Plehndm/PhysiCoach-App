@@ -58,7 +58,7 @@ class _AdvancedLongJumpMetricsWidgetState
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -76,7 +76,7 @@ class _AdvancedLongJumpMetricsWidgetState
                   letterSpacing: 0.0,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 2.0,
         ),
@@ -88,12 +88,12 @@ class _AdvancedLongJumpMetricsWidgetState
                 FlutterFlowTheme.of(context).primaryBackground,
                 FlutterFlowTheme.of(context).secondary
               ],
-              stops: const [0.0, 1.0],
-              begin: const AlignmentDirectional(0.0, -1.0),
-              end: const AlignmentDirectional(0, 1.0),
+              stops: [0.0, 1.0],
+              begin: AlignmentDirectional(0.0, -1.0),
+              end: AlignmentDirectional(0, 1.0),
             ),
           ),
-          child: const Column(
+          child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [],
           ),

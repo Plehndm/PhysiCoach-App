@@ -56,12 +56,12 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
 
     return Container(
       width: double.infinity,
-      constraints: const BoxConstraints(
+      constraints: BoxConstraints(
         maxWidth: 500.0,
       ),
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(24.0),
@@ -75,14 +75,14 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
         key: _model.formKey,
         autovalidateMode: AutovalidateMode.always,
         child: Padding(
-          padding: const EdgeInsets.all(18.0),
+          padding: EdgeInsets.all(18.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Align(
-                  alignment: const AlignmentDirectional(1.0, -1.0),
+                  alignment: AlignmentDirectional(1.0, -1.0),
                   child: FlutterFlowIconButton(
                     borderRadius: 20.0,
                     buttonSize: 50.0,
@@ -109,7 +109,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                     _model.typeValue ??= ActivityTypes.Triple_Jump,
                   ),
                   options: List<ActivityTypes>.from(ActivityTypes.values),
-                  optionLabels: const ['Tripple Jump', 'Running', 'Long Jump'],
+                  optionLabels: ['Tripple Jump', 'Running', 'Long Jump'],
                   onChanged: (val) =>
                       safeSetState(() => _model.typeValue = val),
                   width: double.infinity,
@@ -130,13 +130,13 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                   borderColor: FlutterFlowTheme.of(context).primaryText,
                   borderWidth: 1.0,
                   borderRadius: 24.0,
-                  margin: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                  margin: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
                   hidesUnderline: true,
                   isOverButton: false,
                   isSearchable: false,
                   isMultiSelect: false,
                 ),
-                SizedBox(
+                Container(
                   width: double.infinity,
                   child: TextFormField(
                     controller: _model.titleTextController,
@@ -167,7 +167,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                         borderRadius: BorderRadius.circular(24.0),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
+                        borderSide: BorderSide(
                           color: Color(0x00000000),
                           width: 1.0,
                         ),
@@ -190,7 +190,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                       filled: true,
                       fillColor:
                           FlutterFlowTheme.of(context).secondaryBackground,
-                      contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                      contentPadding: EdgeInsetsDirectional.fromSTEB(
                           20.0, 22.0, 20.0, 22.0),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -203,7 +203,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                         .asValidator(context),
                   ),
                 ),
-                SizedBox(
+                Container(
                   width: double.infinity,
                   child: TextFormField(
                     controller: _model.descriptionTextController,
@@ -234,7 +234,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                         borderRadius: BorderRadius.circular(24.0),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
+                        borderSide: BorderSide(
                           color: Color(0x00000000),
                           width: 1.0,
                         ),
@@ -257,7 +257,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                       filled: true,
                       fillColor:
                           FlutterFlowTheme.of(context).secondaryBackground,
-                      contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                      contentPadding: EdgeInsetsDirectional.fromSTEB(
                           20.0, 22.0, 20.0, 22.0),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -274,7 +274,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                 ),
                 FFButtonWidget(
                   onPressed: () async {
-                    final datePickedDate = await showDatePicker(
+                    final _datePickedDate = await showDatePicker(
                       context: context,
                       initialDate: getCurrentTimestamp,
                       firstDate: DateTime(1900),
@@ -310,18 +310,22 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                       },
                     );
 
-                    if (datePickedDate != null) {
+                    if (_datePickedDate != null) {
                       safeSetState(() {
                         _model.datePicked = DateTime(
-                          datePickedDate.year,
-                          datePickedDate.month,
-                          datePickedDate.day,
+                          _datePickedDate.year,
+                          _datePickedDate.month,
+                          _datePickedDate.day,
                         );
+                      });
+                    } else if (_model.datePicked != null) {
+                      safeSetState(() {
+                        _model.datePicked = getCurrentTimestamp;
                       });
                     }
                   },
                   text: 'Set Date',
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.calendar_today,
                     size: 15.0,
                   ),
@@ -329,9 +333,9 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                     width: double.infinity,
                     height: 70.0,
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Inter',
@@ -447,7 +451,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                     safeSetState(() {});
                   },
                   text: 'Add Activity',
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.add,
                     size: 30.0,
                   ),
@@ -455,9 +459,9 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                     width: double.infinity,
                     height: 70.0,
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Inter',
@@ -474,7 +478,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                     borderRadius: BorderRadius.circular(24.0),
                   ),
                 ),
-              ].divide(const SizedBox(height: 24.0)),
+              ].divide(SizedBox(height: 24.0)),
             ),
           ),
         ),

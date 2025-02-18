@@ -111,7 +111,7 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                     borderRadius: 30.0,
                     borderWidth: 1.0,
                     buttonSize: 60.0,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.arrow_back_rounded,
                       color: Colors.white,
                       size: 30.0,
@@ -134,7 +134,7 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                       children: [
                         if (Theme.of(context).brightness == Brightness.light)
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: FlutterFlowIconButton(
                               borderRadius: 8.0,
@@ -152,7 +152,7 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                           ),
                         if (Theme.of(context).brightness == Brightness.dark)
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: FlutterFlowIconButton(
                               borderRadius: 8.0,
@@ -185,16 +185,16 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                           FlutterFlowTheme.of(context).primaryBackground,
                           FlutterFlowTheme.of(context).secondary
                         ],
-                        stops: const [0.0, 1.0],
-                        begin: const AlignmentDirectional(0.0, -1.0),
-                        end: const AlignmentDirectional(0, 1.0),
+                        stops: [0.0, 1.0],
+                        begin: AlignmentDirectional(0.0, -1.0),
+                        end: AlignmentDirectional(0, 1.0),
                       ),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 10.0, 0.0, 0.0),
                           child: Container(
                             width: 350.0,
@@ -213,7 +213,7 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           10.0, 0.0, 0.0, 0.0),
                                       child: Text(
                                         'Advanced Triple Jump Metrics',
@@ -247,7 +247,7 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                           extra: <String, dynamic>{
                                             'trippleJumpDataDoc':
                                                 tripleJumpAnalysisTrippleJumpDataRecord,
-                                            kTransitionInfoKey: const TransitionInfo(
+                                            kTransitionInfoKey: TransitionInfo(
                                               hasTransition: true,
                                               transitionType:
                                                   PageTransitionType.fade,
@@ -261,10 +261,10 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                   ],
                                 ),
                                 Align(
-                                  alignment: const AlignmentDirectional(1.0, 0.0),
+                                  alignment: AlignmentDirectional(1.0, 0.0),
                                   child: Container(
                                     width: 270.0,
-                                    decoration: const BoxDecoration(),
+                                    decoration: BoxDecoration(),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       mainAxisAlignment:
@@ -302,7 +302,7 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 10.0, 10.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -350,7 +350,7 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
-                                        ].divide(const SizedBox(height: 50.0)),
+                                        ].divide(SizedBox(height: 50.0)),
                                       ),
                                       Column(
                                         mainAxisSize: MainAxisSize.min,
@@ -359,10 +359,10 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          SizedBox(
+                                          Container(
                                             width: 220.0,
                                             height: 0.01,
-                                            child: SizedBox(
+                                            child: Container(
                                               width: 200.0,
                                               height: 1.0,
                                               child: Stack(
@@ -384,11 +384,11 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             0.0, 0.0),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -409,7 +409,7 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                                               .pageViewController1!
                                                               .animateToPage(
                                                             i,
-                                                            duration: const Duration(
+                                                            duration: Duration(
                                                                 milliseconds:
                                                                     500),
                                                             curve: Curves.ease,
@@ -445,8 +445,8 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                           Container(
                                             width: 220.0,
                                             height: 0.01,
-                                            decoration: const BoxDecoration(),
-                                            child: SizedBox(
+                                            decoration: BoxDecoration(),
+                                            child: Container(
                                               width: 200.0,
                                               height: 1.0,
                                               child: Stack(
@@ -468,11 +468,11 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             0.0, 0.0),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -493,7 +493,7 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                                               .pageViewController2!
                                                               .animateToPage(
                                                             i,
-                                                            duration: const Duration(
+                                                            duration: Duration(
                                                                 milliseconds:
                                                                     500),
                                                             curve: Curves.ease,
@@ -529,8 +529,8 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                           Container(
                                             width: 220.0,
                                             height: 0.01,
-                                            decoration: const BoxDecoration(),
-                                            child: SizedBox(
+                                            decoration: BoxDecoration(),
+                                            child: Container(
                                               width: 200.0,
                                               height: 1.0,
                                               child: Stack(
@@ -552,11 +552,11 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             0.0, 0.0),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -577,7 +577,7 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                                               .pageViewController3!
                                                               .animateToPage(
                                                             i,
-                                                            duration: const Duration(
+                                                            duration: Duration(
                                                                 milliseconds:
                                                                     500),
                                                             curve: Curves.ease,
@@ -613,8 +613,8 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                           Container(
                                             width: 220.0,
                                             height: 0.01,
-                                            decoration: const BoxDecoration(),
-                                            child: SizedBox(
+                                            decoration: BoxDecoration(),
+                                            child: Container(
                                               width: 200.0,
                                               height: 1.0,
                                               child: Stack(
@@ -636,11 +636,11 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             0.0, 0.0),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -661,7 +661,7 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                                               .pageViewController4!
                                                               .animateToPage(
                                                             i,
-                                                            duration: const Duration(
+                                                            duration: Duration(
                                                                 milliseconds:
                                                                     500),
                                                             curve: Curves.ease,
@@ -694,9 +694,9 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                               ),
                                             ),
                                           ),
-                                        ].divide(const SizedBox(height: 69.0)),
+                                        ].divide(SizedBox(height: 69.0)),
                                       ),
-                                    ].divide(const SizedBox(width: 10.0)),
+                                    ].divide(SizedBox(width: 10.0)),
                                   ),
                                 ),
                               ],

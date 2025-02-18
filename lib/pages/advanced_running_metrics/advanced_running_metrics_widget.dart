@@ -62,7 +62,7 @@ class _AdvancedRunningMetricsWidgetState
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -80,7 +80,7 @@ class _AdvancedRunningMetricsWidgetState
                   letterSpacing: 0.0,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 2.0,
         ),
@@ -92,9 +92,9 @@ class _AdvancedRunningMetricsWidgetState
                 FlutterFlowTheme.of(context).primaryBackground,
                 FlutterFlowTheme.of(context).secondary
               ],
-              stops: const [0.0, 1.0],
-              begin: const AlignmentDirectional(0.0, -1.0),
-              end: const AlignmentDirectional(0, 1.0),
+              stops: [0.0, 1.0],
+              begin: AlignmentDirectional(0.0, -1.0),
+              end: AlignmentDirectional(0, 1.0),
             ),
           ),
           child: SingleChildScrollView(
@@ -109,7 +109,7 @@ class _AdvancedRunningMetricsWidgetState
                   ),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,7 +158,7 @@ class _AdvancedRunningMetricsWidgetState
                                                 .bodyMedium
                                                 .override(
                                                   fontFamily: 'Inter',
-                                                  color: const Color(0xFF007ADC),
+                                                  color: Color(0xFF007ADC),
                                                   fontSize: 20.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
@@ -179,7 +179,7 @@ class _AdvancedRunningMetricsWidgetState
                                               Container(
                                                 width: 10.0,
                                                 height: 10.0,
-                                                decoration: const BoxDecoration(
+                                                decoration: BoxDecoration(
                                                   color: Color(0xFF007ADC),
                                                   shape: BoxShape.circle,
                                                 ),
@@ -192,13 +192,13 @@ class _AdvancedRunningMetricsWidgetState
                                                         .override(
                                                           fontFamily: 'Inter',
                                                           color:
-                                                              const Color(0xFF007ADC),
+                                                              Color(0xFF007ADC),
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),
                                               ),
-                                            ].divide(const SizedBox(width: 5.0)),
+                                            ].divide(SizedBox(width: 5.0)),
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -206,7 +206,7 @@ class _AdvancedRunningMetricsWidgetState
                                               Container(
                                                 width: 10.0,
                                                 height: 10.0,
-                                                decoration: const BoxDecoration(
+                                                decoration: BoxDecoration(
                                                   color: Color(0xFF00B81B),
                                                   shape: BoxShape.circle,
                                                 ),
@@ -219,13 +219,13 @@ class _AdvancedRunningMetricsWidgetState
                                                         .override(
                                                           fontFamily: 'Inter',
                                                           color:
-                                                              const Color(0xFF00B81B),
+                                                              Color(0xFF00B81B),
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),
                                               ),
-                                            ].divide(const SizedBox(width: 5.0)),
+                                            ].divide(SizedBox(width: 5.0)),
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -233,7 +233,7 @@ class _AdvancedRunningMetricsWidgetState
                                               Container(
                                                 width: 10.0,
                                                 height: 10.0,
-                                                decoration: const BoxDecoration(
+                                                decoration: BoxDecoration(
                                                   color: Color(0xFFFF6F00),
                                                   shape: BoxShape.circle,
                                                 ),
@@ -246,19 +246,19 @@ class _AdvancedRunningMetricsWidgetState
                                                         .override(
                                                           fontFamily: 'Inter',
                                                           color:
-                                                              const Color(0xFFFF6F00),
+                                                              Color(0xFFFF6F00),
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),
                                               ),
-                                            ].divide(const SizedBox(width: 5.0)),
+                                            ].divide(SizedBox(width: 5.0)),
                                           ),
                                         ],
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
+                                  Container(
                                     width: 370.0,
                                     height: 200.0,
                                     child: FlutterFlowLineChart(
@@ -273,7 +273,7 @@ class _AdvancedRunningMetricsWidgetState
                                               .map((e) => e.percent)
                                               .toList(),
                                           settings: LineChartBarData(
-                                            color: const Color(0xFF007ADC),
+                                            color: Color(0xFF007ADC),
                                             barWidth: 0.0,
                                           ),
                                         )
@@ -283,19 +283,19 @@ class _AdvancedRunningMetricsWidgetState
                                         tooltipBackgroundColor:
                                             FlutterFlowTheme.of(context)
                                                 .secondaryText,
-                                        backgroundColor: const Color(0x00FFFFFF),
+                                        backgroundColor: Color(0x00FFFFFF),
                                         showGrid: true,
                                         showBorder: false,
                                       ),
-                                      axisBounds: const AxisBounds(),
-                                      xAxisLabelInfo: const AxisLabelInfo(
+                                      axisBounds: AxisBounds(),
+                                      xAxisLabelInfo: AxisLabelInfo(
                                         title: 'time',
                                         titleTextStyle: TextStyle(
                                           fontSize: 14.0,
                                         ),
                                         reservedSize: 32.0,
                                       ),
-                                      yAxisLabelInfo: const AxisLabelInfo(
+                                      yAxisLabelInfo: AxisLabelInfo(
                                         title: 'percent',
                                         titleTextStyle: TextStyle(
                                           fontSize: 14.0,
@@ -304,7 +304,7 @@ class _AdvancedRunningMetricsWidgetState
                                       ),
                                     ),
                                   ),
-                                ].divide(const SizedBox(height: 8.0)),
+                                ].divide(SizedBox(height: 8.0)),
                               ),
                             ),
                           ],
@@ -353,7 +353,7 @@ class _AdvancedRunningMetricsWidgetState
                                                 .bodyMedium
                                                 .override(
                                                   fontFamily: 'Inter',
-                                                  color: const Color(0xFF00B81B),
+                                                  color: Color(0xFF00B81B),
                                                   fontSize: 20.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
@@ -374,7 +374,7 @@ class _AdvancedRunningMetricsWidgetState
                                               Container(
                                                 width: 10.0,
                                                 height: 10.0,
-                                                decoration: const BoxDecoration(
+                                                decoration: BoxDecoration(
                                                   color: Color(0xFF007ADC),
                                                   shape: BoxShape.circle,
                                                 ),
@@ -387,13 +387,13 @@ class _AdvancedRunningMetricsWidgetState
                                                         .override(
                                                           fontFamily: 'Inter',
                                                           color:
-                                                              const Color(0xFF007ADC),
+                                                              Color(0xFF007ADC),
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),
                                               ),
-                                            ].divide(const SizedBox(width: 5.0)),
+                                            ].divide(SizedBox(width: 5.0)),
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -401,7 +401,7 @@ class _AdvancedRunningMetricsWidgetState
                                               Container(
                                                 width: 10.0,
                                                 height: 10.0,
-                                                decoration: const BoxDecoration(
+                                                decoration: BoxDecoration(
                                                   color: Color(0xFF00B81B),
                                                   shape: BoxShape.circle,
                                                 ),
@@ -414,13 +414,13 @@ class _AdvancedRunningMetricsWidgetState
                                                         .override(
                                                           fontFamily: 'Inter',
                                                           color:
-                                                              const Color(0xFF00B81B),
+                                                              Color(0xFF00B81B),
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),
                                               ),
-                                            ].divide(const SizedBox(width: 5.0)),
+                                            ].divide(SizedBox(width: 5.0)),
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -428,7 +428,7 @@ class _AdvancedRunningMetricsWidgetState
                                               Container(
                                                 width: 10.0,
                                                 height: 10.0,
-                                                decoration: const BoxDecoration(
+                                                decoration: BoxDecoration(
                                                   color: Color(0xFFFF6F00),
                                                   shape: BoxShape.circle,
                                                 ),
@@ -441,19 +441,19 @@ class _AdvancedRunningMetricsWidgetState
                                                         .override(
                                                           fontFamily: 'Inter',
                                                           color:
-                                                              const Color(0xFFFF6F00),
+                                                              Color(0xFFFF6F00),
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),
                                               ),
-                                            ].divide(const SizedBox(width: 5.0)),
+                                            ].divide(SizedBox(width: 5.0)),
                                           ),
                                         ],
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
+                                  Container(
                                     width: 370.0,
                                     height: 200.0,
                                     child: FlutterFlowLineChart(
@@ -468,7 +468,7 @@ class _AdvancedRunningMetricsWidgetState
                                               .map((e) => e.contactTime)
                                               .toList(),
                                           settings: LineChartBarData(
-                                            color: const Color(0xFF00B81B),
+                                            color: Color(0xFF00B81B),
                                             barWidth: 0.0,
                                           ),
                                         )
@@ -478,19 +478,19 @@ class _AdvancedRunningMetricsWidgetState
                                         tooltipBackgroundColor:
                                             FlutterFlowTheme.of(context)
                                                 .secondaryText,
-                                        backgroundColor: const Color(0x00FFFFFF),
+                                        backgroundColor: Color(0x00FFFFFF),
                                         showGrid: true,
                                         showBorder: false,
                                       ),
-                                      axisBounds: const AxisBounds(),
-                                      xAxisLabelInfo: const AxisLabelInfo(
+                                      axisBounds: AxisBounds(),
+                                      xAxisLabelInfo: AxisLabelInfo(
                                         title: 'time',
                                         titleTextStyle: TextStyle(
                                           fontSize: 14.0,
                                         ),
                                         reservedSize: 32.0,
                                       ),
-                                      yAxisLabelInfo: const AxisLabelInfo(
+                                      yAxisLabelInfo: AxisLabelInfo(
                                         title: 'ms',
                                         titleTextStyle: TextStyle(
                                           fontSize: 14.0,
@@ -499,7 +499,7 @@ class _AdvancedRunningMetricsWidgetState
                                       ),
                                     ),
                                   ),
-                                ].divide(const SizedBox(height: 8.0)),
+                                ].divide(SizedBox(height: 8.0)),
                               ),
                             ),
                           ],
@@ -548,7 +548,7 @@ class _AdvancedRunningMetricsWidgetState
                                                 .bodyMedium
                                                 .override(
                                                   fontFamily: 'Inter',
-                                                  color: const Color(0xFF00B81B),
+                                                  color: Color(0xFF00B81B),
                                                   fontSize: 20.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
@@ -569,7 +569,7 @@ class _AdvancedRunningMetricsWidgetState
                                               Container(
                                                 width: 10.0,
                                                 height: 10.0,
-                                                decoration: const BoxDecoration(
+                                                decoration: BoxDecoration(
                                                   color: Color(0xFF007ADC),
                                                   shape: BoxShape.circle,
                                                 ),
@@ -582,13 +582,13 @@ class _AdvancedRunningMetricsWidgetState
                                                         .override(
                                                           fontFamily: 'Inter',
                                                           color:
-                                                              const Color(0xFF007ADC),
+                                                              Color(0xFF007ADC),
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),
                                               ),
-                                            ].divide(const SizedBox(width: 5.0)),
+                                            ].divide(SizedBox(width: 5.0)),
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -596,7 +596,7 @@ class _AdvancedRunningMetricsWidgetState
                                               Container(
                                                 width: 10.0,
                                                 height: 10.0,
-                                                decoration: const BoxDecoration(
+                                                decoration: BoxDecoration(
                                                   color: Color(0xFF00B81B),
                                                   shape: BoxShape.circle,
                                                 ),
@@ -609,13 +609,13 @@ class _AdvancedRunningMetricsWidgetState
                                                         .override(
                                                           fontFamily: 'Inter',
                                                           color:
-                                                              const Color(0xFF00B81B),
+                                                              Color(0xFF00B81B),
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),
                                               ),
-                                            ].divide(const SizedBox(width: 5.0)),
+                                            ].divide(SizedBox(width: 5.0)),
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -623,7 +623,7 @@ class _AdvancedRunningMetricsWidgetState
                                               Container(
                                                 width: 10.0,
                                                 height: 10.0,
-                                                decoration: const BoxDecoration(
+                                                decoration: BoxDecoration(
                                                   color: Color(0xFFFF6F00),
                                                   shape: BoxShape.circle,
                                                 ),
@@ -636,19 +636,19 @@ class _AdvancedRunningMetricsWidgetState
                                                         .override(
                                                           fontFamily: 'Inter',
                                                           color:
-                                                              const Color(0xFFFF6F00),
+                                                              Color(0xFFFF6F00),
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),
                                               ),
-                                            ].divide(const SizedBox(width: 5.0)),
+                                            ].divide(SizedBox(width: 5.0)),
                                           ),
                                         ],
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
+                                  Container(
                                     width: 370.0,
                                     height: 200.0,
                                     child: FlutterFlowLineChart(
@@ -663,7 +663,7 @@ class _AdvancedRunningMetricsWidgetState
                                               .map((e) => e.percent)
                                               .toList(),
                                           settings: LineChartBarData(
-                                            color: const Color(0xFF00B81B),
+                                            color: Color(0xFF00B81B),
                                             barWidth: 0.0,
                                           ),
                                         )
@@ -673,19 +673,19 @@ class _AdvancedRunningMetricsWidgetState
                                         tooltipBackgroundColor:
                                             FlutterFlowTheme.of(context)
                                                 .secondaryText,
-                                        backgroundColor: const Color(0x00FFFFFF),
+                                        backgroundColor: Color(0x00FFFFFF),
                                         showGrid: true,
                                         showBorder: false,
                                       ),
-                                      axisBounds: const AxisBounds(),
-                                      xAxisLabelInfo: const AxisLabelInfo(
+                                      axisBounds: AxisBounds(),
+                                      xAxisLabelInfo: AxisLabelInfo(
                                         title: 'time',
                                         titleTextStyle: TextStyle(
                                           fontSize: 14.0,
                                         ),
                                         reservedSize: 32.0,
                                       ),
-                                      yAxisLabelInfo: const AxisLabelInfo(
+                                      yAxisLabelInfo: AxisLabelInfo(
                                         title: 'percent',
                                         titleTextStyle: TextStyle(
                                           fontSize: 14.0,
@@ -694,7 +694,7 @@ class _AdvancedRunningMetricsWidgetState
                                       ),
                                     ),
                                   ),
-                                ].divide(const SizedBox(height: 8.0)),
+                                ].divide(SizedBox(height: 8.0)),
                               ),
                             ),
                           ],
@@ -743,7 +743,7 @@ class _AdvancedRunningMetricsWidgetState
                                                 .bodyMedium
                                                 .override(
                                                   fontFamily: 'Inter',
-                                                  color: const Color(0xFF00B81B),
+                                                  color: Color(0xFF00B81B),
                                                   fontSize: 20.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
@@ -764,7 +764,7 @@ class _AdvancedRunningMetricsWidgetState
                                               Container(
                                                 width: 10.0,
                                                 height: 10.0,
-                                                decoration: const BoxDecoration(
+                                                decoration: BoxDecoration(
                                                   color: Color(0xFF007ADC),
                                                   shape: BoxShape.circle,
                                                 ),
@@ -777,13 +777,13 @@ class _AdvancedRunningMetricsWidgetState
                                                         .override(
                                                           fontFamily: 'Inter',
                                                           color:
-                                                              const Color(0xFF007ADC),
+                                                              Color(0xFF007ADC),
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),
                                               ),
-                                            ].divide(const SizedBox(width: 5.0)),
+                                            ].divide(SizedBox(width: 5.0)),
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -791,7 +791,7 @@ class _AdvancedRunningMetricsWidgetState
                                               Container(
                                                 width: 10.0,
                                                 height: 10.0,
-                                                decoration: const BoxDecoration(
+                                                decoration: BoxDecoration(
                                                   color: Color(0xFF00B81B),
                                                   shape: BoxShape.circle,
                                                 ),
@@ -804,13 +804,13 @@ class _AdvancedRunningMetricsWidgetState
                                                         .override(
                                                           fontFamily: 'Inter',
                                                           color:
-                                                              const Color(0xFF00B81B),
+                                                              Color(0xFF00B81B),
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),
                                               ),
-                                            ].divide(const SizedBox(width: 5.0)),
+                                            ].divide(SizedBox(width: 5.0)),
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -818,7 +818,7 @@ class _AdvancedRunningMetricsWidgetState
                                               Container(
                                                 width: 10.0,
                                                 height: 10.0,
-                                                decoration: const BoxDecoration(
+                                                decoration: BoxDecoration(
                                                   color: Color(0xFFFF6F00),
                                                   shape: BoxShape.circle,
                                                 ),
@@ -831,19 +831,19 @@ class _AdvancedRunningMetricsWidgetState
                                                         .override(
                                                           fontFamily: 'Inter',
                                                           color:
-                                                              const Color(0xFFFF6F00),
+                                                              Color(0xFFFF6F00),
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),
                                               ),
-                                            ].divide(const SizedBox(width: 5.0)),
+                                            ].divide(SizedBox(width: 5.0)),
                                           ),
                                         ],
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
+                                  Container(
                                     width: 370.0,
                                     height: 200.0,
                                     child: FlutterFlowLineChart(
@@ -858,7 +858,7 @@ class _AdvancedRunningMetricsWidgetState
                                               .map((e) => e.strideLength)
                                               .toList(),
                                           settings: LineChartBarData(
-                                            color: const Color(0xFF00B81B),
+                                            color: Color(0xFF00B81B),
                                             barWidth: 0.0,
                                           ),
                                         )
@@ -868,19 +868,19 @@ class _AdvancedRunningMetricsWidgetState
                                         tooltipBackgroundColor:
                                             FlutterFlowTheme.of(context)
                                                 .secondaryText,
-                                        backgroundColor: const Color(0x00FFFFFF),
+                                        backgroundColor: Color(0x00FFFFFF),
                                         showGrid: true,
                                         showBorder: false,
                                       ),
-                                      axisBounds: const AxisBounds(),
-                                      xAxisLabelInfo: const AxisLabelInfo(
+                                      axisBounds: AxisBounds(),
+                                      xAxisLabelInfo: AxisLabelInfo(
                                         title: 'time',
                                         titleTextStyle: TextStyle(
                                           fontSize: 14.0,
                                         ),
                                         reservedSize: 32.0,
                                       ),
-                                      yAxisLabelInfo: const AxisLabelInfo(
+                                      yAxisLabelInfo: AxisLabelInfo(
                                         title: 'meters',
                                         titleTextStyle: TextStyle(
                                           fontSize: 14.0,
@@ -889,14 +889,14 @@ class _AdvancedRunningMetricsWidgetState
                                       ),
                                     ),
                                   ),
-                                ].divide(const SizedBox(height: 8.0)),
+                                ].divide(SizedBox(height: 8.0)),
                               ),
                             ),
                           ],
                         ),
                       ]
-                          .divide(const SizedBox(height: 10.0))
-                          .around(const SizedBox(height: 10.0)),
+                          .divide(SizedBox(height: 10.0))
+                          .around(SizedBox(height: 10.0)),
                     ),
                   ),
                 ),

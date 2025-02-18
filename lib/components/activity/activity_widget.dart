@@ -49,12 +49,12 @@ class _ActivityWidgetState extends State<ActivityWidget> {
       borderRadius: BorderRadius.circular(8.0),
       child: Container(
         height: 80.0,
-        constraints: const BoxConstraints(
+        constraints: BoxConstraints(
           maxHeight: 80.0,
         ),
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
               blurRadius: 4.0,
               color: Color(0x33000000),
@@ -71,17 +71,19 @@ class _ActivityWidgetState extends State<ActivityWidget> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+          padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
                 child: Text(
                   valueOrDefault<String>(
                     (int seconds) {
-                      return "${(seconds / 60).toString().padLeft(2, "0")}:${(seconds % 60).toString().padRight(2, "0")}";
+                      return (seconds / 60).toString().padLeft(2, "0") +
+                          ":" +
+                          (seconds % 60).toString().padRight(2, "0");
                     }(valueOrDefault<int>(
                       widget.activitiesDoc?.seconds,
                       60,
@@ -94,12 +96,12 @@ class _ActivityWidgetState extends State<ActivityWidget> {
                       ),
                 ),
               ),
-              SizedBox(
+              Container(
                 height: 80.0,
                 child: Stack(
                   children: [
                     Align(
-                      alignment: const AlignmentDirectional(-1.0, 0.0),
+                      alignment: AlignmentDirectional(-1.0, 0.0),
                       child: Text(
                         valueOrDefault<String>(
                           widget.activitiesDoc?.title,
@@ -117,10 +119,10 @@ class _ActivityWidgetState extends State<ActivityWidget> {
                       ),
                     ),
                     Align(
-                      alignment: const AlignmentDirectional(-1.0, 0.0),
+                      alignment: AlignmentDirectional(-1.0, 0.0),
                       child: Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                         child: Text(
                           valueOrDefault<String>(
                             widget.activitiesDoc?.description,
@@ -140,13 +142,13 @@ class _ActivityWidgetState extends State<ActivityWidget> {
                       ),
                     ),
                     Align(
-                      alignment: const AlignmentDirectional(1.0, -1.0),
+                      alignment: AlignmentDirectional(1.0, -1.0),
                       child: Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(50.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(50.0, 0.0, 0.0, 0.0),
                         child: Theme(
                           data: ThemeData(
-                            checkboxTheme: const CheckboxThemeData(
+                            checkboxTheme: CheckboxThemeData(
                               visualDensity: VisualDensity.compact,
                               materialTapTargetSize:
                                   MaterialTapTargetSize.shrinkWrap,

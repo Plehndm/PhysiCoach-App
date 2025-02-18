@@ -76,28 +76,28 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const HomeWidget() : const LoginWidget(),
+          appStateNotifier.loggedIn ? HomeWidget() : LoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const HomeWidget() : const LoginWidget(),
+              appStateNotifier.loggedIn ? HomeWidget() : LoginWidget(),
         ),
         FFRoute(
           name: 'login',
           path: '/login',
-          builder: (context, params) => const LoginWidget(),
+          builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
           name: 'home',
           path: '/home',
-          builder: (context, params) => const HomeWidget(),
+          builder: (context, params) => HomeWidget(),
         ),
         FFRoute(
           name: 'onboarding',
           path: '/onboarding',
-          builder: (context, params) => const OnboardingWidget(),
+          builder: (context, params) => OnboardingWidget(),
         ),
         FFRoute(
           name: 'details',
@@ -130,7 +130,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'profile',
           path: '/profile',
-          builder: (context, params) => const ProfileWidget(),
+          builder: (context, params) => ProfileWidget(),
         ),
         FFRoute(
           name: 'advancedRunningMetrics',
@@ -205,12 +205,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'planner',
           path: '/planner',
-          builder: (context, params) => const PlannerWidget(),
+          builder: (context, params) => PlannerWidget(),
         ),
         FFRoute(
           name: 'profileUpdate',
           path: '/profileUpdate',
-          builder: (context, params) => const ProfileUpdateWidget(),
+          builder: (context, params) => ProfileUpdateWidget(),
         ),
         FFRoute(
           name: 'performActivity',
@@ -464,7 +464,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

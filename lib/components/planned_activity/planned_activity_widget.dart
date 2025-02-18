@@ -62,7 +62,7 @@ class _PlannedActivityWidgetState extends State<PlannedActivityWidget> {
             scaleY: 1.8,
             child: Theme(
               data: ThemeData(
-                checkboxTheme: const CheckboxThemeData(
+                checkboxTheme: CheckboxThemeData(
                   visualDensity: VisualDensity.compact,
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   shape: CircleBorder(),
@@ -118,14 +118,14 @@ class _PlannedActivityWidgetState extends State<PlannedActivityWidget> {
             width: 50.0,
             height: 50.0,
             decoration: BoxDecoration(
-              color: const Color(0x6E0077B6),
+              color: Color(0x6E0077B6),
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Stack(
               children: [
                 if (widget.activityDoc?.type == ActivityTypes.Running)
                   Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Icon(
                       Icons.directions_run_sharp,
                       color: FlutterFlowTheme.of(context).primaryText,
@@ -134,7 +134,7 @@ class _PlannedActivityWidgetState extends State<PlannedActivityWidget> {
                   ),
                 if (widget.activityDoc?.type == ActivityTypes.Triple_Jump)
                   Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Icon(
                       FFIcons.ktripleJump,
                       color: FlutterFlowTheme.of(context).primaryText,
@@ -143,7 +143,7 @@ class _PlannedActivityWidgetState extends State<PlannedActivityWidget> {
                   ),
                 if (widget.activityDoc?.type == ActivityTypes.Long_Jump)
                   Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Icon(
                       FFIcons.klongJump,
                       color: FlutterFlowTheme.of(context).primaryText,
@@ -153,7 +153,7 @@ class _PlannedActivityWidgetState extends State<PlannedActivityWidget> {
               ],
             ),
           ),
-        ].divide(const SizedBox(width: 15.0)).around(const SizedBox(width: 15.0)),
+        ].divide(SizedBox(width: 15.0)).around(SizedBox(width: 15.0)),
       ),
     );
   }

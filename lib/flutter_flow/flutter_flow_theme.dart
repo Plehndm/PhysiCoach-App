@@ -148,11 +148,11 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color error = const Color(0xFFFF5963);
   late Color info = const Color(0xFFFFFFFF);
 
-  late Color federalBlue = const Color(0xFF03045E);
-  late Color honoluluBlue = const Color(0xFF0077B6);
-  late Color pacificCyan = const Color(0xFF00B4D8);
-  late Color nonPhotoBlue = const Color(0xFF90E0EF);
-  late Color lightCyan = const Color(0xFFCAF0F8);
+  late Color federalBlue = Color(0xFF03045E);
+  late Color honoluluBlue = Color(0xFF0077B6);
+  late Color pacificCyan = Color(0xFF00B4D8);
+  late Color nonPhotoBlue = Color(0xFF90E0EF);
+  late Color lightCyan = Color(0xFFCAF0F8);
 }
 
 abstract class Typography {
@@ -325,11 +325,11 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color error = const Color(0xFFFF5963);
   late Color info = const Color(0xFFFFFFFF);
 
-  late Color federalBlue = const Color(0xFF03045E);
-  late Color honoluluBlue = const Color(0xFF0077B6);
-  late Color pacificCyan = const Color(0xFF00B4D8);
-  late Color nonPhotoBlue = const Color(0xFF90E0EF);
-  late Color lightCyan = const Color(0xFFCAF0F8);
+  late Color federalBlue = Color(0xFF03045E);
+  late Color honoluluBlue = Color(0xFF0077B6);
+  late Color pacificCyan = Color(0xFF00B4D8);
+  late Color nonPhotoBlue = Color(0xFF90E0EF);
+  late Color lightCyan = Color(0xFFCAF0F8);
 }
 
 extension TextStyleHelper on TextStyle {

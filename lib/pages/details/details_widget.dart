@@ -72,12 +72,12 @@ class _DetailsWidgetState extends State<DetailsWidget> {
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: const AlignmentDirectional(0.0, 0.0),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
               child: Container(
                 width: double.infinity,
-                constraints: const BoxConstraints(
+                constraints: BoxConstraints(
                   maxWidth: 500.0,
                 ),
                 decoration: BoxDecoration(
@@ -89,7 +89,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: EdgeInsets.all(24.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -129,7 +129,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                           ],
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(0.0, -1.0),
+                          alignment: AlignmentDirectional(0.0, -1.0),
                           child: Text(
                             'Activity Details',
                             style: FlutterFlowTheme.of(context)
@@ -158,7 +158,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                           ),
                           options:
                               List<ActivityTypes>.from(ActivityTypes.values),
-                          optionLabels: const [
+                          optionLabels: [
                             'Tripple Jump',
                             'Running',
                             'Long Jump'
@@ -180,14 +180,14 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                             size: 24.0,
                           ),
                           fillColor: _model.editingMode
-                              ? const Color(0x5CB1AFAF)
+                              ? Color(0x5CB1AFAF)
                               : FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                           elevation: 0.0,
                           borderColor: Colors.transparent,
                           borderWidth: 1.0,
                           borderRadius: 24.0,
-                          margin: const EdgeInsetsDirectional.fromSTEB(
+                          margin: EdgeInsetsDirectional.fromSTEB(
                               12.0, 0.0, 12.0, 0.0),
                           hidesUnderline: true,
                           disabled: !_model.editingMode,
@@ -205,7 +205,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                                     fontWeight: FontWeight.bold,
                                   ),
                         ),
-                        SizedBox(
+                        Container(
                           width: 200.0,
                           child: TextFormField(
                             controller: _model.titleTextController,
@@ -229,14 +229,14 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                                     letterSpacing: 0.0,
                                   ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
+                                borderSide: BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
+                                borderSide: BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
@@ -258,7 +258,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                               ),
                               filled: true,
                               fillColor: _model.editingMode
-                                  ? const Color(0x5CB1AFAF)
+                                  ? Color(0x5CB1AFAF)
                                   : FlutterFlowTheme.of(context)
                                       .secondaryBackground,
                             ),
@@ -284,7 +284,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                                     fontWeight: FontWeight.bold,
                                   ),
                         ),
-                        SizedBox(
+                        Container(
                           width: 200.0,
                           child: TextFormField(
                             controller: _model.descriptionTextController,
@@ -308,14 +308,14 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                                     letterSpacing: 0.0,
                                   ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
+                                borderSide: BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
+                                borderSide: BorderSide(
                                   color: Color(0x00000000),
                                   width: 1.0,
                                 ),
@@ -337,7 +337,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                               ),
                               filled: true,
                               fillColor: _model.editingMode
-                                  ? const Color(0x5CB1AFAF)
+                                  ? Color(0x5CB1AFAF)
                                   : FlutterFlowTheme.of(context)
                                       .secondaryBackground,
                             ),
@@ -442,7 +442,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                                           .primaryText,
                                     ),
                                   ),
-                                  duration: const Duration(milliseconds: 4000),
+                                  duration: Duration(milliseconds: 4000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).secondary,
                                 ),
@@ -455,9 +455,9 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 70.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
@@ -478,7 +478,7 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                             borderRadius: BorderRadius.circular(24.0),
                           ),
                         ),
-                      ].divide(const SizedBox(height: 12.0)),
+                      ].divide(SizedBox(height: 12.0)),
                     ),
                   ),
                 ),
