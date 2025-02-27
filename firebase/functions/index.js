@@ -24,6 +24,25 @@ exports.onUserDeleted = functions.auth.user().onDelete(async (user) => {
           });
       }
     });
+  await firestore
+    .collection("activities")
+    .where("user", "==", userRef)
+    .get()
+    .then(async (querySnapshot) => {
+      for (var doc of querySnapshot.docs) {
+        await doc.ref
+          .collection("gyroscopeData")
+          .get()
+          .then(async (q) => {
+            for (var d of q.docs) {
+              console.log(
+                `Deleting document ${d.id} from collection gyroscopeData`,
+              );
+              await d.ref.delete();
+            }
+          });
+      }
+    });
   await firestore.collection("users").doc(user.uid).delete();
   await firestore
     .collection("activities")

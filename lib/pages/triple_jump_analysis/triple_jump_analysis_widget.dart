@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
@@ -16,6 +17,9 @@ class TripleJumpAnalysisWidget extends StatefulWidget {
   });
 
   final ActivitiesRecord? activityDoc;
+
+  static String routeName = 'tripleJumpAnalysis';
+  static String routePath = '/tripleJumpAnalysis';
 
   @override
   State<TripleJumpAnalysisWidget> createState() =>
@@ -236,7 +240,8 @@ class _TripleJumpAnalysisWidgetState extends State<TripleJumpAnalysisWidget> {
                                       ),
                                       onPressed: () async {
                                         context.pushNamed(
-                                          'advancedTripleJumpMetrics',
+                                          AdvancedTripleJumpMetricsWidget
+                                              .routeName,
                                           queryParameters: {
                                             'trippleJumpDataDoc':
                                                 serializeParam(

@@ -21,6 +21,9 @@ class DetailsWidget extends StatefulWidget {
 
   final ActivitiesRecord? activitiesDoc;
 
+  static String routeName = 'details';
+  static String routePath = '/details';
+
   @override
   State<DetailsWidget> createState() => _DetailsWidgetState();
 }

@@ -5,12 +5,16 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'profile_model.dart';
 export 'profile_model.dart';
 
 class ProfileWidget extends StatefulWidget {
   const ProfileWidget({super.key});
+
+  static String routeName = 'profile';
+  static String routePath = '/profile';
 
   @override
   State<ProfileWidget> createState() => _ProfileWidgetState();
@@ -198,7 +202,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                     FFButtonWidget(
                       onPressed: () async {
                         context.pushNamed(
-                          'home',
+                          HomeWidget.routeName,
                           extra: <String, dynamic>{
                             kTransitionInfoKey: TransitionInfo(
                               hasTransition: true,
@@ -1500,7 +1504,8 @@ class _ProfileWidgetState extends State<ProfileWidget>
                         await authManager.signOut();
                         GoRouter.of(context).clearRedirectLocation();
 
-                        context.goNamedAuth('login', context.mounted);
+                        context.goNamedAuth(
+                            LoginWidget.routeName, context.mounted);
                       },
                       text: 'Log Out',
                       options: FFButtonOptions(
@@ -1530,7 +1535,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                     FFButtonWidget(
                       onPressed: () async {
                         context.pushNamed(
-                          'profileUpdate',
+                          ProfileUpdateWidget.routeName,
                           extra: <String, dynamic>{
                             kTransitionInfoKey: TransitionInfo(
                               hasTransition: true,
@@ -1569,7 +1574,8 @@ class _ProfileWidgetState extends State<ProfileWidget>
                       onPressed: () async {
                         await authManager.deleteUser(context);
 
-                        context.goNamedAuth('home', context.mounted);
+                        context.goNamedAuth(
+                            HomeWidget.routeName, context.mounted);
                       },
                       text: 'Delete',
                       options: FFButtonOptions(

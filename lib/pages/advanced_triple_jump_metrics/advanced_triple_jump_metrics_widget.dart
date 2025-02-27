@@ -14,6 +14,9 @@ class AdvancedTripleJumpMetricsWidget extends StatefulWidget {
 
   final TrippleJumpDataRecord? trippleJumpDataDoc;
 
+  static String routeName = 'advancedTripleJumpMetrics';
+  static String routePath = '/advancedTripleJumpMetrics';
+
   @override
   State<AdvancedTripleJumpMetricsWidget> createState() =>
       _AdvancedTripleJumpMetricsWidgetState();

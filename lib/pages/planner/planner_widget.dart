@@ -16,6 +16,9 @@ export 'planner_model.dart';
 class PlannerWidget extends StatefulWidget {
   const PlannerWidget({super.key});
 
+  static String routeName = 'planner';
+  static String routePath = '/planner';
+
   @override
   State<PlannerWidget> createState() => _PlannerWidgetState();
 }

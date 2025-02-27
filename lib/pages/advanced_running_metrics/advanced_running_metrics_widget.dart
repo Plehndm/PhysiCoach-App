@@ -16,6 +16,9 @@ class AdvancedRunningMetricsWidget extends StatefulWidget {
 
   final RunningDataRecord? runningDataDoc;
 
+  static String routeName = 'advancedRunningMetrics';
+  static String routePath = '/advancedRunningMetrics';
+
   @override
   State<AdvancedRunningMetricsWidget> createState() =>
       _AdvancedRunningMetricsWidgetState();

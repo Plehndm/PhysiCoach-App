@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
@@ -16,6 +17,9 @@ class LongJumpAnalysisWidget extends StatefulWidget {
   });
 
   final ActivitiesRecord? activityDoc;
+
+  static String routeName = 'longJumpAnalysis';
+  static String routePath = '/longJumpAnalysis';
 
   @override
   State<LongJumpAnalysisWidget> createState() => _LongJumpAnalysisWidgetState();
@@ -235,7 +239,8 @@ class _LongJumpAnalysisWidgetState extends State<LongJumpAnalysisWidget> {
                                       ),
                                       onPressed: () async {
                                         context.pushNamed(
-                                          'advancedLongJumpMetrics',
+                                          AdvancedLongJumpMetricsWidget
+                                              .routeName,
                                           queryParameters: {
                                             'longJumpDataDoc': serializeParam(
                                               longJumpAnalysisLongJumpDataRecord,

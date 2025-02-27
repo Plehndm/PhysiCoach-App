@@ -3,6 +3,7 @@ import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/instant_timer.dart';
+import '/index.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'perform_activity_widget.dart' show PerformActivityWidget;
 import 'package:flutter/material.dart';
@@ -14,9 +15,11 @@ class PerformActivityModel extends FlutterFlowModel<PerformActivityWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  InstantTimer? accelDataRecording;
+  InstantTimer? dataCollection;
   // Stores action output result for [Custom Action - getAccelerometerData] action in performActivity widget.
   AccelerationDataStruct? accellData;
+  // Stores action output result for [Custom Action - getGyroscopeData] action in performActivity widget.
+  GyroscopeDataStruct? gyroData;
   // State field(s) for Timer widget.
   final timerInitialTimeMs = 0;
   int timerMilliseconds = 0;
@@ -29,7 +32,7 @@ class PerformActivityModel extends FlutterFlowModel<PerformActivityWidget> {
 
   @override
   void dispose() {
-    accelDataRecording?.cancel();
+    dataCollection?.cancel();
     timerController.dispose();
   }
 }

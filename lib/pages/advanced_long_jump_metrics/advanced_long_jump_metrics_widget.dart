@@ -14,6 +14,9 @@ class AdvancedLongJumpMetricsWidget extends StatefulWidget {
 
   final LongJumpDataRecord? longJumpDataDoc;
 
+  static String routeName = 'advancedLongJumpMetrics';
+  static String routePath = '/advancedLongJumpMetrics';
+
   @override
   State<AdvancedLongJumpMetricsWidget> createState() =>
       _AdvancedLongJumpMetricsWidgetState();

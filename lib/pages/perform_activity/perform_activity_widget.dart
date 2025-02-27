@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/instant_timer.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/index.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -20,6 +21,9 @@ class PerformActivityWidget extends StatefulWidget {
   });
 
   final ActivitiesRecord? activityDoc;
+
+  static String routeName = 'performActivity';
+  static String routePath = '/performActivity';
 
   @override
   State<PerformActivityWidget> createState() => _PerformActivityWidgetState();
@@ -38,15 +42,34 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 1000));
-      _model.accelDataRecording = InstantTimer.periodic(
+      _model.dataCollection = InstantTimer.periodic(
         duration: Duration(milliseconds: 1000),
         callback: (timer) async {
           if (_model.isRecordingData == true) {
-            _model.accellData = await actions.getAccelerometerData(
-              getCurrentTimestamp,
-              AccelerationDataStruct(),
-            );
+            await Future.wait([
+              Future(() async {
+                _model.accellData = await actions.getAccelerometerData(
+                  AccelerationDataStruct(
+                    xAccel: 0.0,
+                    yAccel: 0.0,
+                    zAccel: 0.0,
+                    timestamp: getCurrentTimestamp,
+                  ),
+                );
+              }),
+              Future(() async {
+                _model.gyroData = await actions.getGyroscopeData(
+                  GyroscopeDataStruct(
+                    xGyro: 0.0,
+                    yGyro: 0.0,
+                    zGyro: 0.0,
+                    timestamp: getCurrentTimestamp,
+                  ),
+                );
+              }),
+            ]);
             FFAppState().addToAccelerationAS(_model.accellData!);
+            FFAppState().addToGyroscopeAS(_model.gyroData!);
             safeSetState(() {});
           }
         },
@@ -61,8 +84,9 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
   void dispose() {
     // On page dispose action.
     () async {
-      _model.accelDataRecording?.cancel();
+      _model.dataCollection?.cancel();
       FFAppState().accelerationAS = [];
+      FFAppState().gyroscopeAS = [];
       safeSetState(() {});
     }();
 
@@ -203,288 +227,349 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
               ),
               child: Padding(
                 padding: EdgeInsets.all(24.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      'Exiting this page will stop data collection!',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Inter',
-                            color: FlutterFlowTheme.of(context).error,
-                            fontSize: 16.0,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.underline,
+                child: StreamBuilder<List<GyroscopeDataRecord>>(
+                  stream: queryGyroscopeDataRecord(
+                    parent: widget.activityDoc?.reference,
+                    singleRecord: true,
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
+                            ),
                           ),
-                    ),
-                    Column(
+                        ),
+                      );
+                    }
+                    List<GyroscopeDataRecord> columnGyroscopeDataRecordList =
+                        snapshot.data!;
+                    // Return an empty Container when the item does not exist.
+                    if (snapshot.data!.isEmpty) {
+                      return Container();
+                    }
+                    final columnGyroscopeDataRecord =
+                        columnGyroscopeDataRecordList.isNotEmpty
+                            ? columnGyroscopeDataRecordList.first
+                            : null;
+
+                    return Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Text(
-                          valueOrDefault<String>(
-                            widget.activityDoc?.title,
-                            'title',
-                          ).maybeHandleOverflow(
-                            maxChars: 50,
-                            replacement: '…',
-                          ),
-                          textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.of(context)
-                              .headlineMedium
-                              .override(
-                                fontFamily: 'Inter',
-                                letterSpacing: 0.0,
+                          'Closing this page will stop data collection!',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    color: FlutterFlowTheme.of(context).error,
+                                    fontSize: 16.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Text(
+                              valueOrDefault<String>(
+                                widget.activityDoc?.title,
+                                'title',
+                              ).maybeHandleOverflow(
+                                maxChars: 50,
+                                replacement: '…',
                               ),
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .headlineMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                            Text(
+                              valueOrDefault<String>(
+                                widget.activityDoc?.description,
+                                'description',
+                              ).maybeHandleOverflow(
+                                maxChars: 80,
+                                replacement: '…',
+                              ),
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .labelLarge
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          width: 300.0,
+                          height: 300.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              width: 4.0,
+                            ),
+                          ),
+                          child: Align(
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: FlutterFlowTimer(
+                              initialTime: _model.timerInitialTimeMs,
+                              getDisplayTime: (value) =>
+                                  StopWatchTimer.getDisplayTime(value),
+                              controller: _model.timerController,
+                              updateStateInterval: Duration(milliseconds: 1000),
+                              onChanged: (value, displayTime, shouldUpdate) {
+                                _model.timerMilliseconds = value;
+                                _model.timerValue = displayTime;
+                                if (shouldUpdate) safeSetState(() {});
+                              },
+                              textAlign: TextAlign.start,
+                              style: FlutterFlowTheme.of(context)
+                                  .displaySmall
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                          ),
+                        ),
+                        Stack(
+                          children: [
+                            if (_model.isRecordingData)
+                              Align(
+                                alignment: AlignmentDirectional(1.0, 0.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    _model.timerController.onStopTimer();
+                                    _model.isRecordingData = false;
+                                    safeSetState(() {});
+                                  },
+                                  text: 'Stop',
+                                  options: FFButtonOptions(
+                                    width: 100.0,
+                                    height: 100.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 16.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 20.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                    elevation: 0.0,
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(1000.0),
+                                  ),
+                                ),
+                              ),
+                            if (!_model.isRecordingData)
+                              Align(
+                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    _model.timerController.onResetTimer();
+                                  },
+                                  text: 'Reset',
+                                  options: FFButtonOptions(
+                                    width: 100.0,
+                                    height: 100.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 16.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 20.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                    elevation: 0.0,
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(1000.0),
+                                  ),
+                                ),
+                              ),
+                            if (!_model.isRecordingData)
+                              Align(
+                                alignment: AlignmentDirectional(1.0, 0.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    _model.timerController.onStartTimer();
+                                    _model.isRecordingData = true;
+                                    safeSetState(() {});
+                                  },
+                                  text: 'Start',
+                                  options: FFButtonOptions(
+                                    width: 100.0,
+                                    height: 100.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 16.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 20.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                    elevation: 0.0,
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(1000.0),
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 20.0, 0.0, 0.0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              _model.dataCollection?.cancel();
+                              await Future.wait([
+                                Future(() async {
+                                  await widget.activityDoc!.reference
+                                      .update(createActivitiesRecordData(
+                                    completed: true,
+                                  ));
+                                }),
+                                Future(() async {
+                                  await performActivityAccelerometerDataRecord!
+                                      .reference
+                                      .update({
+                                    ...mapToFirestore(
+                                      {
+                                        'accelerations':
+                                            getAccelerationDataListFirestoreData(
+                                          FFAppState().accelerationAS,
+                                        ),
+                                      },
+                                    ),
+                                  });
+                                }),
+                                Future(() async {
+                                  await columnGyroscopeDataRecord!.reference
+                                      .update({
+                                    ...mapToFirestore(
+                                      {
+                                        'data':
+                                            getGyroscopeDataListFirestoreData(
+                                          FFAppState().gyroscopeAS,
+                                        ),
+                                      },
+                                    ),
+                                  });
+                                }),
+                              ]);
+                              FFAppState().accelerationAS = [];
+                              safeSetState(() {});
+
+                              context.goNamed(
+                                HomeWidget.routeName,
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 0),
+                                  ),
+                                },
+                              );
+                            },
+                            text: 'Complete Activity',
+                            icon: Icon(
+                              Icons.check_outlined,
+                              size: 24.0,
+                            ),
+                            options: FFButtonOptions(
+                              height: 40.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 20.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                              elevation: 0.0,
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                          ),
                         ),
                         Text(
-                          valueOrDefault<String>(
-                            widget.activityDoc?.description,
-                            'description',
-                          ).maybeHandleOverflow(
-                            maxChars: 80,
-                            replacement: '…',
-                          ),
-                          textAlign: TextAlign.center,
+                          'Accel: ${FFAppState().accelerationAS.length.toString()}',
                           style:
-                              FlutterFlowTheme.of(context).labelLarge.override(
+                              FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Inter',
                                     letterSpacing: 0.0,
                                   ),
                         ),
-                      ],
-                    ),
-                    Container(
-                      width: 300.0,
-                      height: 300.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          width: 4.0,
-                        ),
-                      ),
-                      child: Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
-                        child: FlutterFlowTimer(
-                          initialTime: _model.timerInitialTimeMs,
-                          getDisplayTime: (value) =>
-                              StopWatchTimer.getDisplayTime(value),
-                          controller: _model.timerController,
-                          updateStateInterval: Duration(milliseconds: 1000),
-                          onChanged: (value, displayTime, shouldUpdate) {
-                            _model.timerMilliseconds = value;
-                            _model.timerValue = displayTime;
-                            if (shouldUpdate) safeSetState(() {});
-                          },
-                          textAlign: TextAlign.start,
-                          style: FlutterFlowTheme.of(context)
-                              .displaySmall
-                              .override(
-                                fontFamily: 'Inter',
-                                letterSpacing: 0.0,
-                              ),
-                        ),
-                      ),
-                    ),
-                    Stack(
-                      children: [
-                        if (_model.isRecordingData)
-                          Align(
-                            alignment: AlignmentDirectional(1.0, 0.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                _model.timerController.onStopTimer();
-                                _model.isRecordingData = false;
-                                safeSetState(() {});
-                              },
-                              text: 'Stop',
-                              options: FFButtonOptions(
-                                width: 100.0,
-                                height: 100.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      fontSize: 20.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                elevation: 0.0,
-                                borderSide: BorderSide(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(1000.0),
-                              ),
-                            ),
-                          ),
-                        if (!_model.isRecordingData)
-                          Align(
-                            alignment: AlignmentDirectional(-1.0, 0.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                _model.timerController.onResetTimer();
-                              },
-                              text: 'Reset',
-                              options: FFButtonOptions(
-                                width: 100.0,
-                                height: 100.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      fontSize: 20.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                elevation: 0.0,
-                                borderSide: BorderSide(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(1000.0),
-                              ),
-                            ),
-                          ),
-                        if (!_model.isRecordingData)
-                          Align(
-                            alignment: AlignmentDirectional(1.0, 0.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                _model.timerController.onStartTimer();
-                                _model.isRecordingData = true;
-                                safeSetState(() {});
-                              },
-                              text: 'Start',
-                              options: FFButtonOptions(
-                                width: 100.0,
-                                height: 100.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      fontSize: 20.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                elevation: 0.0,
-                                borderSide: BorderSide(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(1000.0),
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                    Text(
-                      valueOrDefault<String>(
-                        FFAppState().accelerationAS.length.toString(),
-                        '0',
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Inter',
-                            letterSpacing: 0.0,
-                          ),
-                    ),
-                    FFButtonWidget(
-                      onPressed: () async {
-                        _model.accelDataRecording?.cancel();
-                        await Future.wait([
-                          Future(() async {
-                            await widget.activityDoc!.reference
-                                .update(createActivitiesRecordData(
-                              completed: true,
-                            ));
-                          }),
-                          Future(() async {
-                            await performActivityAccelerometerDataRecord!
-                                .reference
-                                .update({
-                              ...mapToFirestore(
-                                {
-                                  'accelerations':
-                                      getAccelerationDataListFirestoreData(
-                                    FFAppState().accelerationAS,
+                        Text(
+                          'Gyro: ${FFAppState().gyroscopeAS.length.toString()}',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
                                   ),
-                                },
-                              ),
-                            });
-                          }),
-                        ]);
-                        FFAppState().accelerationAS = [];
-                        safeSetState(() {});
-
-                        context.goNamed(
-                          'home',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
-                      },
-                      text: 'Complete Activity',
-                      icon: Icon(
-                        Icons.check_outlined,
-                        size: 24.0,
-                      ),
-                      options: FFButtonOptions(
-                        height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        textStyle: FlutterFlowTheme.of(context)
-                            .titleSmall
-                            .override(
-                              fontFamily: 'Inter',
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              fontSize: 20.0,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w500,
-                            ),
-                        elevation: 0.0,
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          width: 1.0,
                         ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                    ),
-                  ].divide(SizedBox(height: 15.0)),
+                      ].divide(SizedBox(height: 15.0)),
+                    );
+                  },
                 ),
               ),
             ),

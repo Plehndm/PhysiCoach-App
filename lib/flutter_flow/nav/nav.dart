@@ -6,9 +6,10 @@ import '/backend/backend.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
-import '/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+
+import '/index.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -85,23 +86,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? HomeWidget() : LoginWidget(),
         ),
         FFRoute(
-          name: 'login',
-          path: '/login',
+          name: LoginWidget.routeName,
+          path: LoginWidget.routePath,
           builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
-          name: 'home',
-          path: '/home',
+          name: HomeWidget.routeName,
+          path: HomeWidget.routePath,
           builder: (context, params) => HomeWidget(),
         ),
         FFRoute(
-          name: 'onboarding',
-          path: '/onboarding',
+          name: OnboardingWidget.routeName,
+          path: OnboardingWidget.routePath,
           builder: (context, params) => OnboardingWidget(),
         ),
         FFRoute(
-          name: 'details',
-          path: '/details',
+          name: DetailsWidget.routeName,
+          path: DetailsWidget.routePath,
           asyncParams: {
             'activitiesDoc':
                 getDoc(['activities'], ActivitiesRecord.fromSnapshot),
@@ -114,8 +115,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'runningAnalysis',
-          path: '/runningAnalysis',
+          name: RunningAnalysisWidget.routeName,
+          path: RunningAnalysisWidget.routePath,
           asyncParams: {
             'activityDoc':
                 getDoc(['activities'], ActivitiesRecord.fromSnapshot),
@@ -128,13 +129,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'profile',
-          path: '/profile',
+          name: ProfileWidget.routeName,
+          path: ProfileWidget.routePath,
           builder: (context, params) => ProfileWidget(),
         ),
         FFRoute(
-          name: 'advancedRunningMetrics',
-          path: '/advancedRunningMetrics',
+          name: AdvancedRunningMetricsWidget.routeName,
+          path: AdvancedRunningMetricsWidget.routePath,
           asyncParams: {
             'runningDataDoc':
                 getDoc(['runningData'], RunningDataRecord.fromSnapshot),
@@ -147,8 +148,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'tripleJumpAnalysis',
-          path: '/tripleJumpAnalysis',
+          name: TripleJumpAnalysisWidget.routeName,
+          path: TripleJumpAnalysisWidget.routePath,
           asyncParams: {
             'activityDoc':
                 getDoc(['activities'], ActivitiesRecord.fromSnapshot),
@@ -161,8 +162,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'longJumpAnalysis',
-          path: '/longJumpAnalysis',
+          name: LongJumpAnalysisWidget.routeName,
+          path: LongJumpAnalysisWidget.routePath,
           asyncParams: {
             'activityDoc':
                 getDoc(['activities'], ActivitiesRecord.fromSnapshot),
@@ -175,8 +176,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'advancedTripleJumpMetrics',
-          path: '/advancedTripleJumpMetrics',
+          name: AdvancedTripleJumpMetricsWidget.routeName,
+          path: AdvancedTripleJumpMetricsWidget.routePath,
           asyncParams: {
             'trippleJumpDataDoc':
                 getDoc(['trippleJumpData'], TrippleJumpDataRecord.fromSnapshot),
@@ -189,8 +190,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'advancedLongJumpMetrics',
-          path: '/advancedLongJumpMetrics',
+          name: AdvancedLongJumpMetricsWidget.routeName,
+          path: AdvancedLongJumpMetricsWidget.routePath,
           asyncParams: {
             'longJumpDataDoc':
                 getDoc(['longJumpData'], LongJumpDataRecord.fromSnapshot),
@@ -203,18 +204,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'planner',
-          path: '/planner',
+          name: PlannerWidget.routeName,
+          path: PlannerWidget.routePath,
           builder: (context, params) => PlannerWidget(),
         ),
         FFRoute(
-          name: 'profileUpdate',
-          path: '/profileUpdate',
+          name: ProfileUpdateWidget.routeName,
+          path: ProfileUpdateWidget.routePath,
           builder: (context, params) => ProfileUpdateWidget(),
         ),
         FFRoute(
-          name: 'performActivity',
-          path: '/performActivity',
+          name: PerformActivityWidget.routeName,
+          path: PerformActivityWidget.routePath,
           asyncParams: {
             'activityDoc':
                 getDoc(['activities'], ActivitiesRecord.fromSnapshot),

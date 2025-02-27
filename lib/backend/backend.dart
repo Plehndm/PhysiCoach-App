@@ -11,6 +11,7 @@ import 'schema/running_data_record.dart';
 import 'schema/tripple_jump_data_record.dart';
 import 'schema/long_jump_data_record.dart';
 import 'schema/accelerometer_data_record.dart';
+import 'schema/gyroscope_data_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -25,6 +26,7 @@ export 'schema/running_data_record.dart';
 export 'schema/tripple_jump_data_record.dart';
 export 'schema/long_jump_data_record.dart';
 export 'schema/accelerometer_data_record.dart';
+export 'schema/gyroscope_data_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -246,6 +248,46 @@ Future<List<AccelerometerDataRecord>> queryAccelerometerDataRecordOnce({
     queryCollectionOnce(
       AccelerometerDataRecord.collection(parent),
       AccelerometerDataRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query GyroscopeDataRecords (as a Stream and as a Future).
+Future<int> queryGyroscopeDataRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      GyroscopeDataRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<GyroscopeDataRecord>> queryGyroscopeDataRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      GyroscopeDataRecord.collection(parent),
+      GyroscopeDataRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<GyroscopeDataRecord>> queryGyroscopeDataRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      GyroscopeDataRecord.collection(parent),
+      GyroscopeDataRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

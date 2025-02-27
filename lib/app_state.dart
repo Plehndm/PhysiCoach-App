@@ -191,6 +191,35 @@ class FFAppState extends ChangeNotifier {
       int index, VerticalRatioDataStruct value) {
     verticalRatioAS.insert(index, value);
   }
+
+  List<GyroscopeDataStruct> _gyroscopeAS = [];
+  List<GyroscopeDataStruct> get gyroscopeAS => _gyroscopeAS;
+  set gyroscopeAS(List<GyroscopeDataStruct> value) {
+    _gyroscopeAS = value;
+  }
+
+  void addToGyroscopeAS(GyroscopeDataStruct value) {
+    gyroscopeAS.add(value);
+  }
+
+  void removeFromGyroscopeAS(GyroscopeDataStruct value) {
+    gyroscopeAS.remove(value);
+  }
+
+  void removeAtIndexFromGyroscopeAS(int index) {
+    gyroscopeAS.removeAt(index);
+  }
+
+  void updateGyroscopeASAtIndex(
+    int index,
+    GyroscopeDataStruct Function(GyroscopeDataStruct) updateFn,
+  ) {
+    gyroscopeAS[index] = updateFn(_gyroscopeAS[index]);
+  }
+
+  void insertAtIndexInGyroscopeAS(int index, GyroscopeDataStruct value) {
+    gyroscopeAS.insert(index, value);
+  }
 }
 
 void _safeInit(Function() initializeField) {

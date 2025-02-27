@@ -31,6 +31,10 @@ class AddActivityModel extends FlutterFlowModel<AddActivityWidget> {
   DateTime? datePicked;
   // Stores action output result for [Backend Call - Create Document] action in AddActivity-Button widget.
   ActivitiesRecord? activityDoc;
+  // Stores action output result for [Backend Call - Create Document] action in AddActivity-Button widget.
+  AccelerometerDataRecord? accelDoc;
+  // Stores action output result for [Backend Call - Create Document] action in AddActivity-Button widget.
+  GyroscopeDataRecord? gyroDoc;
 
   @override
   void initState(BuildContext context) {

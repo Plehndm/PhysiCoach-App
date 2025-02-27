@@ -11,17 +11,15 @@ class AccelerationDataStruct extends FFFirebaseStruct {
     double? xAccel,
     double? yAccel,
     double? zAccel,
-    int? durrationMilliSec,
-    DateTime? timeOccurred,
+    DateTime? timestamp,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _xAccel = xAccel,
         _yAccel = yAccel,
         _zAccel = zAccel,
-        _durrationMilliSec = durrationMilliSec,
-        _timeOccurred = timeOccurred,
+        _timestamp = timestamp,
         super(firestoreUtilData);
 
-  // "x-accel" field.
+  // "xAccel" field.
   double? _xAccel;
   double get xAccel => _xAccel ?? 0.0;
   set xAccel(double? val) => _xAccel = val;
@@ -30,7 +28,7 @@ class AccelerationDataStruct extends FFFirebaseStruct {
 
   bool hasXAccel() => _xAccel != null;
 
-  // "y-accel" field.
+  // "yAccel" field.
   double? _yAccel;
   double get yAccel => _yAccel ?? 0.0;
   set yAccel(double? val) => _yAccel = val;
@@ -39,7 +37,7 @@ class AccelerationDataStruct extends FFFirebaseStruct {
 
   bool hasYAccel() => _yAccel != null;
 
-  // "z-accel" field.
+  // "zAccel" field.
   double? _zAccel;
   double get zAccel => _zAccel ?? 0.0;
   set zAccel(double? val) => _zAccel = val;
@@ -48,31 +46,20 @@ class AccelerationDataStruct extends FFFirebaseStruct {
 
   bool hasZAccel() => _zAccel != null;
 
-  // "durrationMilliSec" field.
-  int? _durrationMilliSec;
-  int get durrationMilliSec => _durrationMilliSec ?? 0;
-  set durrationMilliSec(int? val) => _durrationMilliSec = val;
+  // "timestamp" field.
+  DateTime? _timestamp;
+  DateTime get timestamp =>
+      _timestamp ?? DateTime.fromMicrosecondsSinceEpoch(1738306800000000);
+  set timestamp(DateTime? val) => _timestamp = val;
 
-  void incrementDurrationMilliSec(int amount) =>
-      durrationMilliSec = durrationMilliSec + amount;
-
-  bool hasDurrationMilliSec() => _durrationMilliSec != null;
-
-  // "timeOccurred" field.
-  DateTime? _timeOccurred;
-  DateTime get timeOccurred =>
-      _timeOccurred ?? DateTime.fromMicrosecondsSinceEpoch(1738306800000000);
-  set timeOccurred(DateTime? val) => _timeOccurred = val;
-
-  bool hasTimeOccurred() => _timeOccurred != null;
+  bool hasTimestamp() => _timestamp != null;
 
   static AccelerationDataStruct fromMap(Map<String, dynamic> data) =>
       AccelerationDataStruct(
-        xAccel: castToType<double>(data['x-accel']),
-        yAccel: castToType<double>(data['y-accel']),
-        zAccel: castToType<double>(data['z-accel']),
-        durrationMilliSec: castToType<int>(data['durrationMilliSec']),
-        timeOccurred: data['timeOccurred'] as DateTime?,
+        xAccel: castToType<double>(data['xAccel']),
+        yAccel: castToType<double>(data['yAccel']),
+        zAccel: castToType<double>(data['zAccel']),
+        timestamp: data['timestamp'] as DateTime?,
       );
 
   static AccelerationDataStruct? maybeFromMap(dynamic data) => data is Map
@@ -80,33 +67,28 @@ class AccelerationDataStruct extends FFFirebaseStruct {
       : null;
 
   Map<String, dynamic> toMap() => {
-        'x-accel': _xAccel,
-        'y-accel': _yAccel,
-        'z-accel': _zAccel,
-        'durrationMilliSec': _durrationMilliSec,
-        'timeOccurred': _timeOccurred,
+        'xAccel': _xAccel,
+        'yAccel': _yAccel,
+        'zAccel': _zAccel,
+        'timestamp': _timestamp,
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'x-accel': serializeParam(
+        'xAccel': serializeParam(
           _xAccel,
           ParamType.double,
         ),
-        'y-accel': serializeParam(
+        'yAccel': serializeParam(
           _yAccel,
           ParamType.double,
         ),
-        'z-accel': serializeParam(
+        'zAccel': serializeParam(
           _zAccel,
           ParamType.double,
         ),
-        'durrationMilliSec': serializeParam(
-          _durrationMilliSec,
-          ParamType.int,
-        ),
-        'timeOccurred': serializeParam(
-          _timeOccurred,
+        'timestamp': serializeParam(
+          _timestamp,
           ParamType.DateTime,
         ),
       }.withoutNulls;
@@ -115,27 +97,22 @@ class AccelerationDataStruct extends FFFirebaseStruct {
           Map<String, dynamic> data) =>
       AccelerationDataStruct(
         xAccel: deserializeParam(
-          data['x-accel'],
+          data['xAccel'],
           ParamType.double,
           false,
         ),
         yAccel: deserializeParam(
-          data['y-accel'],
+          data['yAccel'],
           ParamType.double,
           false,
         ),
         zAccel: deserializeParam(
-          data['z-accel'],
+          data['zAccel'],
           ParamType.double,
           false,
         ),
-        durrationMilliSec: deserializeParam(
-          data['durrationMilliSec'],
-          ParamType.int,
-          false,
-        ),
-        timeOccurred: deserializeParam(
-          data['timeOccurred'],
+        timestamp: deserializeParam(
+          data['timestamp'],
           ParamType.DateTime,
           false,
         ),
@@ -150,21 +127,19 @@ class AccelerationDataStruct extends FFFirebaseStruct {
         xAccel == other.xAccel &&
         yAccel == other.yAccel &&
         zAccel == other.zAccel &&
-        durrationMilliSec == other.durrationMilliSec &&
-        timeOccurred == other.timeOccurred;
+        timestamp == other.timestamp;
   }
 
   @override
-  int get hashCode => const ListEquality()
-      .hash([xAccel, yAccel, zAccel, durrationMilliSec, timeOccurred]);
+  int get hashCode =>
+      const ListEquality().hash([xAccel, yAccel, zAccel, timestamp]);
 }
 
 AccelerationDataStruct createAccelerationDataStruct({
   double? xAccel,
   double? yAccel,
   double? zAccel,
-  int? durrationMilliSec,
-  DateTime? timeOccurred,
+  DateTime? timestamp,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -174,8 +149,7 @@ AccelerationDataStruct createAccelerationDataStruct({
       xAccel: xAccel,
       yAccel: yAccel,
       zAccel: zAccel,
-      durrationMilliSec: durrationMilliSec,
-      timeOccurred: timeOccurred,
+      timestamp: timestamp,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

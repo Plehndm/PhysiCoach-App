@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import '/index.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'profile_update_model.dart';
@@ -13,6 +14,9 @@ export 'profile_update_model.dart';
 
 class ProfileUpdateWidget extends StatefulWidget {
   const ProfileUpdateWidget({super.key});
+
+  static String routeName = 'profileUpdate';
+  static String routePath = '/profileUpdate';
 
   @override
   State<ProfileUpdateWidget> createState() => _ProfileUpdateWidgetState();
@@ -60,6 +64,77 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: Colors.white,
+              size: 30.0,
+            ),
+            onPressed: () async {
+              context.pop();
+            },
+          ),
+          title: Text(
+            'Update Profile',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Inter',
+                  color: Colors.white,
+                  fontSize: 22.0,
+                  letterSpacing: 0.0,
+                ),
+          ),
+          actions: [
+            Stack(
+              children: [
+                if (Theme.of(context).brightness == Brightness.light)
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                    child: FlutterFlowIconButton(
+                      borderRadius: 8.0,
+                      buttonSize: 50.0,
+                      fillColor: FlutterFlowTheme.of(context).primary,
+                      icon: Icon(
+                        Icons.light_mode,
+                        color: FlutterFlowTheme.of(context).info,
+                        size: 40.0,
+                      ),
+                      onPressed: () async {
+                        setDarkModeSetting(context, ThemeMode.dark);
+                      },
+                    ),
+                  ),
+                if (Theme.of(context).brightness == Brightness.dark)
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                    child: FlutterFlowIconButton(
+                      borderRadius: 8.0,
+                      buttonSize: 50.0,
+                      fillColor: FlutterFlowTheme.of(context).primary,
+                      icon: Icon(
+                        Icons.dark_mode_sharp,
+                        color: FlutterFlowTheme.of(context).info,
+                        size: 40.0,
+                      ),
+                      onPressed: () async {
+                        setDarkModeSetting(context, ThemeMode.light);
+                      },
+                    ),
+                  ),
+              ],
+            ),
+          ],
+          centerTitle: false,
+          elevation: 2.0,
+        ),
         body: Container(
           width: double.infinity,
           decoration: BoxDecoration(
@@ -85,19 +160,6 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Align(
-                        alignment: AlignmentDirectional(-1.0, 0.0),
-                        child: Text(
-                          'Update Profile',
-                          style: FlutterFlowTheme.of(context)
-                              .headlineSmall
-                              .override(
-                                fontFamily: 'Inter',
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                        ),
-                      ),
                       InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -546,7 +608,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                         text: 'Update Birthday',
                         icon: Icon(
                           Icons.calendar_today,
-                          size: 15.0,
+                          size: 24.0,
                         ),
                         options: FFButtonOptions(
                           width: double.infinity,
@@ -587,7 +649,7 @@ class _ProfileUpdateWidgetState extends State<ProfileUpdateWidget> {
                     ));
 
                     context.goNamed(
-                      'profile',
+                      ProfileWidget.routeName,
                       extra: <String, dynamic>{
                         kTransitionInfoKey: TransitionInfo(
                           hasTransition: true,

@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
@@ -16,6 +17,9 @@ class RunningAnalysisWidget extends StatefulWidget {
   });
 
   final ActivitiesRecord? activityDoc;
+
+  static String routeName = 'runningAnalysis';
+  static String routePath = '/runningAnalysis';
 
   @override
   State<RunningAnalysisWidget> createState() => _RunningAnalysisWidgetState();
@@ -235,7 +239,8 @@ class _RunningAnalysisWidgetState extends State<RunningAnalysisWidget> {
                                       ),
                                       onPressed: () async {
                                         context.pushNamed(
-                                          'advancedRunningMetrics',
+                                          AdvancedRunningMetricsWidget
+                                              .routeName,
                                           queryParameters: {
                                             'runningDataDoc': serializeParam(
                                               runningAnalysisRunningDataRecord,

@@ -12,21 +12,21 @@ import 'package:flutter/material.dart';
 
 import 'package:sensors_plus/sensors_plus.dart';
 
-Future<AccelerationDataStruct?> getAccelerometerData(
-    AccelerationDataStruct? accelerationData) async {
-  // Subscribe to user accelerometer events with the desired sampling rate
+Future<GyroscopeDataStruct?> getGyroscopeData(
+    GyroscopeDataStruct? gyroscopeData) async {
+  // Subscribe to gyroscope events with the desired sampling rate
   final _streamSubscriptions = <StreamSubscription<dynamic>>[];
   Duration sensorInterval = SensorInterval.normalInterval;
 
-  // Listen to the stream for UserAccelerometer events
+  // Listen to the stream for gyroscope events
   _streamSubscriptions
-      .add(userAccelerometerEventStream(samplingPeriod: sensorInterval).listen(
-    (UserAccelerometerEvent event) {
-      // Store data from userAccelerometer stream
-      accelerationData?.xAccel = event.x;
-      accelerationData?.yAccel = event.y;
-      accelerationData?.zAccel = event.z;
-      accelerationData?.timestamp = event.timestamp;
+      .add(gyroscopeEventStream(samplingPeriod: sensorInterval).listen(
+    (GyroscopeEvent event) {
+      // Store data from gyroscope stream
+      gyroscopeData?.xGyro = event.x;
+      gyroscopeData?.yGyro = event.y;
+      gyroscopeData?.zGyro = event.z;
+      gyroscopeData?.timestamp = event.timestamp;
     },
     onError: (error) {
       // Logic to handle error
@@ -37,5 +37,5 @@ Future<AccelerationDataStruct?> getAccelerometerData(
     cancelOnError: true,
   ));
 
-  return accelerationData;
+  return gyroscopeData;
 }

@@ -9,12 +9,16 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'home_model.dart';
 export 'home_model.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({super.key});
+
+  static String routeName = 'home';
+  static String routePath = '/home';
 
   @override
   State<HomeWidget> createState() => _HomeWidgetState();
@@ -1354,7 +1358,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                           FFButtonWidget(
                             onPressed: () async {
                               context.pushNamed(
-                                'profile',
+                                ProfileWidget.routeName,
                                 extra: <String, dynamic>{
                                   kTransitionInfoKey: TransitionInfo(
                                     hasTransition: true,
@@ -1398,7 +1402,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                           FFButtonWidget(
                             onPressed: () async {
                               context.pushNamed(
-                                'planner',
+                                PlannerWidget.routeName,
                                 extra: <String, dynamic>{
                                   kTransitionInfoKey: TransitionInfo(
                                     hasTransition: true,

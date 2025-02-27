@@ -438,12 +438,36 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                       }
                     }
 
-                    await AccelerometerDataRecord.createDoc(
-                            _model.activityDoc!.reference)
+                    var accelerometerDataRecordReference =
+                        AccelerometerDataRecord.createDoc(
+                            _model.activityDoc!.reference);
+                    await accelerometerDataRecordReference
                         .set(createAccelerometerDataRecordData(
                       id: FFAppState().activityId,
                       user: currentUserReference,
                     ));
+                    _model.accelDoc =
+                        AccelerometerDataRecord.getDocumentFromData(
+                            createAccelerometerDataRecordData(
+                              id: FFAppState().activityId,
+                              user: currentUserReference,
+                            ),
+                            accelerometerDataRecordReference);
+
+                    var gyroscopeDataRecordReference =
+                        GyroscopeDataRecord.createDoc(
+                            _model.activityDoc!.reference);
+                    await gyroscopeDataRecordReference
+                        .set(createGyroscopeDataRecordData(
+                      id: FFAppState().activityId,
+                      user: currentUserReference,
+                    ));
+                    _model.gyroDoc = GyroscopeDataRecord.getDocumentFromData(
+                        createGyroscopeDataRecordData(
+                          id: FFAppState().activityId,
+                          user: currentUserReference,
+                        ),
+                        gyroscopeDataRecordReference);
                     FFAppState().activityId = FFAppState().activityId + 1;
                     safeSetState(() {});
                     Navigator.pop(context);
