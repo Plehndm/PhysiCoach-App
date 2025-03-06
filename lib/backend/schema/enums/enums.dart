@@ -12,6 +12,16 @@ enum Feedback {
   Improve,
 }
 
+enum Genders {
+  Male,
+  Female,
+  Other,
+}
+
+enum Heights {
+  Test,
+}
+
 extension FFEnumExtensions<T extends Enum> on T {
   String serialize() => name;
 }
@@ -27,6 +37,10 @@ T? deserializeEnum<T>(String? value) {
       return ActivityTypes.values.deserialize(value) as T?;
     case (Feedback):
       return Feedback.values.deserialize(value) as T?;
+    case (Genders):
+      return Genders.values.deserialize(value) as T?;
+    case (Heights):
+      return Heights.values.deserialize(value) as T?;
     default:
       return null;
   }

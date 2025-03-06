@@ -14,9 +14,8 @@ import 'package:sensors_plus/sensors_plus.dart';
 
 Future<GyroscopeDataStruct?> getGyroscopeData(
     GyroscopeDataStruct? gyroscopeData) async {
-  // Subscribe to gyroscope events with the desired sampling rate
   final _streamSubscriptions = <StreamSubscription<dynamic>>[];
-  Duration sensorInterval = SensorInterval.normalInterval;
+  Duration sensorInterval = SensorInterval.fastestInterval;
 
   // Listen to the stream for gyroscope events
   _streamSubscriptions

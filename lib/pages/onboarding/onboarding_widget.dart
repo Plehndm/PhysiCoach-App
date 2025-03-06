@@ -1,10 +1,12 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import '/index.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -466,6 +468,40 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                           ),
                           borderRadius: BorderRadius.circular(24.0),
                         ),
+                      ),
+                      FlutterFlowDropDown<Heights>(
+                        controller: _model.heightValueController ??=
+                            FormFieldController<Heights>(null),
+                        options: List<Heights>.from(<Heights>[]),
+                        optionLabels: <String>[],
+                        onChanged: (val) =>
+                            safeSetState(() => _model.heightValue = val),
+                        width: double.infinity,
+                        height: 60.0,
+                        textStyle:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Inter',
+                                  fontSize: 20.0,
+                                  letterSpacing: 0.0,
+                                ),
+                        hintText: 'Height...',
+                        icon: Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          size: 24.0,
+                        ),
+                        fillColor:
+                            FlutterFlowTheme.of(context).secondaryBackground,
+                        elevation: 0.0,
+                        borderColor: FlutterFlowTheme.of(context).primaryText,
+                        borderWidth: 1.0,
+                        borderRadius: 24.0,
+                        margin: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 0.0, 10.0, 0.0),
+                        hidesUnderline: true,
+                        isOverButton: false,
+                        isSearchable: false,
+                        isMultiSelect: false,
                       ),
                     ].divide(SizedBox(height: 24.0)),
                   ),

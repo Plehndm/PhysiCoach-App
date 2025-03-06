@@ -25,45 +25,17 @@ class RunningDataRecord extends FirestoreRecord {
   DocumentReference? get user => _user;
   bool hasUser() => _user != null;
 
-  // "asymmetry" field.
-  List<AsymmetryDataStruct>? _asymmetry;
-  List<AsymmetryDataStruct> get asymmetry => _asymmetry ?? const [];
-  bool hasAsymmetry() => _asymmetry != null;
-
-  // "verticalRatio" field.
-  List<VerticalRatioDataStruct>? _verticalRatio;
-  List<VerticalRatioDataStruct> get verticalRatio => _verticalRatio ?? const [];
-  bool hasVerticalRatio() => _verticalRatio != null;
-
-  // "strideLength" field.
-  List<StrideLengthDataStruct>? _strideLength;
-  List<StrideLengthDataStruct> get strideLength => _strideLength ?? const [];
-  bool hasStrideLength() => _strideLength != null;
-
-  // "groundContactTime" field.
-  List<GroundContactTimeDataStruct>? _groundContactTime;
-  List<GroundContactTimeDataStruct> get groundContactTime =>
-      _groundContactTime ?? const [];
-  bool hasGroundContactTime() => _groundContactTime != null;
+  // "gaitAnalysies" field.
+  List<GaitMetricsStruct>? _gaitAnalysies;
+  List<GaitMetricsStruct> get gaitAnalysies => _gaitAnalysies ?? const [];
+  bool hasGaitAnalysies() => _gaitAnalysies != null;
 
   void _initializeFields() {
     _id = castToType<int>(snapshotData['id']);
     _user = snapshotData['user'] as DocumentReference?;
-    _asymmetry = getStructList(
-      snapshotData['asymmetry'],
-      AsymmetryDataStruct.fromMap,
-    );
-    _verticalRatio = getStructList(
-      snapshotData['verticalRatio'],
-      VerticalRatioDataStruct.fromMap,
-    );
-    _strideLength = getStructList(
-      snapshotData['strideLength'],
-      StrideLengthDataStruct.fromMap,
-    );
-    _groundContactTime = getStructList(
-      snapshotData['groundContactTime'],
-      GroundContactTimeDataStruct.fromMap,
+    _gaitAnalysies = getStructList(
+      snapshotData['gaitAnalysies'],
+      GaitMetricsStruct.fromMap,
     );
   }
 
@@ -123,21 +95,12 @@ class RunningDataRecordDocumentEquality implements Equality<RunningDataRecord> {
     const listEquality = ListEquality();
     return e1?.id == e2?.id &&
         e1?.user == e2?.user &&
-        listEquality.equals(e1?.asymmetry, e2?.asymmetry) &&
-        listEquality.equals(e1?.verticalRatio, e2?.verticalRatio) &&
-        listEquality.equals(e1?.strideLength, e2?.strideLength) &&
-        listEquality.equals(e1?.groundContactTime, e2?.groundContactTime);
+        listEquality.equals(e1?.gaitAnalysies, e2?.gaitAnalysies);
   }
 
   @override
-  int hash(RunningDataRecord? e) => const ListEquality().hash([
-        e?.id,
-        e?.user,
-        e?.asymmetry,
-        e?.verticalRatio,
-        e?.strideLength,
-        e?.groundContactTime
-      ]);
+  int hash(RunningDataRecord? e) =>
+      const ListEquality().hash([e?.id, e?.user, e?.gaitAnalysies]);
 
   @override
   bool isValidKey(Object? o) => o is RunningDataRecord;

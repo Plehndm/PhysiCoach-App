@@ -220,6 +220,35 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInGyroscopeAS(int index, GyroscopeDataStruct value) {
     gyroscopeAS.insert(index, value);
   }
+
+  List<GaitMetricsStruct> _gaitAnalysisAS = [];
+  List<GaitMetricsStruct> get gaitAnalysisAS => _gaitAnalysisAS;
+  set gaitAnalysisAS(List<GaitMetricsStruct> value) {
+    _gaitAnalysisAS = value;
+  }
+
+  void addToGaitAnalysisAS(GaitMetricsStruct value) {
+    gaitAnalysisAS.add(value);
+  }
+
+  void removeFromGaitAnalysisAS(GaitMetricsStruct value) {
+    gaitAnalysisAS.remove(value);
+  }
+
+  void removeAtIndexFromGaitAnalysisAS(int index) {
+    gaitAnalysisAS.removeAt(index);
+  }
+
+  void updateGaitAnalysisASAtIndex(
+    int index,
+    GaitMetricsStruct Function(GaitMetricsStruct) updateFn,
+  ) {
+    gaitAnalysisAS[index] = updateFn(_gaitAnalysisAS[index]);
+  }
+
+  void insertAtIndexInGaitAnalysisAS(int index, GaitMetricsStruct value) {
+    gaitAnalysisAS.insert(index, value);
+  }
 }
 
 void _safeInit(Function() initializeField) {

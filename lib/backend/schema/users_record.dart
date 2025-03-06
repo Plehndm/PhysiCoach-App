@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -50,6 +51,21 @@ class UsersRecord extends FirestoreRecord {
   DateTime? get birthday => _birthday;
   bool hasBirthday() => _birthday != null;
 
+  // "height" field.
+  String? _height;
+  String get height => _height ?? '';
+  bool hasHeight() => _height != null;
+
+  // "weight" field.
+  double? _weight;
+  double get weight => _weight ?? 0.0;
+  bool hasWeight() => _weight != null;
+
+  // "gender" field.
+  Genders? _gender;
+  Genders? get gender => _gender;
+  bool hasGender() => _gender != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -58,6 +74,11 @@ class UsersRecord extends FirestoreRecord {
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
     _birthday = snapshotData['birthday'] as DateTime?;
+    _height = snapshotData['height'] as String?;
+    _weight = castToType<double>(snapshotData['weight']);
+    _gender = snapshotData['gender'] is Genders
+        ? snapshotData['gender']
+        : deserializeEnum<Genders>(snapshotData['gender']);
   }
 
   static CollectionReference get collection =>
@@ -101,6 +122,9 @@ Map<String, dynamic> createUsersRecordData({
   DateTime? createdTime,
   String? phoneNumber,
   DateTime? birthday,
+  String? height,
+  double? weight,
+  Genders? gender,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -111,6 +135,9 @@ Map<String, dynamic> createUsersRecordData({
       'created_time': createdTime,
       'phone_number': phoneNumber,
       'birthday': birthday,
+      'height': height,
+      'weight': weight,
+      'gender': gender,
     }.withoutNulls,
   );
 
@@ -128,7 +155,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.uid == e2?.uid &&
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
-        e1?.birthday == e2?.birthday;
+        e1?.birthday == e2?.birthday &&
+        e1?.height == e2?.height &&
+        e1?.weight == e2?.weight &&
+        e1?.gender == e2?.gender;
   }
 
   @override
@@ -139,7 +169,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.uid,
         e?.createdTime,
         e?.phoneNumber,
-        e?.birthday
+        e?.birthday,
+        e?.height,
+        e?.weight,
+        e?.gender
       ]);
 
   @override

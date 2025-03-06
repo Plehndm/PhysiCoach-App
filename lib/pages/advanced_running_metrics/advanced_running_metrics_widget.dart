@@ -3,8 +3,8 @@ import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'advanced_running_metrics_model.dart';
 export 'advanced_running_metrics_model.dart';
 
@@ -47,8 +47,6 @@ class _AdvancedRunningMetricsWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -267,16 +265,17 @@ class _AdvancedRunningMetricsWidgetState
                                     child: FlutterFlowLineChart(
                                       data: [
                                         FFLineChartData(
-                                          xData: FFAppState()
-                                              .asymmetryAS
-                                              .map((e) => e.timeOccurred)
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
                                               .toList(),
-                                          yData: FFAppState()
-                                              .asymmetryAS
-                                              .map((e) => e.percent)
+                                          yData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.asymmetry)
                                               .toList(),
                                           settings: LineChartBarData(
-                                            color: Color(0xFF007ADC),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
                                             barWidth: 0.0,
                                           ),
                                         )
@@ -322,7 +321,7 @@ class _AdvancedRunningMetricsWidgetState
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Contact Time',
+                                    'Ground Contact Time',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyLarge
                                         .override(
@@ -462,16 +461,17 @@ class _AdvancedRunningMetricsWidgetState
                                     child: FlutterFlowLineChart(
                                       data: [
                                         FFLineChartData(
-                                          xData: FFAppState()
-                                              .groundContactTimeAS
-                                              .map((e) => e.timeOccurred)
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
                                               .toList(),
-                                          yData: FFAppState()
-                                              .groundContactTimeAS
-                                              .map((e) => e.contactTime)
+                                          yData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.groundContactTime)
                                               .toList(),
                                           settings: LineChartBarData(
-                                            color: Color(0xFF00B81B),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
                                             barWidth: 0.0,
                                           ),
                                         )
@@ -657,16 +657,17 @@ class _AdvancedRunningMetricsWidgetState
                                     child: FlutterFlowLineChart(
                                       data: [
                                         FFLineChartData(
-                                          xData: FFAppState()
-                                              .verticalRatioAS
-                                              .map((e) => e.timeOccurred)
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
                                               .toList(),
-                                          yData: FFAppState()
-                                              .verticalRatioAS
-                                              .map((e) => e.percent)
+                                          yData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.verticalRatio)
                                               .toList(),
                                           settings: LineChartBarData(
-                                            color: Color(0xFF00B81B),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
                                             barWidth: 0.0,
                                           ),
                                         )
@@ -852,17 +853,75 @@ class _AdvancedRunningMetricsWidgetState
                                     child: FlutterFlowLineChart(
                                       data: [
                                         FFLineChartData(
-                                          xData: FFAppState()
-                                              .strideLengthAS
-                                              .map((e) => e.timeOccurred)
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
                                               .toList(),
-                                          yData: FFAppState()
-                                              .strideLengthAS
+                                          yData: widget
+                                              .runningDataDoc!.gaitAnalysies
                                               .map((e) => e.strideLength)
                                               .toList(),
                                           settings: LineChartBarData(
-                                            color: Color(0xFF00B81B),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
                                             barWidth: 0.0,
+                                          ),
+                                        ),
+                                        FFLineChartData(
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
+                                              .toList(),
+                                          yData: List.generate(
+                                              random_data.randomInteger(5, 5),
+                                              (index) => random_data
+                                                  .randomInteger(34, 34)),
+                                          settings: LineChartBarData(
+                                            color: Color(0xFFFF6F00),
+                                            barWidth: 2.0,
+                                            dotData: FlDotData(show: false),
+                                            belowBarData: BarAreaData(
+                                              show: true,
+                                              color: Color(0x3FFF6F00),
+                                            ),
+                                          ),
+                                        ),
+                                        FFLineChartData(
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
+                                              .toList(),
+                                          yData: List.generate(
+                                              random_data.randomInteger(5, 5),
+                                              (index) => random_data
+                                                  .randomInteger(29, 29)),
+                                          settings: LineChartBarData(
+                                            color: Color(0xFF00B81B),
+                                            barWidth: 2.0,
+                                            dotData: FlDotData(show: false),
+                                            belowBarData: BarAreaData(
+                                              show: true,
+                                              color: Color(0x3F00B81B),
+                                            ),
+                                          ),
+                                        ),
+                                        FFLineChartData(
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
+                                              .toList(),
+                                          yData: List.generate(
+                                              random_data.randomInteger(5, 5),
+                                              (index) => random_data
+                                                  .randomInteger(24, 24)),
+                                          settings: LineChartBarData(
+                                            color: Color(0xFF007ADC),
+                                            barWidth: 2.0,
+                                            dotData: FlDotData(show: false),
+                                            belowBarData: BarAreaData(
+                                              show: true,
+                                              color: Color(0x3F007ADC),
+                                            ),
                                           ),
                                         )
                                       ],

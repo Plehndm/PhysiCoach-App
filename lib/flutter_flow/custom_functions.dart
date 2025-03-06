@@ -34,10 +34,10 @@ int? getYear(DateTime date) {
   return date.year;
 }
 
-GaitMetricsStruct gaitAnalysis(
+GaitMetricsStruct? gaitAnalysis(
   List<AccelerationDataStruct> accelerometerData,
   List<GyroscopeDataStruct> gyroscopeData,
-  GaitMetricsStruct metrics,
+  GaitMetricsStruct? metrics,
 ) {
   // Calculate stride length
   double totalStrideLength = 0;
@@ -63,7 +63,7 @@ GaitMetricsStruct gaitAnalysis(
     }
   }
 
-  metrics.strideLength = stepCount > 0 ? totalStrideLength / stepCount : 0;
+  metrics?.strideLength = stepCount > 0 ? totalStrideLength / stepCount : 0;
 
   // Calculate ground contact time
   double totalContactTime = 0;
@@ -109,10 +109,10 @@ GaitMetricsStruct gaitAnalysis(
 
   double avgVerticalOscillation =
       stepCount > 0 ? totalVerticalOscillation / stepCount : 0;
-  double strideLength = metrics.strideLength;
+  double? strideLength = metrics?.strideLength;
 
-  metrics.verticalRatio =
-      strideLength > 0 ? avgVerticalOscillation / strideLength : 0;
+  metrics?.verticalRatio =
+      strideLength! > 0 ? avgVerticalOscillation / strideLength : 0;
 
   // Calculate asymmetry
   double totalLeftStepTime = 0;
@@ -160,7 +160,7 @@ GaitMetricsStruct gaitAnalysis(
   }
 
   if (leftSteps == 0 || rightSteps == 0) {
-    metrics.asymmetry = 0;
+    metrics?.asymmetry = 0;
   } else {
     double leftAvgTime = totalLeftStepTime / leftSteps;
     double rightAvgTime = totalRightStepTime / rightSteps;
@@ -168,6 +168,9 @@ GaitMetricsStruct gaitAnalysis(
     metrics?.asymmetry =
         (leftAvgTime - rightAvgTime).abs() / ((leftAvgTime + rightAvgTime) / 2);
   }
+
+  // Set Timestamp
+  metrics?.timestamp = DateTime.now();
 
   return metrics;
 }

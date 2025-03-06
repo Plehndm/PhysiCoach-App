@@ -16,13 +16,13 @@ Future<AccelerationDataStruct?> getAccelerometerData(
     AccelerationDataStruct? accelerationData) async {
   // Subscribe to user accelerometer events with the desired sampling rate
   final _streamSubscriptions = <StreamSubscription<dynamic>>[];
-  Duration sensorInterval = SensorInterval.normalInterval;
+  Duration sensorInterval = SensorInterval.fastestInterval;
 
   // Listen to the stream for UserAccelerometer events
   _streamSubscriptions
       .add(userAccelerometerEventStream(samplingPeriod: sensorInterval).listen(
     (UserAccelerometerEvent event) {
-      // Store data from userAccelerometer stream
+      // Store data from userAccelerometer stream`
       accelerationData?.xAccel = event.x;
       accelerationData?.yAccel = event.y;
       accelerationData?.zAccel = event.z;

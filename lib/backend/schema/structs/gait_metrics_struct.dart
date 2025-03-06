@@ -12,11 +12,13 @@ class GaitMetricsStruct extends FFFirebaseStruct {
     double? groundContactTime,
     double? verticalRatio,
     double? asymmetry,
+    DateTime? timestamp,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _strideLength = strideLength,
         _groundContactTime = groundContactTime,
         _verticalRatio = verticalRatio,
         _asymmetry = asymmetry,
+        _timestamp = timestamp,
         super(firestoreUtilData);
 
   // "strideLength" field.
@@ -58,12 +60,21 @@ class GaitMetricsStruct extends FFFirebaseStruct {
 
   bool hasAsymmetry() => _asymmetry != null;
 
+  // "timestamp" field.
+  DateTime? _timestamp;
+  DateTime get timestamp =>
+      _timestamp ?? DateTime.fromMicrosecondsSinceEpoch(1741071600000000);
+  set timestamp(DateTime? val) => _timestamp = val;
+
+  bool hasTimestamp() => _timestamp != null;
+
   static GaitMetricsStruct fromMap(Map<String, dynamic> data) =>
       GaitMetricsStruct(
         strideLength: castToType<double>(data['strideLength']),
         groundContactTime: castToType<double>(data['groundContactTime']),
         verticalRatio: castToType<double>(data['verticalRatio']),
         asymmetry: castToType<double>(data['asymmetry']),
+        timestamp: data['timestamp'] as DateTime?,
       );
 
   static GaitMetricsStruct? maybeFromMap(dynamic data) => data is Map
@@ -75,6 +86,7 @@ class GaitMetricsStruct extends FFFirebaseStruct {
         'groundContactTime': _groundContactTime,
         'verticalRatio': _verticalRatio,
         'asymmetry': _asymmetry,
+        'timestamp': _timestamp,
       }.withoutNulls;
 
   @override
@@ -94,6 +106,10 @@ class GaitMetricsStruct extends FFFirebaseStruct {
         'asymmetry': serializeParam(
           _asymmetry,
           ParamType.double,
+        ),
+        'timestamp': serializeParam(
+          _timestamp,
+          ParamType.DateTime,
         ),
       }.withoutNulls;
 
@@ -119,6 +135,11 @@ class GaitMetricsStruct extends FFFirebaseStruct {
           ParamType.double,
           false,
         ),
+        timestamp: deserializeParam(
+          data['timestamp'],
+          ParamType.DateTime,
+          false,
+        ),
       );
 
   @override
@@ -130,12 +151,13 @@ class GaitMetricsStruct extends FFFirebaseStruct {
         strideLength == other.strideLength &&
         groundContactTime == other.groundContactTime &&
         verticalRatio == other.verticalRatio &&
-        asymmetry == other.asymmetry;
+        asymmetry == other.asymmetry &&
+        timestamp == other.timestamp;
   }
 
   @override
-  int get hashCode => const ListEquality()
-      .hash([strideLength, groundContactTime, verticalRatio, asymmetry]);
+  int get hashCode => const ListEquality().hash(
+      [strideLength, groundContactTime, verticalRatio, asymmetry, timestamp]);
 }
 
 GaitMetricsStruct createGaitMetricsStruct({
@@ -143,6 +165,7 @@ GaitMetricsStruct createGaitMetricsStruct({
   double? groundContactTime,
   double? verticalRatio,
   double? asymmetry,
+  DateTime? timestamp,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -153,6 +176,7 @@ GaitMetricsStruct createGaitMetricsStruct({
       groundContactTime: groundContactTime,
       verticalRatio: verticalRatio,
       asymmetry: asymmetry,
+      timestamp: timestamp,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
