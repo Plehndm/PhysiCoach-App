@@ -469,10 +469,12 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                           borderRadius: BorderRadius.circular(24.0),
                         ),
                       ),
-                      FlutterFlowDropDown<Heights>(
+                      FlutterFlowDropDown<String>(
                         controller: _model.heightValueController ??=
-                            FormFieldController<Heights>(null),
-                        options: List<Heights>.from(<Heights>[]),
+                            FormFieldController<String>(
+                          _model.heightValue ??= '',
+                        ),
+                        options: List<String>.from(<String>[]),
                         optionLabels: <String>[],
                         onChanged: (val) =>
                             safeSetState(() => _model.heightValue = val),

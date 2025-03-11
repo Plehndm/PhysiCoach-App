@@ -14,7 +14,6 @@ import 'package:sensors_plus/sensors_plus.dart';
 
 Future<AccelerationDataStruct?> getAccelerometerData(
     AccelerationDataStruct? accelerationData) async {
-  // Subscribe to user accelerometer events with the desired sampling rate
   final _streamSubscriptions = <StreamSubscription<dynamic>>[];
   Duration sensorInterval = SensorInterval.fastestInterval;
 

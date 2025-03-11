@@ -8,7 +8,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/instant_timer.dart';
 import '/custom_code/actions/index.dart' as actions;
-import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
@@ -52,38 +51,24 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
             await Future.wait([
               Future(() async {
                 _model.accellData = await actions.getAccelerometerData(
-                  AccelerationDataStruct(
-                    xAccel: 0.0,
-                    yAccel: 0.0,
-                    zAccel: 0.0,
-                    timestamp: getCurrentTimestamp,
-                  ),
+                  AccelerationDataStruct(),
                 );
               }),
               Future(() async {
                 _model.gyroData = await actions.getGyroscopeData(
-                  GyroscopeDataStruct(
-                    xGyro: 0.0,
-                    yGyro: 0.0,
-                    zGyro: 0.0,
-                    timestamp: getCurrentTimestamp,
-                  ),
+                  GyroscopeDataStruct(),
                 );
               }),
             ]);
             FFAppState().addToAccelerationAS(_model.accellData!);
             FFAppState().addToGyroscopeAS(_model.gyroData!);
             safeSetState(() {});
-            FFAppState().addToGaitAnalysisAS(functions.gaitAnalysis(
-                FFAppState().accelerationAS.toList(),
-                FFAppState().gyroscopeAS.toList(),
-                GaitMetricsStruct(
-                  strideLength: 0.0,
-                  groundContactTime: 0.0,
-                  verticalRatio: 0.0,
-                  asymmetry: 50.0,
-                  timestamp: getCurrentTimestamp,
-                ))!);
+            _model.gaitMetrics = await actions.gaitAnalysis(
+              FFAppState().accelerationAS.toList(),
+              FFAppState().gyroscopeAS.toList(),
+              GaitMetricsStruct(),
+            );
+            FFAppState().addToGaitAnalysisAS(_model.gaitMetrics!);
             safeSetState(() {});
           }
         },

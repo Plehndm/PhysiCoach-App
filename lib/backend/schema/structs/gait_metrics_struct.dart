@@ -23,7 +23,7 @@ class GaitMetricsStruct extends FFFirebaseStruct {
 
   // "strideLength" field.
   double? _strideLength;
-  double get strideLength => _strideLength ?? 0.0;
+  double get strideLength => _strideLength ?? 29.0;
   set strideLength(double? val) => _strideLength = val;
 
   void incrementStrideLength(double amount) =>
@@ -33,7 +33,7 @@ class GaitMetricsStruct extends FFFirebaseStruct {
 
   // "groundContactTime" field.
   double? _groundContactTime;
-  double get groundContactTime => _groundContactTime ?? 0.0;
+  double get groundContactTime => _groundContactTime ?? 200.0;
   set groundContactTime(double? val) => _groundContactTime = val;
 
   void incrementGroundContactTime(double amount) =>
@@ -43,7 +43,7 @@ class GaitMetricsStruct extends FFFirebaseStruct {
 
   // "verticalRatio" field.
   double? _verticalRatio;
-  double get verticalRatio => _verticalRatio ?? 0.0;
+  double get verticalRatio => _verticalRatio ?? 10.0;
   set verticalRatio(double? val) => _verticalRatio = val;
 
   void incrementVerticalRatio(double amount) =>
@@ -53,7 +53,7 @@ class GaitMetricsStruct extends FFFirebaseStruct {
 
   // "asymmetry" field.
   double? _asymmetry;
-  double get asymmetry => _asymmetry ?? 0.0;
+  double get asymmetry => _asymmetry ?? 50.0;
   set asymmetry(double? val) => _asymmetry = val;
 
   void incrementAsymmetry(double amount) => asymmetry = asymmetry + amount;

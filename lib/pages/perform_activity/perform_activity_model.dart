@@ -20,6 +20,8 @@ class PerformActivityModel extends FlutterFlowModel<PerformActivityWidget> {
   AccelerationDataStruct? accellData;
   // Stores action output result for [Custom Action - getGyroscopeData] action in performActivity widget.
   GyroscopeDataStruct? gyroData;
+  // Stores action output result for [Custom Action - gaitAnalysis] action in performActivity widget.
+  GaitMetricsStruct? gaitMetrics;
   // State field(s) for Timer widget.
   final timerInitialTimeMs = 0;
   int timerMilliseconds = 0;

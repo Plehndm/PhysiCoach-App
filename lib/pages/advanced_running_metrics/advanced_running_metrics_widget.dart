@@ -868,14 +868,32 @@ class _AdvancedRunningMetricsWidgetState
                                           ),
                                         ),
                                         FFLineChartData(
-                                          xData: widget
-                                              .runningDataDoc!.gaitAnalysies
-                                              .map((e) => e.timestamp)
-                                              .toList(),
+                                          xData: List.generate(
+                                              random_data.randomInteger(5, 5),
+                                              (index) =>
+                                                  random_data.randomInteger(
+                                                      valueOrDefault<int>(
+                                                        widget
+                                                            .runningDataDoc
+                                                            ?.gaitAnalysies
+                                                            .firstOrNull
+                                                            ?.timestamp
+                                                            .secondsSinceEpoch,
+                                                        0,
+                                                      ),
+                                                      valueOrDefault<int>(
+                                                        widget
+                                                            .runningDataDoc
+                                                            ?.gaitAnalysies
+                                                            .lastOrNull
+                                                            ?.timestamp
+                                                            .secondsSinceEpoch,
+                                                        0,
+                                                      ))),
                                           yData: List.generate(
                                               random_data.randomInteger(5, 5),
                                               (index) => random_data
-                                                  .randomInteger(34, 34)),
+                                                  .randomInteger(24, 24)),
                                           settings: LineChartBarData(
                                             color: Color(0xFFFF6F00),
                                             barWidth: 2.0,
@@ -887,10 +905,28 @@ class _AdvancedRunningMetricsWidgetState
                                           ),
                                         ),
                                         FFLineChartData(
-                                          xData: widget
-                                              .runningDataDoc!.gaitAnalysies
-                                              .map((e) => e.timestamp)
-                                              .toList(),
+                                          xData: List.generate(
+                                              random_data.randomInteger(5, 5),
+                                              (index) =>
+                                                  random_data.randomInteger(
+                                                      valueOrDefault<int>(
+                                                        widget
+                                                            .runningDataDoc
+                                                            ?.gaitAnalysies
+                                                            .firstOrNull
+                                                            ?.timestamp
+                                                            .secondsSinceEpoch,
+                                                        0,
+                                                      ),
+                                                      valueOrDefault<int>(
+                                                        widget
+                                                            .runningDataDoc
+                                                            ?.gaitAnalysies
+                                                            .lastOrNull
+                                                            ?.timestamp
+                                                            .secondsSinceEpoch,
+                                                        0,
+                                                      ))),
                                           yData: List.generate(
                                               random_data.randomInteger(5, 5),
                                               (index) => random_data
@@ -906,14 +942,32 @@ class _AdvancedRunningMetricsWidgetState
                                           ),
                                         ),
                                         FFLineChartData(
-                                          xData: widget
-                                              .runningDataDoc!.gaitAnalysies
-                                              .map((e) => e.timestamp)
-                                              .toList(),
+                                          xData: List.generate(
+                                              random_data.randomInteger(5, 5),
+                                              (index) =>
+                                                  random_data.randomInteger(
+                                                      valueOrDefault<int>(
+                                                        widget
+                                                            .runningDataDoc
+                                                            ?.gaitAnalysies
+                                                            .firstOrNull
+                                                            ?.timestamp
+                                                            .secondsSinceEpoch,
+                                                        0,
+                                                      ),
+                                                      valueOrDefault<int>(
+                                                        widget
+                                                            .runningDataDoc
+                                                            ?.gaitAnalysies
+                                                            .lastOrNull
+                                                            ?.timestamp
+                                                            .secondsSinceEpoch,
+                                                        0,
+                                                      ))),
                                           yData: List.generate(
                                               random_data.randomInteger(5, 5),
                                               (index) => random_data
-                                                  .randomInteger(24, 24)),
+                                                  .randomInteger(34, 34)),
                                           settings: LineChartBarData(
                                             color: Color(0xFF007ADC),
                                             barWidth: 2.0,
