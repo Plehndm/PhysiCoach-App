@@ -106,7 +106,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                 FlutterFlowDropDown<ActivityTypes>(
                   controller: _model.typeValueController ??=
                       FormFieldController<ActivityTypes>(
-                    _model.typeValue ??= ActivityTypes.Triple_Jump,
+                    _model.typeValue ??= ActivityTypes.tripleJump,
                   ),
                   options: List<ActivityTypes>.from(ActivityTypes.values),
                   optionLabels: ['Tripple Jump', 'Running', 'Long Jump'],
@@ -411,15 +411,41 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                           ),
                         ),
                         activitiesRecordReference);
-                    if (_model.typeValue == ActivityTypes.Running) {
+                    if (_model.typeValue == ActivityTypes.running) {
                       await RunningDataRecord.collection
                           .doc()
                           .set(createRunningDataRecordData(
                             id: FFAppState().activityId,
                             user: currentUserReference,
+                            runningLevels: updateRunningLevelsStruct(
+                              RunningLevelsStruct(
+                                asymmetryLevels: FeedbackLevelsStruct(
+                                  great: 50.0,
+                                  good: 45.0,
+                                  improve: 40.0,
+                                ),
+                                groundContactTimeLevels: FeedbackLevelsStruct(
+                                  great: 190.0,
+                                  good: 200.0,
+                                  improve: 210.0,
+                                ),
+                                verticalRatioLevels: FeedbackLevelsStruct(
+                                  great: 8.0,
+                                  good: 10.0,
+                                  improve: 12.0,
+                                ),
+                                strideLengthLevels: FeedbackLevelsStruct(
+                                  great: 34.0,
+                                  good: 29.0,
+                                  improve: 24.0,
+                                ),
+                              ),
+                              clearUnsetFields: false,
+                              create: true,
+                            ),
                           ));
                     } else {
-                      if (_model.typeValue == ActivityTypes.Triple_Jump) {
+                      if (_model.typeValue == ActivityTypes.tripleJump) {
                         await TrippleJumpDataRecord.collection
                             .doc()
                             .set(createTrippleJumpDataRecordData(
@@ -427,7 +453,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                               user: currentUserReference,
                             ));
                       } else {
-                        if (_model.typeValue == ActivityTypes.Long_Jump) {
+                        if (_model.typeValue == ActivityTypes.longJump) {
                           await LongJumpDataRecord.collection
                               .doc()
                               .set(createLongJumpDataRecordData(

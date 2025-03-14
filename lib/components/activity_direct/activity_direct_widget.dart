@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -156,53 +157,104 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
                     letterSpacing: 0.0,
                   ),
             ),
-            FFButtonWidget(
-              onPressed: () async {
-                context.pushNamed(
-                  PerformActivityWidget.routeName,
-                  queryParameters: {
-                    'activityDoc': serializeParam(
-                      widget.activityDoc,
-                      ParamType.Document,
+            StreamBuilder<List<RunningDataRecord>>(
+              stream: queryRunningDataRecord(
+                queryBuilder: (runningDataRecord) => runningDataRecord
+                    .where(
+                      'user',
+                      isEqualTo: currentUserReference,
+                    )
+                    .where(
+                      'id',
+                      isEqualTo: valueOrDefault<int>(
+                        widget.activityDoc?.id,
+                        0,
+                      ),
                     ),
-                  }.withoutNulls,
-                  extra: <String, dynamic>{
-                    'activityDoc': widget.activityDoc,
-                    kTransitionInfoKey: TransitionInfo(
-                      hasTransition: true,
-                      transitionType: PageTransitionType.fade,
-                      duration: Duration(milliseconds: 0),
+                singleRecord: true,
+              ),
+              builder: (context, snapshot) {
+                // Customize what your widget looks like when it's loading.
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: SizedBox(
+                      width: 50.0,
+                      height: 50.0,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          FlutterFlowTheme.of(context).primary,
+                        ),
+                      ),
                     ),
-                  },
-                );
+                  );
+                }
+                List<RunningDataRecord> performButtonRunningDataRecordList =
+                    snapshot.data!;
+                // Return an empty Container when the item does not exist.
+                if (snapshot.data!.isEmpty) {
+                  return Container();
+                }
+                final performButtonRunningDataRecord =
+                    performButtonRunningDataRecordList.isNotEmpty
+                        ? performButtonRunningDataRecordList.first
+                        : null;
 
-                Navigator.pop(context);
-              },
-              text: 'Perform',
-              icon: Icon(
-                Icons.check_circle_outline_sharp,
-                size: 30.0,
-              ),
-              options: FFButtonOptions(
-                width: double.infinity,
-                height: 70.0,
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                color: FlutterFlowTheme.of(context).primary,
-                textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                      fontFamily: 'Inter',
+                return FFButtonWidget(
+                  onPressed: () async {
+                    context.pushNamed(
+                      PerformActivityWidget.routeName,
+                      queryParameters: {
+                        'activityDoc': serializeParam(
+                          widget.activityDoc,
+                          ParamType.Document,
+                        ),
+                        'runningDataDoc': serializeParam(
+                          performButtonRunningDataRecord,
+                          ParamType.Document,
+                        ),
+                      }.withoutNulls,
+                      extra: <String, dynamic>{
+                        'activityDoc': widget.activityDoc,
+                        'runningDataDoc': performButtonRunningDataRecord,
+                        kTransitionInfoKey: TransitionInfo(
+                          hasTransition: true,
+                          transitionType: PageTransitionType.fade,
+                          duration: Duration(milliseconds: 0),
+                        ),
+                      },
+                    );
+
+                    Navigator.pop(context);
+                  },
+                  text: 'Perform',
+                  icon: Icon(
+                    Icons.check_circle_outline_sharp,
+                    size: 30.0,
+                  ),
+                  options: FFButtonOptions(
+                    width: double.infinity,
+                    height: 70.0,
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Inter',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          fontSize: 20.0,
+                          letterSpacing: 0.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                    elevation: 0.0,
+                    borderSide: BorderSide(
                       color: FlutterFlowTheme.of(context).primaryText,
-                      fontSize: 20.0,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.w500,
+                      width: 1.0,
                     ),
-                elevation: 0.0,
-                borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  width: 1.0,
-                ),
-                borderRadius: BorderRadius.circular(24.0),
-              ),
+                    borderRadius: BorderRadius.circular(24.0),
+                  ),
+                );
+              },
             ),
             if (widget.activityDoc?.completed == true)
               Text(
@@ -215,7 +267,7 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
             if (widget.activityDoc?.completed == true)
               FFButtonWidget(
                 onPressed: () async {
-                  if (widget.activityDoc?.type == ActivityTypes.Running) {
+                  if (widget.activityDoc?.type == ActivityTypes.running) {
                     context.pushNamed(
                       RunningAnalysisWidget.routeName,
                       queryParameters: {
@@ -234,8 +286,7 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
                       },
                     );
                   } else {
-                    if (widget.activityDoc?.type ==
-                        ActivityTypes.Triple_Jump) {
+                    if (widget.activityDoc?.type == ActivityTypes.tripleJump) {
                       context.pushNamed(
                         TripleJumpAnalysisWidget.routeName,
                         queryParameters: {
@@ -254,8 +305,7 @@ class _ActivityDirectWidgetState extends State<ActivityDirectWidget> {
                         },
                       );
                     } else {
-                      if (widget.activityDoc?.type ==
-                          ActivityTypes.Long_Jump) {
+                      if (widget.activityDoc?.type == ActivityTypes.longJump) {
                         context.pushNamed(
                           LongJumpAnalysisWidget.routeName,
                           queryParameters: {

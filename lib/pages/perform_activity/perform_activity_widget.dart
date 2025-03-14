@@ -1,5 +1,4 @@
 import '';
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -20,9 +19,11 @@ class PerformActivityWidget extends StatefulWidget {
   const PerformActivityWidget({
     super.key,
     required this.activityDoc,
+    required this.runningDataDoc,
   });
 
   final ActivitiesRecord? activityDoc;
+  final RunningDataRecord? runningDataDoc;
 
   static String routeName = 'performActivity';
   static String routePath = '/performActivity';
@@ -67,6 +68,7 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
               FFAppState().accelerationAS.toList(),
               FFAppState().gyroscopeAS.toList(),
               GaitMetricsStruct(),
+              widget.runningDataDoc!.runningLevels,
             );
             FFAppState().addToGaitAnalysisAS(_model.gaitMetrics!);
             safeSetState(() {});
@@ -467,153 +469,103 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 20.0, 0.0, 0.0),
-                          child: StreamBuilder<List<RunningDataRecord>>(
-                            stream: queryRunningDataRecord(
-                              queryBuilder: (runningDataRecord) =>
-                                  runningDataRecord
-                                      .where(
-                                        'user',
-                                        isEqualTo: currentUserReference,
-                                      )
-                                      .where(
-                                        'id',
-                                        isEqualTo: valueOrDefault<int>(
-                                          widget.activityDoc?.id,
-                                          0,
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              _model.dataCollection?.cancel();
+                              await Future.wait([
+                                Future(() async {
+                                  await widget.activityDoc!.reference
+                                      .update(createActivitiesRecordData(
+                                    completed: true,
+                                  ));
+                                }),
+                                Future(() async {
+                                  await performActivityAccelerometerDataRecord!
+                                      .reference
+                                      .update({
+                                    ...mapToFirestore(
+                                      {
+                                        'accelerations':
+                                            getAccelerationDataListFirestoreData(
+                                          FFAppState().accelerationAS,
                                         ),
-                                      ),
-                              singleRecord: true,
-                            ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
-                                      ),
+                                      },
                                     ),
+                                  });
+                                }),
+                                Future(() async {
+                                  await columnGyroscopeDataRecord!.reference
+                                      .update({
+                                    ...mapToFirestore(
+                                      {
+                                        'data':
+                                            getGyroscopeDataListFirestoreData(
+                                          FFAppState().gyroscopeAS,
+                                        ),
+                                      },
+                                    ),
+                                  });
+                                }),
+                                Future(() async {
+                                  await widget.runningDataDoc!.reference
+                                      .update({
+                                    ...mapToFirestore(
+                                      {
+                                        'gaitAnalysies':
+                                            getGaitMetricsListFirestoreData(
+                                          FFAppState().gaitAnalysisAS,
+                                        ),
+                                      },
+                                    ),
+                                  });
+                                }),
+                              ]);
+                              FFAppState().accelerationAS = [];
+                              FFAppState().gyroscopeAS = [];
+                              FFAppState().gaitAnalysisAS = [];
+                              safeSetState(() {});
+
+                              context.goNamed(
+                                HomeWidget.routeName,
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 0),
                                   ),
-                                );
-                              }
-                              List<RunningDataRecord>
-                                  completeActivityButtonRunningDataRecordList =
-                                  snapshot.data!;
-                              // Return an empty Container when the item does not exist.
-                              if (snapshot.data!.isEmpty) {
-                                return Container();
-                              }
-                              final completeActivityButtonRunningDataRecord =
-                                  completeActivityButtonRunningDataRecordList
-                                          .isNotEmpty
-                                      ? completeActivityButtonRunningDataRecordList
-                                          .first
-                                      : null;
-
-                              return FFButtonWidget(
-                                onPressed: () async {
-                                  _model.dataCollection?.cancel();
-                                  await Future.wait([
-                                    Future(() async {
-                                      await widget.activityDoc!.reference
-                                          .update(createActivitiesRecordData(
-                                        completed: true,
-                                      ));
-                                    }),
-                                    Future(() async {
-                                      await performActivityAccelerometerDataRecord!
-                                          .reference
-                                          .update({
-                                        ...mapToFirestore(
-                                          {
-                                            'accelerations':
-                                                getAccelerationDataListFirestoreData(
-                                              FFAppState().accelerationAS,
-                                            ),
-                                          },
-                                        ),
-                                      });
-                                    }),
-                                    Future(() async {
-                                      await columnGyroscopeDataRecord!.reference
-                                          .update({
-                                        ...mapToFirestore(
-                                          {
-                                            'data':
-                                                getGyroscopeDataListFirestoreData(
-                                              FFAppState().gyroscopeAS,
-                                            ),
-                                          },
-                                        ),
-                                      });
-                                    }),
-                                    Future(() async {
-                                      await completeActivityButtonRunningDataRecord!
-                                          .reference
-                                          .update({
-                                        ...mapToFirestore(
-                                          {
-                                            'gaitAnalysies':
-                                                getGaitMetricsListFirestoreData(
-                                              FFAppState().gaitAnalysisAS,
-                                            ),
-                                          },
-                                        ),
-                                      });
-                                    }),
-                                  ]);
-                                  FFAppState().accelerationAS = [];
-                                  FFAppState().gyroscopeAS = [];
-                                  FFAppState().gaitAnalysisAS = [];
-                                  safeSetState(() {});
-
-                                  context.goNamed(
-                                    HomeWidget.routeName,
-                                    extra: <String, dynamic>{
-                                      kTransitionInfoKey: TransitionInfo(
-                                        hasTransition: true,
-                                        transitionType: PageTransitionType.fade,
-                                        duration: Duration(milliseconds: 0),
-                                      ),
-                                    },
-                                  );
                                 },
-                                text: 'Complete Activity',
-                                icon: Icon(
-                                  Icons.check_outlined,
-                                  size: 24.0,
-                                ),
-                                options: FFButtonOptions(
-                                  height: 40.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 16.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        fontSize: 20.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                  elevation: 0.0,
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
                               );
                             },
+                            text: 'Complete Activity',
+                            icon: Icon(
+                              Icons.check_outlined,
+                              size: 24.0,
+                            ),
+                            options: FFButtonOptions(
+                              height: 40.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 20.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                              elevation: 0.0,
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
                           ),
                         ),
                         Text(

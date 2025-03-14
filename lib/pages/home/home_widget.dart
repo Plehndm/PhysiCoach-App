@@ -292,7 +292,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                   .where(
                                                                     'type',
                                                                     isEqualTo: ActivityTypes
-                                                                            .Triple_Jump
+                                                                        .tripleJump
                                                                         .serialize(),
                                                                   )
                                                                   .where(
@@ -471,7 +471,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                   .where(
                                                                     'type',
                                                                     isEqualTo: ActivityTypes
-                                                                            .Running
+                                                                        .running
                                                                         .serialize(),
                                                                   )
                                                                   .where(
@@ -650,7 +650,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                   .where(
                                                                     'type',
                                                                     isEqualTo: ActivityTypes
-                                                                            .Long_Jump
+                                                                        .longJump
                                                                         .serialize(),
                                                                   )
                                                                   .where(
@@ -840,7 +840,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                   .where(
                                                                     'type',
                                                                     isEqualTo: ActivityTypes
-                                                                            .Triple_Jump
+                                                                        .tripleJump
                                                                         .serialize(),
                                                                   )
                                                                   .where(
@@ -1019,7 +1019,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                   .where(
                                                                     'type',
                                                                     isEqualTo: ActivityTypes
-                                                                            .Running
+                                                                        .running
                                                                         .serialize(),
                                                                   )
                                                                   .where(
@@ -1198,7 +1198,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                   .where(
                                                                     'type',
                                                                     isEqualTo: ActivityTypes
-                                                                            .Long_Jump
+                                                                        .longJump
                                                                         .serialize(),
                                                                   )
                                                                   .where(

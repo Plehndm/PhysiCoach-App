@@ -10,12 +10,15 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import '/backend/schema/enums/enums.dart' as enums;
+
 import 'dart:math' as math;
 
 Future<GaitMetricsStruct> gaitAnalysis(
   List<AccelerationDataStruct> accelerometerData,
   List<GyroscopeDataStruct> gyroscopeData,
   GaitMetricsStruct metrics,
+  RunningLevelsStruct runningLevels,
 ) async {
   // Calculate stride length
   double totalStrideLength = 0;
@@ -44,6 +47,14 @@ Future<GaitMetricsStruct> gaitAnalysis(
   metrics.strideLength =
       stepCount > 0 ? totalStrideLength / stepCount : metrics.strideLength;
 
+  if (metrics.strideLength >= runningLevels.strideLengthLevels.great) {
+    metrics.runningFeedback.strideLengthFeedback = enums.Feedback.great;
+  } else if (metrics.strideLength >= runningLevels.strideLengthLevels.good) {
+    metrics.runningFeedback.strideLengthFeedback = enums.Feedback.good;
+  } else {
+    metrics.runningFeedback.strideLengthFeedback = enums.Feedback.improve;
+  }
+
   // Calculate ground contact time
   double totalContactTime = 0;
   DateTime? stepStartTime;
@@ -68,6 +79,16 @@ Future<GaitMetricsStruct> gaitAnalysis(
 
   metrics.groundContactTime =
       totalContactTime > 0 ? totalContactTime : metrics.groundContactTime;
+
+  if (metrics.groundContactTime >=
+      runningLevels.groundContactTimeLevels.great) {
+    metrics.runningFeedback.groundContactTimeFeedback = enums.Feedback.great;
+  } else if (metrics.groundContactTime >=
+      runningLevels.groundContactTimeLevels.good) {
+    metrics.runningFeedback.groundContactTimeFeedback = enums.Feedback.good;
+  } else {
+    metrics.runningFeedback.groundContactTimeFeedback = enums.Feedback.improve;
+  }
 
   // Calculate vertical ratio
   double totalVerticalOscillation = 0;
@@ -94,6 +115,14 @@ Future<GaitMetricsStruct> gaitAnalysis(
   metrics.verticalRatio = strideLength > 0
       ? avgVerticalOscillation / strideLength
       : metrics.verticalRatio;
+
+  if (metrics.verticalRatio >= runningLevels.verticalRatioLevels.great) {
+    metrics.runningFeedback.verticalRatioFeedback = enums.Feedback.great;
+  } else if (metrics.verticalRatio >= runningLevels.verticalRatioLevels.good) {
+    metrics.runningFeedback.verticalRatioFeedback = enums.Feedback.good;
+  } else {
+    metrics.runningFeedback.verticalRatioFeedback = enums.Feedback.improve;
+  }
 
   // Calculate asymmetry
   double totalLeftStepTime = 0;
@@ -148,6 +177,14 @@ Future<GaitMetricsStruct> gaitAnalysis(
 
     metrics.asymmetry =
         (leftAvgTime - rightAvgTime).abs() / ((leftAvgTime + rightAvgTime) / 2);
+  }
+
+  if (metrics.asymmetry >= runningLevels.asymmetryLevels.great) {
+    metrics.runningFeedback.asymmetryFeedback = enums.Feedback.great;
+  } else if (metrics.asymmetry >= runningLevels.asymmetryLevels.good) {
+    metrics.runningFeedback.asymmetryFeedback = enums.Feedback.good;
+  } else {
+    metrics.runningFeedback.asymmetryFeedback = enums.Feedback.improve;
   }
 
   // Set Timestamp

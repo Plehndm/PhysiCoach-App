@@ -1,5 +1,4 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
 import '/index.dart';
 import 'onboarding_widget.dart' show OnboardingWidget;
 import 'package:flutter/material.dart';
@@ -23,9 +22,6 @@ class OnboardingModel extends FlutterFlowModel<OnboardingWidget> {
   final phoneNumberMask = MaskTextInputFormatter(mask: '(###) ###-####');
   String? Function(BuildContext, String?)? phoneNumberTextControllerValidator;
   DateTime? datePicked;
-  // State field(s) for Height widget.
-  String? heightValue;
-  FormFieldController<String>? heightValueController;
 
   @override
   void initState(BuildContext context) {}

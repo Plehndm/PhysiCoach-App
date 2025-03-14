@@ -219,10 +219,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           asyncParams: {
             'activityDoc':
                 getDoc(['activities'], ActivitiesRecord.fromSnapshot),
+            'runningDataDoc':
+                getDoc(['runningData'], RunningDataRecord.fromSnapshot),
           },
           builder: (context, params) => PerformActivityWidget(
             activityDoc: params.getParam(
               'activityDoc',
+              ParamType.Document,
+            ),
+            runningDataDoc: params.getParam(
+              'runningDataDoc',
               ParamType.Document,
             ),
           ),

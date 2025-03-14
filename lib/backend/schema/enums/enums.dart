@@ -1,25 +1,21 @@
 import 'package:collection/collection.dart';
 
 enum ActivityTypes {
-  Triple_Jump,
-  Running,
-  Long_Jump,
+  tripleJump,
+  running,
+  longJump,
 }
 
 enum Feedback {
-  Great,
-  Good,
-  Improve,
+  great,
+  good,
+  improve,
 }
 
 enum Genders {
-  Male,
-  Female,
-  Other,
-}
-
-enum Heights {
-  Test,
+  male,
+  female,
+  other,
 }
 
 extension FFEnumExtensions<T extends Enum> on T {
@@ -39,8 +35,6 @@ T? deserializeEnum<T>(String? value) {
       return Feedback.values.deserialize(value) as T?;
     case (Genders):
       return Genders.values.deserialize(value) as T?;
-    case (Heights):
-      return Heights.values.deserialize(value) as T?;
     default:
       return null;
   }

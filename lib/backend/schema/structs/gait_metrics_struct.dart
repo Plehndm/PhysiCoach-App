@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 
+import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class GaitMetricsStruct extends FFFirebaseStruct {
@@ -13,12 +14,14 @@ class GaitMetricsStruct extends FFFirebaseStruct {
     double? verticalRatio,
     double? asymmetry,
     DateTime? timestamp,
+    RunningFeedbackStruct? runningFeedback,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _strideLength = strideLength,
         _groundContactTime = groundContactTime,
         _verticalRatio = verticalRatio,
         _asymmetry = asymmetry,
         _timestamp = timestamp,
+        _runningFeedback = runningFeedback,
         super(firestoreUtilData);
 
   // "strideLength" field.
@@ -68,6 +71,18 @@ class GaitMetricsStruct extends FFFirebaseStruct {
 
   bool hasTimestamp() => _timestamp != null;
 
+  // "runningFeedback" field.
+  RunningFeedbackStruct? _runningFeedback;
+  RunningFeedbackStruct get runningFeedback =>
+      _runningFeedback ?? RunningFeedbackStruct();
+  set runningFeedback(RunningFeedbackStruct? val) => _runningFeedback = val;
+
+  void updateRunningFeedback(Function(RunningFeedbackStruct) updateFn) {
+    updateFn(_runningFeedback ??= RunningFeedbackStruct());
+  }
+
+  bool hasRunningFeedback() => _runningFeedback != null;
+
   static GaitMetricsStruct fromMap(Map<String, dynamic> data) =>
       GaitMetricsStruct(
         strideLength: castToType<double>(data['strideLength']),
@@ -75,6 +90,9 @@ class GaitMetricsStruct extends FFFirebaseStruct {
         verticalRatio: castToType<double>(data['verticalRatio']),
         asymmetry: castToType<double>(data['asymmetry']),
         timestamp: data['timestamp'] as DateTime?,
+        runningFeedback: data['runningFeedback'] is RunningFeedbackStruct
+            ? data['runningFeedback']
+            : RunningFeedbackStruct.maybeFromMap(data['runningFeedback']),
       );
 
   static GaitMetricsStruct? maybeFromMap(dynamic data) => data is Map
@@ -87,6 +105,7 @@ class GaitMetricsStruct extends FFFirebaseStruct {
         'verticalRatio': _verticalRatio,
         'asymmetry': _asymmetry,
         'timestamp': _timestamp,
+        'runningFeedback': _runningFeedback?.toMap(),
       }.withoutNulls;
 
   @override
@@ -110,6 +129,10 @@ class GaitMetricsStruct extends FFFirebaseStruct {
         'timestamp': serializeParam(
           _timestamp,
           ParamType.DateTime,
+        ),
+        'runningFeedback': serializeParam(
+          _runningFeedback,
+          ParamType.DataStruct,
         ),
       }.withoutNulls;
 
@@ -140,6 +163,12 @@ class GaitMetricsStruct extends FFFirebaseStruct {
           ParamType.DateTime,
           false,
         ),
+        runningFeedback: deserializeStructParam(
+          data['runningFeedback'],
+          ParamType.DataStruct,
+          false,
+          structBuilder: RunningFeedbackStruct.fromSerializableMap,
+        ),
       );
 
   @override
@@ -152,12 +181,19 @@ class GaitMetricsStruct extends FFFirebaseStruct {
         groundContactTime == other.groundContactTime &&
         verticalRatio == other.verticalRatio &&
         asymmetry == other.asymmetry &&
-        timestamp == other.timestamp;
+        timestamp == other.timestamp &&
+        runningFeedback == other.runningFeedback;
   }
 
   @override
-  int get hashCode => const ListEquality().hash(
-      [strideLength, groundContactTime, verticalRatio, asymmetry, timestamp]);
+  int get hashCode => const ListEquality().hash([
+        strideLength,
+        groundContactTime,
+        verticalRatio,
+        asymmetry,
+        timestamp,
+        runningFeedback
+      ]);
 }
 
 GaitMetricsStruct createGaitMetricsStruct({
@@ -166,6 +202,7 @@ GaitMetricsStruct createGaitMetricsStruct({
   double? verticalRatio,
   double? asymmetry,
   DateTime? timestamp,
+  RunningFeedbackStruct? runningFeedback,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -177,6 +214,8 @@ GaitMetricsStruct createGaitMetricsStruct({
       verticalRatio: verticalRatio,
       asymmetry: asymmetry,
       timestamp: timestamp,
+      runningFeedback: runningFeedback ??
+          (clearUnsetFields ? RunningFeedbackStruct() : null),
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
@@ -233,6 +272,14 @@ Map<String, dynamic> getGaitMetricsFirestoreData(
     return {};
   }
   final firestoreData = mapToFirestore(gaitMetrics.toMap());
+
+  // Handle nested data for "runningFeedback" field.
+  addRunningFeedbackStructData(
+    firestoreData,
+    gaitMetrics.hasRunningFeedback() ? gaitMetrics.runningFeedback : null,
+    'runningFeedback',
+    forFieldValue,
+  );
 
   // Add any Firestore field values
   gaitMetrics.firestoreUtilData.fieldValues

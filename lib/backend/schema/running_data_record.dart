@@ -30,6 +30,12 @@ class RunningDataRecord extends FirestoreRecord {
   List<GaitMetricsStruct> get gaitAnalysies => _gaitAnalysies ?? const [];
   bool hasGaitAnalysies() => _gaitAnalysies != null;
 
+  // "runningLevels" field.
+  RunningLevelsStruct? _runningLevels;
+  RunningLevelsStruct get runningLevels =>
+      _runningLevels ?? RunningLevelsStruct();
+  bool hasRunningLevels() => _runningLevels != null;
+
   void _initializeFields() {
     _id = castToType<int>(snapshotData['id']);
     _user = snapshotData['user'] as DocumentReference?;
@@ -37,6 +43,9 @@ class RunningDataRecord extends FirestoreRecord {
       snapshotData['gaitAnalysies'],
       GaitMetricsStruct.fromMap,
     );
+    _runningLevels = snapshotData['runningLevels'] is RunningLevelsStruct
+        ? snapshotData['runningLevels']
+        : RunningLevelsStruct.maybeFromMap(snapshotData['runningLevels']);
   }
 
   static CollectionReference get collection =>
@@ -76,13 +85,18 @@ class RunningDataRecord extends FirestoreRecord {
 Map<String, dynamic> createRunningDataRecordData({
   int? id,
   DocumentReference? user,
+  RunningLevelsStruct? runningLevels,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'id': id,
       'user': user,
+      'runningLevels': RunningLevelsStruct().toMap(),
     }.withoutNulls,
   );
+
+  // Handle nested data for "runningLevels" field.
+  addRunningLevelsStructData(firestoreData, runningLevels, 'runningLevels');
 
   return firestoreData;
 }
@@ -95,12 +109,13 @@ class RunningDataRecordDocumentEquality implements Equality<RunningDataRecord> {
     const listEquality = ListEquality();
     return e1?.id == e2?.id &&
         e1?.user == e2?.user &&
-        listEquality.equals(e1?.gaitAnalysies, e2?.gaitAnalysies);
+        listEquality.equals(e1?.gaitAnalysies, e2?.gaitAnalysies) &&
+        e1?.runningLevels == e2?.runningLevels;
   }
 
   @override
-  int hash(RunningDataRecord? e) =>
-      const ListEquality().hash([e?.id, e?.user, e?.gaitAnalysies]);
+  int hash(RunningDataRecord? e) => const ListEquality()
+      .hash([e?.id, e?.user, e?.gaitAnalysies, e?.runningLevels]);
 
   @override
   bool isValidKey(Object? o) => o is RunningDataRecord;

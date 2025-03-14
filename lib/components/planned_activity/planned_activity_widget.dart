@@ -123,7 +123,7 @@ class _PlannedActivityWidgetState extends State<PlannedActivityWidget> {
             ),
             child: Stack(
               children: [
-                if (widget.activityDoc?.type == ActivityTypes.Running)
+                if (widget.activityDoc?.type == ActivityTypes.running)
                   Align(
                     alignment: AlignmentDirectional(0.0, 0.0),
                     child: Icon(
@@ -132,7 +132,7 @@ class _PlannedActivityWidgetState extends State<PlannedActivityWidget> {
                       size: 35.0,
                     ),
                   ),
-                if (widget.activityDoc?.type == ActivityTypes.Triple_Jump)
+                if (widget.activityDoc?.type == ActivityTypes.tripleJump)
                   Align(
                     alignment: AlignmentDirectional(0.0, 0.0),
                     child: Icon(
@@ -141,7 +141,7 @@ class _PlannedActivityWidgetState extends State<PlannedActivityWidget> {
                       size: 35.0,
                     ),
                   ),
-                if (widget.activityDoc?.type == ActivityTypes.Long_Jump)
+                if (widget.activityDoc?.type == ActivityTypes.longJump)
                   Align(
                     alignment: AlignmentDirectional(0.0, 0.0),
                     child: Icon(
