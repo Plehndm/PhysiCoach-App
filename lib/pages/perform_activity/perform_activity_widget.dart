@@ -1,5 +1,6 @@
 import '';
 import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
@@ -67,7 +68,19 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
             _model.gaitMetrics = await actions.gaitAnalysis(
               FFAppState().accelerationAS.toList(),
               FFAppState().gyroscopeAS.toList(),
-              GaitMetricsStruct(),
+              GaitMetricsStruct(
+                runningFeedback: RunningFeedbackStruct(
+                  asymmetryFeedback: FeedbackEnum.good,
+                  groundContactTimeFeedback: FeedbackEnum.good,
+                  verticalRatioFeedback: FeedbackEnum.good,
+                  strideLengthFeedback: FeedbackEnum.good,
+                ),
+                strideLength: 29.0,
+                groundContactTime: 200.0,
+                verticalRatio: 10.0,
+                asymmetry: 50.0,
+                timestamp: getCurrentTimestamp,
+              ),
               widget.runningDataDoc!.runningLevels,
             );
             FFAppState().addToGaitAnalysisAS(_model.gaitMetrics!);

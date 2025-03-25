@@ -11,10 +11,10 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class RunningFeedbackStruct extends FFFirebaseStruct {
   RunningFeedbackStruct({
-    Feedback? asymmetryFeedback,
-    Feedback? groundContactTimeFeedback,
-    Feedback? verticalRatioFeedback,
-    Feedback? strideLengthFeedback,
+    FeedbackEnum? asymmetryFeedback,
+    FeedbackEnum? groundContactTimeFeedback,
+    FeedbackEnum? verticalRatioFeedback,
+    FeedbackEnum? strideLengthFeedback,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _asymmetryFeedback = asymmetryFeedback,
         _groundContactTimeFeedback = groundContactTimeFeedback,
@@ -23,49 +23,52 @@ class RunningFeedbackStruct extends FFFirebaseStruct {
         super(firestoreUtilData);
 
   // "asymmetryFeedback" field.
-  Feedback? _asymmetryFeedback;
-  Feedback get asymmetryFeedback => _asymmetryFeedback ?? Feedback.good;
-  set asymmetryFeedback(Feedback? val) => _asymmetryFeedback = val;
+  FeedbackEnum? _asymmetryFeedback;
+  FeedbackEnum get asymmetryFeedback => _asymmetryFeedback ?? FeedbackEnum.good;
+  set asymmetryFeedback(FeedbackEnum? val) => _asymmetryFeedback = val;
 
   bool hasAsymmetryFeedback() => _asymmetryFeedback != null;
 
   // "groundContactTimeFeedback" field.
-  Feedback? _groundContactTimeFeedback;
-  Feedback get groundContactTimeFeedback =>
-      _groundContactTimeFeedback ?? Feedback.good;
-  set groundContactTimeFeedback(Feedback? val) =>
+  FeedbackEnum? _groundContactTimeFeedback;
+  FeedbackEnum get groundContactTimeFeedback =>
+      _groundContactTimeFeedback ?? FeedbackEnum.good;
+  set groundContactTimeFeedback(FeedbackEnum? val) =>
       _groundContactTimeFeedback = val;
 
   bool hasGroundContactTimeFeedback() => _groundContactTimeFeedback != null;
 
   // "verticalRatioFeedback" field.
-  Feedback? _verticalRatioFeedback;
-  Feedback get verticalRatioFeedback => _verticalRatioFeedback ?? Feedback.good;
-  set verticalRatioFeedback(Feedback? val) => _verticalRatioFeedback = val;
+  FeedbackEnum? _verticalRatioFeedback;
+  FeedbackEnum get verticalRatioFeedback =>
+      _verticalRatioFeedback ?? FeedbackEnum.good;
+  set verticalRatioFeedback(FeedbackEnum? val) => _verticalRatioFeedback = val;
 
   bool hasVerticalRatioFeedback() => _verticalRatioFeedback != null;
 
   // "strideLengthFeedback" field.
-  Feedback? _strideLengthFeedback;
-  Feedback get strideLengthFeedback => _strideLengthFeedback ?? Feedback.good;
-  set strideLengthFeedback(Feedback? val) => _strideLengthFeedback = val;
+  FeedbackEnum? _strideLengthFeedback;
+  FeedbackEnum get strideLengthFeedback =>
+      _strideLengthFeedback ?? FeedbackEnum.good;
+  set strideLengthFeedback(FeedbackEnum? val) => _strideLengthFeedback = val;
 
   bool hasStrideLengthFeedback() => _strideLengthFeedback != null;
 
   static RunningFeedbackStruct fromMap(Map<String, dynamic> data) =>
       RunningFeedbackStruct(
-        asymmetryFeedback: data['asymmetryFeedback'] is Feedback
+        asymmetryFeedback: data['asymmetryFeedback'] is FeedbackEnum
             ? data['asymmetryFeedback']
-            : deserializeEnum<Feedback>(data['asymmetryFeedback']),
-        groundContactTimeFeedback: data['groundContactTimeFeedback'] is Feedback
+            : deserializeEnum<FeedbackEnum>(data['asymmetryFeedback']),
+        groundContactTimeFeedback: data['groundContactTimeFeedback']
+                is FeedbackEnum
             ? data['groundContactTimeFeedback']
-            : deserializeEnum<Feedback>(data['groundContactTimeFeedback']),
-        verticalRatioFeedback: data['verticalRatioFeedback'] is Feedback
+            : deserializeEnum<FeedbackEnum>(data['groundContactTimeFeedback']),
+        verticalRatioFeedback: data['verticalRatioFeedback'] is FeedbackEnum
             ? data['verticalRatioFeedback']
-            : deserializeEnum<Feedback>(data['verticalRatioFeedback']),
-        strideLengthFeedback: data['strideLengthFeedback'] is Feedback
+            : deserializeEnum<FeedbackEnum>(data['verticalRatioFeedback']),
+        strideLengthFeedback: data['strideLengthFeedback'] is FeedbackEnum
             ? data['strideLengthFeedback']
-            : deserializeEnum<Feedback>(data['strideLengthFeedback']),
+            : deserializeEnum<FeedbackEnum>(data['strideLengthFeedback']),
       );
 
   static RunningFeedbackStruct? maybeFromMap(dynamic data) => data is Map
@@ -101,22 +104,22 @@ class RunningFeedbackStruct extends FFFirebaseStruct {
 
   static RunningFeedbackStruct fromSerializableMap(Map<String, dynamic> data) =>
       RunningFeedbackStruct(
-        asymmetryFeedback: deserializeParam<Feedback>(
+        asymmetryFeedback: deserializeParam<FeedbackEnum>(
           data['asymmetryFeedback'],
           ParamType.Enum,
           false,
         ),
-        groundContactTimeFeedback: deserializeParam<Feedback>(
+        groundContactTimeFeedback: deserializeParam<FeedbackEnum>(
           data['groundContactTimeFeedback'],
           ParamType.Enum,
           false,
         ),
-        verticalRatioFeedback: deserializeParam<Feedback>(
+        verticalRatioFeedback: deserializeParam<FeedbackEnum>(
           data['verticalRatioFeedback'],
           ParamType.Enum,
           false,
         ),
-        strideLengthFeedback: deserializeParam<Feedback>(
+        strideLengthFeedback: deserializeParam<FeedbackEnum>(
           data['strideLengthFeedback'],
           ParamType.Enum,
           false,
@@ -145,10 +148,10 @@ class RunningFeedbackStruct extends FFFirebaseStruct {
 }
 
 RunningFeedbackStruct createRunningFeedbackStruct({
-  Feedback? asymmetryFeedback,
-  Feedback? groundContactTimeFeedback,
-  Feedback? verticalRatioFeedback,
-  Feedback? strideLengthFeedback,
+  FeedbackEnum? asymmetryFeedback,
+  FeedbackEnum? groundContactTimeFeedback,
+  FeedbackEnum? verticalRatioFeedback,
+  FeedbackEnum? strideLengthFeedback,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,

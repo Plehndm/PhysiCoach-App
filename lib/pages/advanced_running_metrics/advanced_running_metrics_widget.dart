@@ -871,9 +871,23 @@ class _AdvancedRunningMetricsWidgetState
                                           xData: widget
                                               .runningDataDoc!.gaitAnalysies
                                               .map((e) => e.timestamp)
+                                              .toList()
+                                              .where((e) =>
+                                                  (e <=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .firstOrNull!
+                                                          .timestamp) ||
+                                                  (e >=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .lastOrNull!
+                                                          .timestamp))
                                               .toList(),
                                           yData: List.generate(
-                                              random_data.randomInteger(14, 14),
+                                              random_data.randomInteger(2, 2),
                                               (index) => random_data
                                                   .randomInteger(24, 24)),
                                           settings: LineChartBarData(
@@ -887,30 +901,26 @@ class _AdvancedRunningMetricsWidgetState
                                           ),
                                         ),
                                         FFLineChartData(
-                                          xData: List.generate(
-                                              random_data.randomInteger(5, 5),
-                                              (index) =>
-                                                  random_data.randomInteger(
-                                                      valueOrDefault<int>(
-                                                        widget
-                                                            .runningDataDoc
-                                                            ?.gaitAnalysies
-                                                            .firstOrNull
-                                                            ?.timestamp
-                                                            .secondsSinceEpoch,
-                                                        0,
-                                                      ),
-                                                      valueOrDefault<int>(
-                                                        widget
-                                                            .runningDataDoc
-                                                            ?.gaitAnalysies
-                                                            .lastOrNull
-                                                            ?.timestamp
-                                                            .secondsSinceEpoch,
-                                                        0,
-                                                      ))),
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
+                                              .toList()
+                                              .where((e) =>
+                                                  (e <=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .firstOrNull!
+                                                          .timestamp) ||
+                                                  (e >=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .lastOrNull!
+                                                          .timestamp))
+                                              .toList(),
                                           yData: List.generate(
-                                              random_data.randomInteger(14, 14),
+                                              random_data.randomInteger(2, 2),
                                               (index) => random_data
                                                   .randomInteger(29, 29)),
                                           settings: LineChartBarData(
@@ -924,30 +934,26 @@ class _AdvancedRunningMetricsWidgetState
                                           ),
                                         ),
                                         FFLineChartData(
-                                          xData: List.generate(
-                                              random_data.randomInteger(5, 5),
-                                              (index) =>
-                                                  random_data.randomInteger(
-                                                      valueOrDefault<int>(
-                                                        widget
-                                                            .runningDataDoc
-                                                            ?.gaitAnalysies
-                                                            .firstOrNull
-                                                            ?.timestamp
-                                                            .secondsSinceEpoch,
-                                                        0,
-                                                      ),
-                                                      valueOrDefault<int>(
-                                                        widget
-                                                            .runningDataDoc
-                                                            ?.gaitAnalysies
-                                                            .lastOrNull
-                                                            ?.timestamp
-                                                            .secondsSinceEpoch,
-                                                        0,
-                                                      ))),
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
+                                              .toList()
+                                              .where((e) =>
+                                                  (e <=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .firstOrNull!
+                                                          .timestamp) ||
+                                                  (e >=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .lastOrNull!
+                                                          .timestamp))
+                                              .toList(),
                                           yData: List.generate(
-                                              random_data.randomInteger(14, 14),
+                                              random_data.randomInteger(2, 2),
                                               (index) => random_data
                                                   .randomInteger(34, 34)),
                                           settings: LineChartBarData(

@@ -10,8 +10,6 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import '/backend/schema/enums/enums.dart' as enums;
-
 import 'dart:math' as math;
 
 Future<GaitMetricsStruct> gaitAnalysis(
@@ -48,11 +46,11 @@ Future<GaitMetricsStruct> gaitAnalysis(
       stepCount > 0 ? totalStrideLength / stepCount : metrics.strideLength;
 
   if (metrics.strideLength >= runningLevels.strideLengthLevels.great) {
-    metrics.runningFeedback.strideLengthFeedback = enums.Feedback.great;
+    metrics.runningFeedback.strideLengthFeedback = FeedbackEnum.great;
   } else if (metrics.strideLength >= runningLevels.strideLengthLevels.good) {
-    metrics.runningFeedback.strideLengthFeedback = enums.Feedback.good;
+    metrics.runningFeedback.strideLengthFeedback = FeedbackEnum.good;
   } else {
-    metrics.runningFeedback.strideLengthFeedback = enums.Feedback.improve;
+    metrics.runningFeedback.strideLengthFeedback = FeedbackEnum.improve;
   }
 
   // Calculate ground contact time
@@ -82,12 +80,12 @@ Future<GaitMetricsStruct> gaitAnalysis(
 
   if (metrics.groundContactTime >=
       runningLevels.groundContactTimeLevels.great) {
-    metrics.runningFeedback.groundContactTimeFeedback = enums.Feedback.great;
+    metrics.runningFeedback.groundContactTimeFeedback = FeedbackEnum.great;
   } else if (metrics.groundContactTime >=
       runningLevels.groundContactTimeLevels.good) {
-    metrics.runningFeedback.groundContactTimeFeedback = enums.Feedback.good;
+    metrics.runningFeedback.groundContactTimeFeedback = FeedbackEnum.good;
   } else {
-    metrics.runningFeedback.groundContactTimeFeedback = enums.Feedback.improve;
+    metrics.runningFeedback.groundContactTimeFeedback = FeedbackEnum.improve;
   }
 
   // Calculate vertical ratio
@@ -117,11 +115,11 @@ Future<GaitMetricsStruct> gaitAnalysis(
       : metrics.verticalRatio;
 
   if (metrics.verticalRatio >= runningLevels.verticalRatioLevels.great) {
-    metrics.runningFeedback.verticalRatioFeedback = enums.Feedback.great;
+    metrics.runningFeedback.verticalRatioFeedback = FeedbackEnum.great;
   } else if (metrics.verticalRatio >= runningLevels.verticalRatioLevels.good) {
-    metrics.runningFeedback.verticalRatioFeedback = enums.Feedback.good;
+    metrics.runningFeedback.verticalRatioFeedback = FeedbackEnum.good;
   } else {
-    metrics.runningFeedback.verticalRatioFeedback = enums.Feedback.improve;
+    metrics.runningFeedback.verticalRatioFeedback = FeedbackEnum.improve;
   }
 
   // Calculate asymmetry
@@ -180,11 +178,11 @@ Future<GaitMetricsStruct> gaitAnalysis(
   }
 
   if (metrics.asymmetry >= runningLevels.asymmetryLevels.great) {
-    metrics.runningFeedback.asymmetryFeedback = enums.Feedback.great;
+    metrics.runningFeedback.asymmetryFeedback = FeedbackEnum.great;
   } else if (metrics.asymmetry >= runningLevels.asymmetryLevels.good) {
-    metrics.runningFeedback.asymmetryFeedback = enums.Feedback.good;
+    metrics.runningFeedback.asymmetryFeedback = FeedbackEnum.good;
   } else {
-    metrics.runningFeedback.asymmetryFeedback = enums.Feedback.improve;
+    metrics.runningFeedback.asymmetryFeedback = FeedbackEnum.improve;
   }
 
   // Set Timestamp

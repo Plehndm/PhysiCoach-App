@@ -6,7 +6,7 @@ enum ActivityTypes {
   longJump,
 }
 
-enum Feedback {
+enum FeedbackEnum {
   great,
   good,
   improve,
@@ -31,8 +31,8 @@ T? deserializeEnum<T>(String? value) {
   switch (T) {
     case (ActivityTypes):
       return ActivityTypes.values.deserialize(value) as T?;
-    case (Feedback):
-      return Feedback.values.deserialize(value) as T?;
+    case (FeedbackEnum):
+      return FeedbackEnum.values.deserialize(value) as T?;
     case (Genders):
       return Genders.values.deserialize(value) as T?;
     default:
