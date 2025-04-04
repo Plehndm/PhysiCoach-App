@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -145,6 +146,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'runningDataDoc',
               ParamType.Document,
             ),
+            overallFeedback: params.getParam<FeedbackEnum>(
+              'overallFeedback',
+              ParamType.Enum,
+              isList: true,
+            ),
           ),
         ),
         FFRoute(
@@ -219,16 +225,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           asyncParams: {
             'activityDoc':
                 getDoc(['activities'], ActivitiesRecord.fromSnapshot),
-            'runningDataDoc':
-                getDoc(['runningData'], RunningDataRecord.fromSnapshot),
           },
           builder: (context, params) => PerformActivityWidget(
             activityDoc: params.getParam(
               'activityDoc',
-              ParamType.Document,
-            ),
-            runningDataDoc: params.getParam(
-              'runningDataDoc',
               ParamType.Document,
             ),
           ),

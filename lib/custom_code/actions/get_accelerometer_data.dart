@@ -35,6 +35,6 @@ Future<AccelerationDataStruct?> getAccelerometerData(
     },
     cancelOnError: true,
   ));
-
+  _streamSubscriptions[0].cancel();
   return accelerationData;
 }

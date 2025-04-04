@@ -80,15 +80,20 @@ class _ActivityWidgetState extends State<ActivityWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
                 child: Text(
                   valueOrDefault<String>(
-                    (int seconds) {
-                      return (seconds / 60).toString().padLeft(2, "0") +
+                    (int milliseconds) {
+                      return ((milliseconds ~/ 1000) ~/ 60)
+                              .toString()
+                              .padLeft(2, "0") +
                           ":" +
-                          (seconds % 60).toString().padRight(2, "0");
+                          ((milliseconds ~/ 1000) -
+                                  (60 * (milliseconds ~/ 1000 ~/ 60)))
+                              .toString()
+                              .padLeft(2, "0");
                     }(valueOrDefault<int>(
-                      widget.activitiesDoc?.seconds,
-                      60,
+                      widget.activitiesDoc?.milliseconds,
+                      0,
                     )),
-                    '01:00',
+                    '00:00',
                   ),
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
                         fontFamily: 'Inter',

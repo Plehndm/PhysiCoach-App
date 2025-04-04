@@ -1,10 +1,12 @@
 import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'advanced_running_metrics_model.dart';
 export 'advanced_running_metrics_model.dart';
 
@@ -12,9 +14,11 @@ class AdvancedRunningMetricsWidget extends StatefulWidget {
   const AdvancedRunningMetricsWidget({
     super.key,
     required this.runningDataDoc,
+    required this.overallFeedback,
   });
 
   final RunningDataRecord? runningDataDoc;
+  final List<FeedbackEnum>? overallFeedback;
 
   static String routeName = 'advancedRunningMetrics';
   static String routePath = '/advancedRunningMetrics';
@@ -34,6 +38,16 @@ class _AdvancedRunningMetricsWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => AdvancedRunningMetricsModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.asymmetryOverall = widget.overallFeedback?.firstOrNull;
+      _model.groundContactTimeOverall =
+          widget.overallFeedback?.elementAtOrNull(1);
+      _model.verticalRatioOverall = widget.overallFeedback?.elementAtOrNull(2);
+      _model.strideLengthOverall = widget.overallFeedback?.lastOrNull;
+      safeSetState(() {});
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -153,17 +167,60 @@ class _AdvancedRunningMetricsWidgetState
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
-                                          Text(
-                                            'Great',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  color: Color(0xFF007ADC),
-                                                  fontSize: 20.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w600,
+                                          Stack(
+                                            children: [
+                                              if (_model.asymmetryOverall ==
+                                                  FeedbackEnum.great)
+                                                Text(
+                                                  'Great',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            Color(0xFF007ADC),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
                                                 ),
+                                              if (_model.asymmetryOverall ==
+                                                  FeedbackEnum.good)
+                                                Text(
+                                                  'Good',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            Color(0xFF00B81B),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                ),
+                                              if (_model.asymmetryOverall ==
+                                                  FeedbackEnum.improve)
+                                                Text(
+                                                  'Improve',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            Color(0xFFFF6F00),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -278,6 +335,105 @@ class _AdvancedRunningMetricsWidgetState
                                                 .primaryText,
                                             barWidth: 0.0,
                                           ),
+                                        ),
+                                        FFLineChartData(
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
+                                              .toList()
+                                              .where((e) =>
+                                                  (e <=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .firstOrNull!
+                                                          .timestamp) ||
+                                                  (e >=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .lastOrNull!
+                                                          .timestamp))
+                                              .toList(),
+                                          yData: List.generate(
+                                              random_data.randomInteger(2, 2),
+                                              (index) => random_data
+                                                  .randomInteger(40, 40)),
+                                          settings: LineChartBarData(
+                                            color: Color(0xFFFF6F00),
+                                            barWidth: 2.0,
+                                            dotData: FlDotData(show: false),
+                                            belowBarData: BarAreaData(
+                                              show: true,
+                                              color: Color(0x3FFF6F00),
+                                            ),
+                                          ),
+                                        ),
+                                        FFLineChartData(
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
+                                              .toList()
+                                              .where((e) =>
+                                                  (e <=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .firstOrNull!
+                                                          .timestamp) ||
+                                                  (e >=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .lastOrNull!
+                                                          .timestamp))
+                                              .toList(),
+                                          yData: List.generate(
+                                              random_data.randomInteger(2, 2),
+                                              (index) => random_data
+                                                  .randomInteger(45, 45)),
+                                          settings: LineChartBarData(
+                                            color: Color(0xFF00B81B),
+                                            barWidth: 2.0,
+                                            dotData: FlDotData(show: false),
+                                            belowBarData: BarAreaData(
+                                              show: true,
+                                              color: Color(0x3F00B81B),
+                                            ),
+                                          ),
+                                        ),
+                                        FFLineChartData(
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
+                                              .toList()
+                                              .where((e) =>
+                                                  (e <=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .firstOrNull!
+                                                          .timestamp) ||
+                                                  (e >=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .lastOrNull!
+                                                          .timestamp))
+                                              .toList(),
+                                          yData: List.generate(
+                                              random_data.randomInteger(2, 2),
+                                              (index) => random_data
+                                                  .randomInteger(50, 50)),
+                                          settings: LineChartBarData(
+                                            color: Color(0xFF007ADC),
+                                            barWidth: 2.0,
+                                            dotData: FlDotData(show: false),
+                                            belowBarData: BarAreaData(
+                                              show: true,
+                                              color: Color(0x3F007ADC),
+                                            ),
+                                          ),
                                         )
                                       ],
                                       chartStylingInfo: ChartStylingInfo(
@@ -349,17 +505,63 @@ class _AdvancedRunningMetricsWidgetState
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
-                                          Text(
-                                            'Good',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  color: Color(0xFF00B81B),
-                                                  fontSize: 20.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w600,
+                                          Stack(
+                                            children: [
+                                              if (_model
+                                                      .groundContactTimeOverall ==
+                                                  FeedbackEnum.great)
+                                                Text(
+                                                  'Great',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            Color(0xFF007ADC),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
                                                 ),
+                                              if (_model
+                                                      .groundContactTimeOverall ==
+                                                  FeedbackEnum.good)
+                                                Text(
+                                                  'Good',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            Color(0xFF00B81B),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                ),
+                                              if (_model
+                                                      .groundContactTimeOverall ==
+                                                  FeedbackEnum.improve)
+                                                Text(
+                                                  'Improve',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            Color(0xFFFF6F00),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -474,6 +676,105 @@ class _AdvancedRunningMetricsWidgetState
                                                 .primaryText,
                                             barWidth: 0.0,
                                           ),
+                                        ),
+                                        FFLineChartData(
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
+                                              .toList()
+                                              .where((e) =>
+                                                  (e <=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .firstOrNull!
+                                                          .timestamp) ||
+                                                  (e >=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .lastOrNull!
+                                                          .timestamp))
+                                              .toList(),
+                                          yData: List.generate(
+                                              random_data.randomInteger(2, 2),
+                                              (index) => random_data
+                                                  .randomInteger(210, 210)),
+                                          settings: LineChartBarData(
+                                            color: Color(0xFFFF6F00),
+                                            barWidth: 2.0,
+                                            dotData: FlDotData(show: false),
+                                            belowBarData: BarAreaData(
+                                              show: true,
+                                              color: Color(0x3FFF6F00),
+                                            ),
+                                          ),
+                                        ),
+                                        FFLineChartData(
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
+                                              .toList()
+                                              .where((e) =>
+                                                  (e <=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .firstOrNull!
+                                                          .timestamp) ||
+                                                  (e >=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .lastOrNull!
+                                                          .timestamp))
+                                              .toList(),
+                                          yData: List.generate(
+                                              random_data.randomInteger(2, 2),
+                                              (index) => random_data
+                                                  .randomInteger(200, 200)),
+                                          settings: LineChartBarData(
+                                            color: Color(0xFF00B81B),
+                                            barWidth: 2.0,
+                                            dotData: FlDotData(show: false),
+                                            belowBarData: BarAreaData(
+                                              show: true,
+                                              color: Color(0x3F00B81B),
+                                            ),
+                                          ),
+                                        ),
+                                        FFLineChartData(
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
+                                              .toList()
+                                              .where((e) =>
+                                                  (e <=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .firstOrNull!
+                                                          .timestamp) ||
+                                                  (e >=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .lastOrNull!
+                                                          .timestamp))
+                                              .toList(),
+                                          yData: List.generate(
+                                              random_data.randomInteger(2, 2),
+                                              (index) => random_data
+                                                  .randomInteger(190, 190)),
+                                          settings: LineChartBarData(
+                                            color: Color(0xFF007ADC),
+                                            barWidth: 2.0,
+                                            dotData: FlDotData(show: false),
+                                            belowBarData: BarAreaData(
+                                              show: true,
+                                              color: Color(0x3F007ADC),
+                                            ),
+                                          ),
                                         )
                                       ],
                                       chartStylingInfo: ChartStylingInfo(
@@ -545,17 +846,60 @@ class _AdvancedRunningMetricsWidgetState
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
-                                          Text(
-                                            'Good',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  color: Color(0xFF00B81B),
-                                                  fontSize: 20.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w600,
+                                          Stack(
+                                            children: [
+                                              if (_model.verticalRatioOverall ==
+                                                  FeedbackEnum.great)
+                                                Text(
+                                                  'Great',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            Color(0xFF007ADC),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
                                                 ),
+                                              if (_model.verticalRatioOverall ==
+                                                  FeedbackEnum.good)
+                                                Text(
+                                                  'Good',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            Color(0xFF00B81B),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                ),
+                                              if (_model.verticalRatioOverall ==
+                                                  FeedbackEnum.improve)
+                                                Text(
+                                                  'Improve',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            Color(0xFFFF6F00),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -670,6 +1014,105 @@ class _AdvancedRunningMetricsWidgetState
                                                 .primaryText,
                                             barWidth: 0.0,
                                           ),
+                                        ),
+                                        FFLineChartData(
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
+                                              .toList()
+                                              .where((e) =>
+                                                  (e <=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .firstOrNull!
+                                                          .timestamp) ||
+                                                  (e >=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .lastOrNull!
+                                                          .timestamp))
+                                              .toList(),
+                                          yData: List.generate(
+                                              random_data.randomInteger(2, 2),
+                                              (index) => random_data
+                                                  .randomInteger(12, 12)),
+                                          settings: LineChartBarData(
+                                            color: Color(0xFFFF6F00),
+                                            barWidth: 2.0,
+                                            dotData: FlDotData(show: false),
+                                            belowBarData: BarAreaData(
+                                              show: true,
+                                              color: Color(0x3FFF6F00),
+                                            ),
+                                          ),
+                                        ),
+                                        FFLineChartData(
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
+                                              .toList()
+                                              .where((e) =>
+                                                  (e <=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .firstOrNull!
+                                                          .timestamp) ||
+                                                  (e >=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .lastOrNull!
+                                                          .timestamp))
+                                              .toList(),
+                                          yData: List.generate(
+                                              random_data.randomInteger(2, 2),
+                                              (index) => random_data
+                                                  .randomInteger(10, 10)),
+                                          settings: LineChartBarData(
+                                            color: Color(0xFF00B81B),
+                                            barWidth: 2.0,
+                                            dotData: FlDotData(show: false),
+                                            belowBarData: BarAreaData(
+                                              show: true,
+                                              color: Color(0x3F00B81B),
+                                            ),
+                                          ),
+                                        ),
+                                        FFLineChartData(
+                                          xData: widget
+                                              .runningDataDoc!.gaitAnalysies
+                                              .map((e) => e.timestamp)
+                                              .toList()
+                                              .where((e) =>
+                                                  (e <=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .firstOrNull!
+                                                          .timestamp) ||
+                                                  (e >=
+                                                      widget
+                                                          .runningDataDoc!
+                                                          .gaitAnalysies
+                                                          .lastOrNull!
+                                                          .timestamp))
+                                              .toList(),
+                                          yData: List.generate(
+                                              random_data.randomInteger(2, 2),
+                                              (index) => random_data
+                                                  .randomInteger(8, 8)),
+                                          settings: LineChartBarData(
+                                            color: Color(0xFF007ADC),
+                                            barWidth: 2.0,
+                                            dotData: FlDotData(show: false),
+                                            belowBarData: BarAreaData(
+                                              show: true,
+                                              color: Color(0x3F007ADC),
+                                            ),
+                                          ),
                                         )
                                       ],
                                       chartStylingInfo: ChartStylingInfo(
@@ -741,17 +1184,60 @@ class _AdvancedRunningMetricsWidgetState
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
-                                          Text(
-                                            'Good',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  color: Color(0xFF00B81B),
-                                                  fontSize: 20.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w600,
+                                          Stack(
+                                            children: [
+                                              if (_model.strideLengthOverall ==
+                                                  FeedbackEnum.great)
+                                                Text(
+                                                  'Great',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            Color(0xFF007ADC),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
                                                 ),
+                                              if (_model.strideLengthOverall ==
+                                                  FeedbackEnum.good)
+                                                Text(
+                                                  'Good',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            Color(0xFF00B81B),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                ),
+                                              if (_model.strideLengthOverall ==
+                                                  FeedbackEnum.improve)
+                                                Text(
+                                                  'Improve',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            Color(0xFFFF6F00),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                ),
+                                            ],
                                           ),
                                         ],
                                       ),

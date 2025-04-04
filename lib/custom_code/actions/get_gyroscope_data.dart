@@ -35,6 +35,6 @@ Future<GyroscopeDataStruct?> getGyroscopeData(
     },
     cancelOnError: true,
   ));
-
+  _streamSubscriptions[0].cancel();
   return gyroscopeData;
 }

@@ -36,11 +36,6 @@ class ActivitiesRecord extends FirestoreRecord {
   DocumentReference? get user => _user;
   bool hasUser() => _user != null;
 
-  // "seconds" field.
-  int? _seconds;
-  int get seconds => _seconds ?? 0;
-  bool hasSeconds() => _seconds != null;
-
   // "id" field.
   int? _id;
   int get id => _id ?? 0;
@@ -56,6 +51,11 @@ class ActivitiesRecord extends FirestoreRecord {
   DateStruct get date => _date ?? DateStruct();
   bool hasDate() => _date != null;
 
+  // "milliseconds" field.
+  int? _milliseconds;
+  int get milliseconds => _milliseconds ?? 0;
+  bool hasMilliseconds() => _milliseconds != null;
+
   void _initializeFields() {
     _type = snapshotData['type'] is ActivityTypes
         ? snapshotData['type']
@@ -63,12 +63,12 @@ class ActivitiesRecord extends FirestoreRecord {
     _title = snapshotData['title'] as String?;
     _description = snapshotData['description'] as String?;
     _user = snapshotData['user'] as DocumentReference?;
-    _seconds = castToType<int>(snapshotData['seconds']);
     _id = castToType<int>(snapshotData['id']);
     _completed = snapshotData['completed'] as bool?;
     _date = snapshotData['date'] is DateStruct
         ? snapshotData['date']
         : DateStruct.maybeFromMap(snapshotData['date']);
+    _milliseconds = castToType<int>(snapshotData['milliseconds']);
   }
 
   static CollectionReference get collection =>
@@ -110,10 +110,10 @@ Map<String, dynamic> createActivitiesRecordData({
   String? title,
   String? description,
   DocumentReference? user,
-  int? seconds,
   int? id,
   bool? completed,
   DateStruct? date,
+  int? milliseconds,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -121,10 +121,10 @@ Map<String, dynamic> createActivitiesRecordData({
       'title': title,
       'description': description,
       'user': user,
-      'seconds': seconds,
       'id': id,
       'completed': completed,
       'date': DateStruct().toMap(),
+      'milliseconds': milliseconds,
     }.withoutNulls,
   );
 
@@ -143,10 +143,10 @@ class ActivitiesRecordDocumentEquality implements Equality<ActivitiesRecord> {
         e1?.title == e2?.title &&
         e1?.description == e2?.description &&
         e1?.user == e2?.user &&
-        e1?.seconds == e2?.seconds &&
         e1?.id == e2?.id &&
         e1?.completed == e2?.completed &&
-        e1?.date == e2?.date;
+        e1?.date == e2?.date &&
+        e1?.milliseconds == e2?.milliseconds;
   }
 
   @override
@@ -155,10 +155,10 @@ class ActivitiesRecordDocumentEquality implements Equality<ActivitiesRecord> {
         e?.title,
         e?.description,
         e?.user,
-        e?.seconds,
         e?.id,
         e?.completed,
-        e?.date
+        e?.date,
+        e?.milliseconds
       ]);
 
   @override

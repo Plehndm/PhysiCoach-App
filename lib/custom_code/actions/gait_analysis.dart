@@ -18,7 +18,7 @@ Future<GaitMetricsStruct> gaitAnalysis(
   GaitMetricsStruct metrics,
   RunningLevelsStruct runningLevels,
 ) async {
-  // Calculate stride length
+  //------------------------------------------Calculate stride length----------------------------------------------
   double totalStrideLength = 0;
   int stepCount = 0;
   for (int i = 1; i < accelerometerData.length; i++) {
@@ -53,7 +53,7 @@ Future<GaitMetricsStruct> gaitAnalysis(
     metrics.runningFeedback.strideLengthFeedback = FeedbackEnum.improve;
   }
 
-  // Calculate ground contact time
+  //-----------------------------------Calculate ground contact time---------------------------------------
   double totalContactTime = 0;
   DateTime? stepStartTime;
   for (int i = 0; i < accelerometerData.length; i++) {
@@ -78,17 +78,17 @@ Future<GaitMetricsStruct> gaitAnalysis(
   metrics.groundContactTime =
       totalContactTime > 0 ? totalContactTime : metrics.groundContactTime;
 
-  if (metrics.groundContactTime >=
+  if (metrics.groundContactTime <=
       runningLevels.groundContactTimeLevels.great) {
     metrics.runningFeedback.groundContactTimeFeedback = FeedbackEnum.great;
-  } else if (metrics.groundContactTime >=
+  } else if (metrics.groundContactTime <=
       runningLevels.groundContactTimeLevels.good) {
     metrics.runningFeedback.groundContactTimeFeedback = FeedbackEnum.good;
   } else {
     metrics.runningFeedback.groundContactTimeFeedback = FeedbackEnum.improve;
   }
 
-  // Calculate vertical ratio
+  //------------------------------------Calculate vertical ratio------------------------------------------
   double totalVerticalOscillation = 0;
   stepCount = 0;
 
@@ -114,15 +114,15 @@ Future<GaitMetricsStruct> gaitAnalysis(
       ? avgVerticalOscillation / strideLength
       : metrics.verticalRatio;
 
-  if (metrics.verticalRatio >= runningLevels.verticalRatioLevels.great) {
+  if (metrics.verticalRatio <= runningLevels.verticalRatioLevels.great) {
     metrics.runningFeedback.verticalRatioFeedback = FeedbackEnum.great;
-  } else if (metrics.verticalRatio >= runningLevels.verticalRatioLevels.good) {
+  } else if (metrics.verticalRatio <= runningLevels.verticalRatioLevels.good) {
     metrics.runningFeedback.verticalRatioFeedback = FeedbackEnum.good;
   } else {
     metrics.runningFeedback.verticalRatioFeedback = FeedbackEnum.improve;
   }
 
-  // Calculate asymmetry
+  //----------------------------------------Calculate asymmetry-------------------------------------------
   double totalLeftStepTime = 0;
   double totalRightStepTime = 0;
   int leftSteps = 0;
@@ -185,7 +185,7 @@ Future<GaitMetricsStruct> gaitAnalysis(
     metrics.runningFeedback.asymmetryFeedback = FeedbackEnum.improve;
   }
 
-  // Set Timestamp
+  //----------------------------------------Set Timestamp--------------------------------------------
   metrics.timestamp = DateTime.now();
 
   return metrics;

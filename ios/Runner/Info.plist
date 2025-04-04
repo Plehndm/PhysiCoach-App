@@ -61,6 +61,7 @@
     <string>This app requires access to the accelerometer to provide acceleration information.</string>
 
 
+
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

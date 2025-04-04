@@ -1,4 +1,4 @@
-import '';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -8,8 +8,10 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/instant_timer.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/random_data_util.dart' as random_data;
 import '/index.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -20,11 +22,9 @@ class PerformActivityWidget extends StatefulWidget {
   const PerformActivityWidget({
     super.key,
     required this.activityDoc,
-    required this.runningDataDoc,
   });
 
   final ActivitiesRecord? activityDoc;
-  final RunningDataRecord? runningDataDoc;
 
   static String routeName = 'performActivity';
   static String routePath = '/performActivity';
@@ -45,6 +45,23 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.runningDataDocQuery = await queryRunningDataRecordOnce(
+        queryBuilder: (runningDataRecord) => runningDataRecord
+            .where(
+              'user',
+              isEqualTo: currentUserReference,
+            )
+            .where(
+              'id',
+              isEqualTo: valueOrDefault<int>(
+                widget.activityDoc?.id,
+                0,
+              ),
+            ),
+        singleRecord: true,
+      ).then((s) => s.firstOrNull);
+      _model.runningDataDoc = _model.runningDataDocQuery;
+      safeSetState(() {});
       await Future.delayed(const Duration(milliseconds: 1000));
       _model.dataCollection = InstantTimer.periodic(
         duration: Duration(milliseconds: 1000),
@@ -53,12 +70,40 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
             await Future.wait([
               Future(() async {
                 _model.accellData = await actions.getAccelerometerData(
-                  AccelerationDataStruct(),
+                  AccelerationDataStruct(
+                    xAccel: valueOrDefault<double>(
+                      random_data.randomDouble(0.0, 2.0),
+                      2.0,
+                    ),
+                    yAccel: valueOrDefault<double>(
+                      random_data.randomDouble(0.0, 2.0),
+                      2.0,
+                    ),
+                    zAccel: valueOrDefault<double>(
+                      random_data.randomDouble(0.0, 2.0),
+                      2.0,
+                    ),
+                    timestamp: getCurrentTimestamp,
+                  ),
                 );
               }),
               Future(() async {
                 _model.gyroData = await actions.getGyroscopeData(
-                  GyroscopeDataStruct(),
+                  GyroscopeDataStruct(
+                    xGyro: valueOrDefault<double>(
+                      random_data.randomDouble(0.0, 2.0),
+                      2.0,
+                    ),
+                    yGyro: valueOrDefault<double>(
+                      random_data.randomDouble(0.0, 2.0),
+                      2.0,
+                    ),
+                    zGyro: valueOrDefault<double>(
+                      random_data.randomDouble(0.0, 2.0),
+                      2.0,
+                    ),
+                    timestamp: getCurrentTimestamp,
+                  ),
                 );
               }),
             ]);
@@ -81,7 +126,7 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                 asymmetry: 50.0,
                 timestamp: getCurrentTimestamp,
               ),
-              widget.runningDataDoc!.runningLevels,
+              _model.runningDataDoc!.runningLevels,
             );
             FFAppState().addToGaitAnalysisAS(_model.gaitMetrics!);
             safeSetState(() {});
@@ -479,108 +524,111 @@ class _PerformActivityWidgetState extends State<PerformActivityWidget> {
                               ),
                           ],
                         ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 20.0, 0.0, 0.0),
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              _model.dataCollection?.cancel();
-                              await Future.wait([
-                                Future(() async {
-                                  await widget.activityDoc!.reference
-                                      .update(createActivitiesRecordData(
-                                    completed: true,
-                                  ));
-                                }),
-                                Future(() async {
-                                  await performActivityAccelerometerDataRecord!
-                                      .reference
-                                      .update({
-                                    ...mapToFirestore(
-                                      {
-                                        'accelerations':
-                                            getAccelerationDataListFirestoreData(
-                                          FFAppState().accelerationAS,
-                                        ),
-                                      },
-                                    ),
-                                  });
-                                }),
-                                Future(() async {
-                                  await columnGyroscopeDataRecord!.reference
-                                      .update({
-                                    ...mapToFirestore(
-                                      {
-                                        'data':
-                                            getGyroscopeDataListFirestoreData(
-                                          FFAppState().gyroscopeAS,
-                                        ),
-                                      },
-                                    ),
-                                  });
-                                }),
-                                Future(() async {
-                                  await widget.runningDataDoc!.reference
-                                      .update({
-                                    ...mapToFirestore(
-                                      {
-                                        'gaitAnalysies':
-                                            getGaitMetricsListFirestoreData(
-                                          FFAppState().gaitAnalysisAS,
-                                        ),
-                                      },
-                                    ),
-                                  });
-                                }),
-                              ]);
-                              FFAppState().accelerationAS = [];
-                              FFAppState().gyroscopeAS = [];
-                              FFAppState().gaitAnalysisAS = [];
-                              safeSetState(() {});
+                        if (!_model.isRecordingData)
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 20.0, 0.0, 0.0),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                _model.dataCollection?.cancel();
+                                await Future.wait([
+                                  Future(() async {
+                                    await widget.activityDoc!.reference
+                                        .update(createActivitiesRecordData(
+                                      completed: true,
+                                      milliseconds: _model.timerMilliseconds,
+                                    ));
+                                  }),
+                                  Future(() async {
+                                    await performActivityAccelerometerDataRecord!
+                                        .reference
+                                        .update({
+                                      ...mapToFirestore(
+                                        {
+                                          'accelerations':
+                                              getAccelerationDataListFirestoreData(
+                                            FFAppState().accelerationAS,
+                                          ),
+                                        },
+                                      ),
+                                    });
+                                  }),
+                                  Future(() async {
+                                    await columnGyroscopeDataRecord!.reference
+                                        .update({
+                                      ...mapToFirestore(
+                                        {
+                                          'data':
+                                              getGyroscopeDataListFirestoreData(
+                                            FFAppState().gyroscopeAS,
+                                          ),
+                                        },
+                                      ),
+                                    });
+                                  }),
+                                  Future(() async {
+                                    await _model.runningDataDoc!.reference
+                                        .update({
+                                      ...mapToFirestore(
+                                        {
+                                          'gaitAnalysies':
+                                              getGaitMetricsListFirestoreData(
+                                            FFAppState().gaitAnalysisAS,
+                                          ),
+                                        },
+                                      ),
+                                    });
+                                  }),
+                                ]);
+                                FFAppState().accelerationAS = [];
+                                FFAppState().gyroscopeAS = [];
+                                FFAppState().gaitAnalysisAS = [];
+                                safeSetState(() {});
 
-                              context.goNamed(
-                                HomeWidget.routeName,
-                                extra: <String, dynamic>{
-                                  kTransitionInfoKey: TransitionInfo(
-                                    hasTransition: true,
-                                    transitionType: PageTransitionType.fade,
-                                    duration: Duration(milliseconds: 0),
-                                  ),
-                                },
-                              );
-                            },
-                            text: 'Complete Activity',
-                            icon: Icon(
-                              Icons.check_outlined,
-                              size: 24.0,
-                            ),
-                            options: FFButtonOptions(
-                              height: 40.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 16.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: 'Inter',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    fontSize: 20.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                              elevation: 0.0,
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                width: 1.0,
+                                context.goNamed(
+                                  HomeWidget.routeName,
+                                  extra: <String, dynamic>{
+                                    kTransitionInfoKey: TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType: PageTransitionType.fade,
+                                      duration: Duration(milliseconds: 0),
+                                    ),
+                                  },
+                                );
+                              },
+                              text: 'Complete Activity',
+                              icon: Icon(
+                                Icons.check_outlined,
+                                size: 24.0,
                               ),
-                              borderRadius: BorderRadius.circular(12.0),
+                              options: FFButtonOptions(
+                                height: 40.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 16.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 20.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                elevation: 0.0,
+                                borderSide: BorderSide(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
                             ),
                           ),
-                        ),
                         Text(
                           'Accel: ${FFAppState().accelerationAS.length.toString()}',
                           style:
