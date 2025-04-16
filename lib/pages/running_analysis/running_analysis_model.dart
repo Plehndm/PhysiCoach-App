@@ -8,14 +8,6 @@ import 'package:flutter/material.dart';
 class RunningAnalysisModel extends FlutterFlowModel<RunningAnalysisWidget> {
   ///  Local state fields for this page.
 
-  FeedbackEnum? asymmetryOverall = FeedbackEnum.good;
-
-  FeedbackEnum? groundContactTimeOverall = FeedbackEnum.good;
-
-  FeedbackEnum? verticalRatioOverall = FeedbackEnum.good;
-
-  FeedbackEnum? strideLengthOverall = FeedbackEnum.good;
-
   RunningDataRecord? runningDataDoc;
 
   List<FeedbackEnum> overallFeedback = [];
@@ -36,38 +28,42 @@ class RunningAnalysisModel extends FlutterFlowModel<RunningAnalysisWidget> {
   RunningDataRecord? runningDataDocQuery;
   // Stores action output result for [Custom Action - getOverallFeedback] action in runningAnalysis widget.
   List<FeedbackEnum>? overallFeedbackOutput;
-  // State field(s) for PageView widget.
-  PageController? pageViewController1;
+  // State field(s) for Asymmetry-PageView widget.
+  PageController? asymmetryPageViewController;
 
-  int get pageViewCurrentIndex1 => pageViewController1 != null &&
-          pageViewController1!.hasClients &&
-          pageViewController1!.page != null
-      ? pageViewController1!.page!.round()
-      : 0;
-  // State field(s) for PageView widget.
-  PageController? pageViewController2;
+  int get asymmetryPageViewCurrentIndex =>
+      asymmetryPageViewController != null &&
+              asymmetryPageViewController!.hasClients &&
+              asymmetryPageViewController!.page != null
+          ? asymmetryPageViewController!.page!.round()
+          : 0;
+  // State field(s) for GroundContactTime-PageView widget.
+  PageController? groundContactTimePageViewController;
 
-  int get pageViewCurrentIndex2 => pageViewController2 != null &&
-          pageViewController2!.hasClients &&
-          pageViewController2!.page != null
-      ? pageViewController2!.page!.round()
-      : 0;
-  // State field(s) for PageView widget.
-  PageController? pageViewController3;
+  int get groundContactTimePageViewCurrentIndex =>
+      groundContactTimePageViewController != null &&
+              groundContactTimePageViewController!.hasClients &&
+              groundContactTimePageViewController!.page != null
+          ? groundContactTimePageViewController!.page!.round()
+          : 0;
+  // State field(s) for VerticalRatio-PageView widget.
+  PageController? verticalRatioPageViewController;
 
-  int get pageViewCurrentIndex3 => pageViewController3 != null &&
-          pageViewController3!.hasClients &&
-          pageViewController3!.page != null
-      ? pageViewController3!.page!.round()
-      : 0;
-  // State field(s) for PageView widget.
-  PageController? pageViewController4;
+  int get verticalRatioPageViewCurrentIndex =>
+      verticalRatioPageViewController != null &&
+              verticalRatioPageViewController!.hasClients &&
+              verticalRatioPageViewController!.page != null
+          ? verticalRatioPageViewController!.page!.round()
+          : 0;
+  // State field(s) for StrideLength-PageView widget.
+  PageController? strideLengthPageViewController;
 
-  int get pageViewCurrentIndex4 => pageViewController4 != null &&
-          pageViewController4!.hasClients &&
-          pageViewController4!.page != null
-      ? pageViewController4!.page!.round()
-      : 0;
+  int get strideLengthPageViewCurrentIndex =>
+      strideLengthPageViewController != null &&
+              strideLengthPageViewController!.hasClients &&
+              strideLengthPageViewController!.page != null
+          ? strideLengthPageViewController!.page!.round()
+          : 0;
 
   @override
   void initState(BuildContext context) {}

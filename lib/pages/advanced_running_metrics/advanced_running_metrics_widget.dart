@@ -333,7 +333,9 @@ class _AdvancedRunningMetricsWidgetState
                                           settings: LineChartBarData(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            barWidth: 0.0,
+                                            barWidth: 1.0,
+                                            isCurved: true,
+                                            preventCurveOverShooting: true,
                                           ),
                                         ),
                                         FFLineChartData(
@@ -363,10 +365,6 @@ class _AdvancedRunningMetricsWidgetState
                                             color: Color(0xFFFF6F00),
                                             barWidth: 2.0,
                                             dotData: FlDotData(show: false),
-                                            belowBarData: BarAreaData(
-                                              show: true,
-                                              color: Color(0x3FFF6F00),
-                                            ),
                                           ),
                                         ),
                                         FFLineChartData(
@@ -396,10 +394,6 @@ class _AdvancedRunningMetricsWidgetState
                                             color: Color(0xFF00B81B),
                                             barWidth: 2.0,
                                             dotData: FlDotData(show: false),
-                                            belowBarData: BarAreaData(
-                                              show: true,
-                                              color: Color(0x3F00B81B),
-                                            ),
                                           ),
                                         ),
                                         FFLineChartData(
@@ -429,10 +423,6 @@ class _AdvancedRunningMetricsWidgetState
                                             color: Color(0xFF007ADC),
                                             barWidth: 2.0,
                                             dotData: FlDotData(show: false),
-                                            belowBarData: BarAreaData(
-                                              show: true,
-                                              color: Color(0x3F007ADC),
-                                            ),
                                           ),
                                         )
                                       ],
@@ -674,7 +664,9 @@ class _AdvancedRunningMetricsWidgetState
                                           settings: LineChartBarData(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            barWidth: 0.0,
+                                            barWidth: 1.0,
+                                            isCurved: true,
+                                            preventCurveOverShooting: true,
                                           ),
                                         ),
                                         FFLineChartData(
@@ -704,10 +696,6 @@ class _AdvancedRunningMetricsWidgetState
                                             color: Color(0xFFFF6F00),
                                             barWidth: 2.0,
                                             dotData: FlDotData(show: false),
-                                            belowBarData: BarAreaData(
-                                              show: true,
-                                              color: Color(0x3FFF6F00),
-                                            ),
                                           ),
                                         ),
                                         FFLineChartData(
@@ -737,10 +725,6 @@ class _AdvancedRunningMetricsWidgetState
                                             color: Color(0xFF00B81B),
                                             barWidth: 2.0,
                                             dotData: FlDotData(show: false),
-                                            belowBarData: BarAreaData(
-                                              show: true,
-                                              color: Color(0x3F00B81B),
-                                            ),
                                           ),
                                         ),
                                         FFLineChartData(
@@ -770,10 +754,6 @@ class _AdvancedRunningMetricsWidgetState
                                             color: Color(0xFF007ADC),
                                             barWidth: 2.0,
                                             dotData: FlDotData(show: false),
-                                            belowBarData: BarAreaData(
-                                              show: true,
-                                              color: Color(0x3F007ADC),
-                                            ),
                                           ),
                                         )
                                       ],
@@ -1012,7 +992,9 @@ class _AdvancedRunningMetricsWidgetState
                                           settings: LineChartBarData(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            barWidth: 0.0,
+                                            barWidth: 1.0,
+                                            isCurved: true,
+                                            preventCurveOverShooting: true,
                                           ),
                                         ),
                                         FFLineChartData(
@@ -1042,10 +1024,6 @@ class _AdvancedRunningMetricsWidgetState
                                             color: Color(0xFFFF6F00),
                                             barWidth: 2.0,
                                             dotData: FlDotData(show: false),
-                                            belowBarData: BarAreaData(
-                                              show: true,
-                                              color: Color(0x3FFF6F00),
-                                            ),
                                           ),
                                         ),
                                         FFLineChartData(
@@ -1075,10 +1053,6 @@ class _AdvancedRunningMetricsWidgetState
                                             color: Color(0xFF00B81B),
                                             barWidth: 2.0,
                                             dotData: FlDotData(show: false),
-                                            belowBarData: BarAreaData(
-                                              show: true,
-                                              color: Color(0x3F00B81B),
-                                            ),
                                           ),
                                         ),
                                         FFLineChartData(
@@ -1108,10 +1082,6 @@ class _AdvancedRunningMetricsWidgetState
                                             color: Color(0xFF007ADC),
                                             barWidth: 2.0,
                                             dotData: FlDotData(show: false),
-                                            belowBarData: BarAreaData(
-                                              show: true,
-                                              color: Color(0x3F007ADC),
-                                            ),
                                           ),
                                         )
                                       ],
@@ -1350,7 +1320,9 @@ class _AdvancedRunningMetricsWidgetState
                                           settings: LineChartBarData(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            barWidth: 0.0,
+                                            barWidth: 1.0,
+                                            isCurved: true,
+                                            preventCurveOverShooting: true,
                                           ),
                                         ),
                                         FFLineChartData(
@@ -1380,10 +1352,6 @@ class _AdvancedRunningMetricsWidgetState
                                             color: Color(0xFFFF6F00),
                                             barWidth: 2.0,
                                             dotData: FlDotData(show: false),
-                                            belowBarData: BarAreaData(
-                                              show: true,
-                                              color: Color(0x3FFF6F00),
-                                            ),
                                           ),
                                         ),
                                         FFLineChartData(
@@ -1413,10 +1381,6 @@ class _AdvancedRunningMetricsWidgetState
                                             color: Color(0xFF00B81B),
                                             barWidth: 2.0,
                                             dotData: FlDotData(show: false),
-                                            belowBarData: BarAreaData(
-                                              show: true,
-                                              color: Color(0x3F00B81B),
-                                            ),
                                           ),
                                         ),
                                         FFLineChartData(
@@ -1446,10 +1410,6 @@ class _AdvancedRunningMetricsWidgetState
                                             color: Color(0xFF007ADC),
                                             barWidth: 2.0,
                                             dotData: FlDotData(show: false),
-                                            belowBarData: BarAreaData(
-                                              show: true,
-                                              color: Color(0x3F007ADC),
-                                            ),
                                           ),
                                         )
                                       ],

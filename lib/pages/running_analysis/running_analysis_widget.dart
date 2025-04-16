@@ -56,18 +56,81 @@ class _RunningAnalysisWidgetState extends State<RunningAnalysisWidget> {
             ),
         singleRecord: true,
       ).then((s) => s.firstOrNull);
-      _model.runningDataDoc = _model.runningDataDocQuery;
-      safeSetState(() {});
       _model.overallFeedbackOutput = await actions.getOverallFeedback(
-        _model.runningDataDoc!.gaitAnalysies.toList(),
+        _model.runningDataDocQuery!.gaitAnalysies.toList(),
         ActivityTypes.running,
       );
-      _model.asymmetryOverall = _model.overallFeedbackOutput?.firstOrNull;
-      _model.groundContactTimeOverall =
-          _model.overallFeedbackOutput?.elementAtOrNull(1);
-      _model.verticalRatioOverall =
-          _model.overallFeedbackOutput?.elementAtOrNull(2);
-      _model.strideLengthOverall = _model.overallFeedbackOutput?.lastOrNull;
+      await Future.wait([
+        Future(() async {
+          await _model.asymmetryPageViewController?.animateToPage(
+            () {
+              if (_model.overallFeedbackOutput?.firstOrNull ==
+                  FeedbackEnum.great) {
+                return 2;
+              } else if (_model.overallFeedbackOutput?.firstOrNull ==
+                  FeedbackEnum.good) {
+                return 1;
+              } else {
+                return 0;
+              }
+            }(),
+            duration: Duration(milliseconds: 500),
+            curve: Curves.ease,
+          );
+        }),
+        Future(() async {
+          await _model.groundContactTimePageViewController?.animateToPage(
+            () {
+              if ((_model.overallFeedbackOutput?.elementAtOrNull(1)) ==
+                  FeedbackEnum.great) {
+                return 2;
+              } else if ((_model.overallFeedbackOutput?.elementAtOrNull(1)) ==
+                  FeedbackEnum.good) {
+                return 1;
+              } else {
+                return 0;
+              }
+            }(),
+            duration: Duration(milliseconds: 500),
+            curve: Curves.ease,
+          );
+        }),
+        Future(() async {
+          await _model.verticalRatioPageViewController?.animateToPage(
+            () {
+              if ((_model.overallFeedbackOutput?.elementAtOrNull(2)) ==
+                  FeedbackEnum.great) {
+                return 2;
+              } else if ((_model.overallFeedbackOutput?.elementAtOrNull(2)) ==
+                  FeedbackEnum.good) {
+                return 1;
+              } else {
+                return 0;
+              }
+            }(),
+            duration: Duration(milliseconds: 500),
+            curve: Curves.ease,
+          );
+        }),
+        Future(() async {
+          await _model.strideLengthPageViewController?.animateToPage(
+            () {
+              if (_model.overallFeedbackOutput?.lastOrNull ==
+                  FeedbackEnum.great) {
+                return 2;
+              } else if (_model.overallFeedbackOutput?.lastOrNull ==
+                  FeedbackEnum.good) {
+                return 1;
+              } else {
+                return 0;
+              }
+            }(),
+            duration: Duration(milliseconds: 500),
+            curve: Curves.ease,
+          );
+        }),
+      ]);
+      _model.runningDataDoc = _model.runningDataDocQuery;
       _model.overallFeedback =
           _model.overallFeedbackOutput!.toList().cast<FeedbackEnum>();
       safeSetState(() {});
@@ -367,31 +430,9 @@ class _RunningAnalysisWidgetState extends State<RunningAnalysisWidget> {
                                                 physics:
                                                     const NeverScrollableScrollPhysics(),
                                                 controller: _model
-                                                        .pageViewController1 ??=
+                                                        .asymmetryPageViewController ??=
                                                     PageController(
-                                                        initialPage: max(
-                                                            0,
-                                                            min(
-                                                                valueOrDefault<
-                                                                    int>(
-                                                                  () {
-                                                                    if (_model
-                                                                            .asymmetryOverall ==
-                                                                        FeedbackEnum
-                                                                            .great) {
-                                                                      return 2;
-                                                                    } else if (_model
-                                                                            .asymmetryOverall ==
-                                                                        FeedbackEnum
-                                                                            .good) {
-                                                                      return 1;
-                                                                    } else {
-                                                                      return 0;
-                                                                    }
-                                                                  }(),
-                                                                  1,
-                                                                ),
-                                                                2))),
+                                                        initialPage: 1),
                                                 scrollDirection:
                                                     Axis.horizontal,
                                                 children: [
@@ -410,34 +451,15 @@ class _RunningAnalysisWidgetState extends State<RunningAnalysisWidget> {
                                                   child: smooth_page_indicator
                                                       .SmoothPageIndicator(
                                                     controller: _model
-                                                            .pageViewController1 ??=
+                                                            .asymmetryPageViewController ??=
                                                         PageController(
-                                                            initialPage: max(
-                                                                0,
-                                                                min(
-                                                                    valueOrDefault<
-                                                                        int>(
-                                                                      () {
-                                                                        if (_model.asymmetryOverall ==
-                                                                            FeedbackEnum
-                                                                                .great) {
-                                                                          return 2;
-                                                                        } else if (_model.asymmetryOverall ==
-                                                                            FeedbackEnum.good) {
-                                                                          return 1;
-                                                                        } else {
-                                                                          return 0;
-                                                                        }
-                                                                      }(),
-                                                                      1,
-                                                                    ),
-                                                                    2))),
+                                                            initialPage: 1),
                                                     count: 3,
                                                     axisDirection:
                                                         Axis.horizontal,
                                                     onDotClicked: (i) async {
                                                       await _model
-                                                          .pageViewController1!
+                                                          .asymmetryPageViewController!
                                                           .animateToPage(
                                                         i,
                                                         duration: Duration(
@@ -484,31 +506,9 @@ class _RunningAnalysisWidgetState extends State<RunningAnalysisWidget> {
                                                 physics:
                                                     const NeverScrollableScrollPhysics(),
                                                 controller: _model
-                                                        .pageViewController2 ??=
+                                                        .groundContactTimePageViewController ??=
                                                     PageController(
-                                                        initialPage: max(
-                                                            0,
-                                                            min(
-                                                                valueOrDefault<
-                                                                    int>(
-                                                                  () {
-                                                                    if (_model
-                                                                            .groundContactTimeOverall ==
-                                                                        FeedbackEnum
-                                                                            .great) {
-                                                                      return 2;
-                                                                    } else if (_model
-                                                                            .groundContactTimeOverall ==
-                                                                        FeedbackEnum
-                                                                            .good) {
-                                                                      return 1;
-                                                                    } else {
-                                                                      return 0;
-                                                                    }
-                                                                  }(),
-                                                                  1,
-                                                                ),
-                                                                2))),
+                                                        initialPage: 1),
                                                 scrollDirection:
                                                     Axis.horizontal,
                                                 children: [
@@ -527,34 +527,15 @@ class _RunningAnalysisWidgetState extends State<RunningAnalysisWidget> {
                                                   child: smooth_page_indicator
                                                       .SmoothPageIndicator(
                                                     controller: _model
-                                                            .pageViewController2 ??=
+                                                            .groundContactTimePageViewController ??=
                                                         PageController(
-                                                            initialPage: max(
-                                                                0,
-                                                                min(
-                                                                    valueOrDefault<
-                                                                        int>(
-                                                                      () {
-                                                                        if (_model.groundContactTimeOverall ==
-                                                                            FeedbackEnum
-                                                                                .great) {
-                                                                          return 2;
-                                                                        } else if (_model.groundContactTimeOverall ==
-                                                                            FeedbackEnum.good) {
-                                                                          return 1;
-                                                                        } else {
-                                                                          return 0;
-                                                                        }
-                                                                      }(),
-                                                                      1,
-                                                                    ),
-                                                                    2))),
+                                                            initialPage: 1),
                                                     count: 3,
                                                     axisDirection:
                                                         Axis.horizontal,
                                                     onDotClicked: (i) async {
                                                       await _model
-                                                          .pageViewController2!
+                                                          .groundContactTimePageViewController!
                                                           .animateToPage(
                                                         i,
                                                         duration: Duration(
@@ -601,31 +582,9 @@ class _RunningAnalysisWidgetState extends State<RunningAnalysisWidget> {
                                                 physics:
                                                     const NeverScrollableScrollPhysics(),
                                                 controller: _model
-                                                        .pageViewController3 ??=
+                                                        .verticalRatioPageViewController ??=
                                                     PageController(
-                                                        initialPage: max(
-                                                            0,
-                                                            min(
-                                                                valueOrDefault<
-                                                                    int>(
-                                                                  () {
-                                                                    if (_model
-                                                                            .verticalRatioOverall ==
-                                                                        FeedbackEnum
-                                                                            .great) {
-                                                                      return 2;
-                                                                    } else if (_model
-                                                                            .verticalRatioOverall ==
-                                                                        FeedbackEnum
-                                                                            .good) {
-                                                                      return 1;
-                                                                    } else {
-                                                                      return 0;
-                                                                    }
-                                                                  }(),
-                                                                  1,
-                                                                ),
-                                                                2))),
+                                                        initialPage: 1),
                                                 scrollDirection:
                                                     Axis.horizontal,
                                                 children: [
@@ -644,34 +603,15 @@ class _RunningAnalysisWidgetState extends State<RunningAnalysisWidget> {
                                                   child: smooth_page_indicator
                                                       .SmoothPageIndicator(
                                                     controller: _model
-                                                            .pageViewController3 ??=
+                                                            .verticalRatioPageViewController ??=
                                                         PageController(
-                                                            initialPage: max(
-                                                                0,
-                                                                min(
-                                                                    valueOrDefault<
-                                                                        int>(
-                                                                      () {
-                                                                        if (_model.verticalRatioOverall ==
-                                                                            FeedbackEnum
-                                                                                .great) {
-                                                                          return 2;
-                                                                        } else if (_model.verticalRatioOverall ==
-                                                                            FeedbackEnum.good) {
-                                                                          return 1;
-                                                                        } else {
-                                                                          return 0;
-                                                                        }
-                                                                      }(),
-                                                                      1,
-                                                                    ),
-                                                                    2))),
+                                                            initialPage: 1),
                                                     count: 3,
                                                     axisDirection:
                                                         Axis.horizontal,
                                                     onDotClicked: (i) async {
                                                       await _model
-                                                          .pageViewController3!
+                                                          .verticalRatioPageViewController!
                                                           .animateToPage(
                                                         i,
                                                         duration: Duration(
@@ -718,31 +658,9 @@ class _RunningAnalysisWidgetState extends State<RunningAnalysisWidget> {
                                                 physics:
                                                     const NeverScrollableScrollPhysics(),
                                                 controller: _model
-                                                        .pageViewController4 ??=
+                                                        .strideLengthPageViewController ??=
                                                     PageController(
-                                                        initialPage: max(
-                                                            0,
-                                                            min(
-                                                                valueOrDefault<
-                                                                    int>(
-                                                                  () {
-                                                                    if (_model
-                                                                            .strideLengthOverall ==
-                                                                        FeedbackEnum
-                                                                            .great) {
-                                                                      return 2;
-                                                                    } else if (_model
-                                                                            .strideLengthOverall ==
-                                                                        FeedbackEnum
-                                                                            .good) {
-                                                                      return 1;
-                                                                    } else {
-                                                                      return 0;
-                                                                    }
-                                                                  }(),
-                                                                  1,
-                                                                ),
-                                                                2))),
+                                                        initialPage: 1),
                                                 scrollDirection:
                                                     Axis.horizontal,
                                                 children: [
@@ -761,34 +679,15 @@ class _RunningAnalysisWidgetState extends State<RunningAnalysisWidget> {
                                                   child: smooth_page_indicator
                                                       .SmoothPageIndicator(
                                                     controller: _model
-                                                            .pageViewController4 ??=
+                                                            .strideLengthPageViewController ??=
                                                         PageController(
-                                                            initialPage: max(
-                                                                0,
-                                                                min(
-                                                                    valueOrDefault<
-                                                                        int>(
-                                                                      () {
-                                                                        if (_model.strideLengthOverall ==
-                                                                            FeedbackEnum
-                                                                                .great) {
-                                                                          return 2;
-                                                                        } else if (_model.strideLengthOverall ==
-                                                                            FeedbackEnum.good) {
-                                                                          return 1;
-                                                                        } else {
-                                                                          return 0;
-                                                                        }
-                                                                      }(),
-                                                                      1,
-                                                                    ),
-                                                                    2))),
+                                                            initialPage: 1),
                                                     count: 3,
                                                     axisDirection:
                                                         Axis.horizontal,
                                                     onDotClicked: (i) async {
                                                       await _model
-                                                          .pageViewController4!
+                                                          .strideLengthPageViewController!
                                                           .animateToPage(
                                                         i,
                                                         duration: Duration(
@@ -828,6 +727,23 @@ class _RunningAnalysisWidgetState extends State<RunningAnalysisWidget> {
                               ),
                             ),
                           ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                      child: Container(
+                        width: 361.0,
+                        height: 319.0,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          borderRadius: BorderRadius.circular(24.0),
+                          border: Border.all(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
                         ),
                       ),
                     ),

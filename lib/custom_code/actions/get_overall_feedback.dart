@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'dart:math';
+
 Future<List<FeedbackEnum>> getOverallFeedback(
   List<GaitMetricsStruct> gaitMetrics,
   ActivityTypes activityType,
@@ -39,20 +41,17 @@ Future<List<FeedbackEnum>> getOverallFeedback(
     }
 
     // Assign overall asymmetry feedback
-    if (totalGreatAsym >= totalGoodAsym || totalGreatAsym >= totalImproveAsym) {
-      if (totalGreatAsym < totalGoodAsym) {
-        asymOverall = FeedbackEnum.good;
-      } else if (totalGreatAsym < totalImproveAsym) {
-        asymOverall = FeedbackEnum.improve;
-      } else {
-        asymOverall = FeedbackEnum.great;
-      }
+    List<int> asymOverallList = [
+      totalGreatAsym,
+      totalGoodAsym,
+      totalImproveAsym
+    ];
+    if (totalGreatAsym == asymOverallList.reduce(max)) {
+      asymOverall = FeedbackEnum.great;
+    } else if (totalGoodAsym == asymOverallList.reduce(max)) {
+      asymOverall = FeedbackEnum.good;
     } else {
-      if (totalGoodAsym >= totalImproveAsym) {
-        asymOverall = FeedbackEnum.good;
-      } else {
-        asymOverall = FeedbackEnum.good;
-      }
+      asymOverall = FeedbackEnum.improve;
     }
 
     // Add overall asymmetry to overall running feedback list
@@ -78,20 +77,13 @@ Future<List<FeedbackEnum>> getOverallFeedback(
     }
 
     // Assign overall ground contact time feedback
-    if (totalGreatGCT >= totalGoodGCT || totalGreatGCT >= totalImproveGCT) {
-      if (totalGreatGCT < totalGoodGCT) {
-        gctOverall = FeedbackEnum.good;
-      } else if (totalGreatGCT < totalImproveGCT) {
-        gctOverall = FeedbackEnum.improve;
-      } else {
-        gctOverall = FeedbackEnum.great;
-      }
+    List<int> gctOverallList = [totalGreatGCT, totalGoodGCT, totalImproveGCT];
+    if (totalGreatGCT == gctOverallList.reduce(max)) {
+      gctOverall = FeedbackEnum.great;
+    } else if (totalGoodGCT == gctOverallList.reduce(max)) {
+      gctOverall = FeedbackEnum.good;
     } else {
-      if (totalGoodGCT >= totalImproveGCT) {
-        gctOverall = FeedbackEnum.good;
-      } else {
-        gctOverall = FeedbackEnum.good;
-      }
+      gctOverall = FeedbackEnum.improve;
     }
 
     // Add overall ground contact time to overall running feedback list
@@ -117,20 +109,13 @@ Future<List<FeedbackEnum>> getOverallFeedback(
     }
 
     // Assign overall vertical ratio's feedback
-    if (totalGreatVR >= totalGoodVR || totalGreatVR >= totalImproveVR) {
-      if (totalGreatVR < totalGoodVR) {
-        vrOverall = FeedbackEnum.good;
-      } else if (totalGreatVR < totalImproveVR) {
-        vrOverall = FeedbackEnum.improve;
-      } else {
-        vrOverall = FeedbackEnum.great;
-      }
+    List<int> vrOverallList = [totalGreatVR, totalGoodVR, totalImproveVR];
+    if (totalGreatVR == vrOverallList.reduce(max)) {
+      vrOverall = FeedbackEnum.great;
+    } else if (totalGoodVR == vrOverallList.reduce(max)) {
+      vrOverall = FeedbackEnum.good;
     } else {
-      if (totalGoodVR >= totalImproveVR) {
-        vrOverall = FeedbackEnum.good;
-      } else {
-        vrOverall = FeedbackEnum.good;
-      }
+      vrOverall = FeedbackEnum.improve;
     }
 
     // Add overall vertical ratio to overall running feedback list
@@ -156,20 +141,13 @@ Future<List<FeedbackEnum>> getOverallFeedback(
     }
 
     // Assign overall stride length's feedback
-    if (totalGreatSL >= totalGoodSL || totalGreatSL >= totalImproveSL) {
-      if (totalGreatSL < totalGoodSL) {
-        slOverall = FeedbackEnum.good;
-      } else if (totalGreatSL < totalImproveSL) {
-        slOverall = FeedbackEnum.improve;
-      } else {
-        slOverall = FeedbackEnum.great;
-      }
+    List<int> slTotalList = [totalGreatSL, totalGoodSL, totalImproveSL];
+    if (totalGreatSL == slTotalList.reduce(max)) {
+      slOverall = FeedbackEnum.great;
+    } else if (totalGoodSL == slTotalList.reduce(max)) {
+      slOverall = FeedbackEnum.good;
     } else {
-      if (totalGoodSL >= totalImproveSL) {
-        slOverall = FeedbackEnum.good;
-      } else {
-        slOverall = FeedbackEnum.good;
-      }
+      slOverall = FeedbackEnum.improve;
     }
 
     // Add overall stride length to overall running feedback list

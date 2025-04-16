@@ -218,7 +218,7 @@ class _AddActivityWidgetState extends State<AddActivityWidget> {
                                 fontSize: 18.0,
                                 letterSpacing: 0.0,
                               ),
-                      hintText: 'Description...',
+                      hintText: 'Description (optional)...',
                       hintStyle:
                           FlutterFlowTheme.of(context).labelMedium.override(
                                 fontFamily: 'Inter',
