@@ -22,7 +22,7 @@ Follow these steps to **run the PhysiCoach-App locally** or build it for your de
 
 ### 🔁 Clone the Repository
 
-bash
+**bash**
 
 git clone https://github.com/Plehndm/PhysiCoach-App.git
 
@@ -40,25 +40,22 @@ Optional: VS Code or Android Studio for development
 ## 📦 Install Dependencies
 After cloning the repository:
 
-bash
+**bash**
 
-Copy code
+**Copy code**
 
 flutter pub get
 
 ## ▶️ Run the App
 Connect your emulator/device and run:
 
-bash
+**bash**
 
-Copy code
+**Copy code**
 
 flutter run
 
 ## 📁 Project Structure
-bash
-
-Copy code
 
 PhysiCoach-App/
 
