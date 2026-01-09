@@ -61,16 +61,27 @@ bash
 Copy code
 
 PhysiCoach-App/
+
 ├── android/              # Android specific configuration
+
 ├── ios/                  # iOS specific configuration
+
 ├── lib/                  # Core Flutter app code
+
 │   ├── screens/          # UI screens
+
 │   ├── models/           # Data models
+
 │   ├── widgets/          # Reusable UI components
+
 │   └── main.dart         # App entry point
+
 ├── assets/               # App icons, images, etc.
+
 ├── test/                 # Unit & widget tests
+
 ├── pubspec.yaml          # Dependencies and metadata
+
 └── README.md             # Documentation (this file)
 
 ## 📈 How It Works
